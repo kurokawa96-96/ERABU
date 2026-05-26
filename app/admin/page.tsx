@@ -1,11 +1,11 @@
 "use client";
 
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 const POLICY_ICONS = [
-  "education","medical","environment","industry",
-  "transport","reform","participation","childcare",
-  "data","energy","digital"
+  "education", "medical", "environment", "industry",
+  "transport", "reform", "participation", "childcare",
+  "data", "energy", "digital"
 ];
 
 interface Policy {
@@ -42,22 +42,22 @@ interface Election {
 function Icon({ type, size = 16, color = "#666" }: { type: string; size?: number; color?: string }) {
   const p = { width: size, height: size, viewBox: "0 0 20 20", fill: "none" as const };
   const m: Record<string, JSX.Element> = {
-    back:    <svg {...p}><path d="M12.5 5L7.5 10L12.5 15" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-    plus:    <svg {...p}><path d="M10 4v12M4 10h12" stroke={color} strokeWidth="1.5" strokeLinecap="round"/></svg>,
-    trash:   <svg {...p}><path d="M4 6h12M8 6V4h4v2M6 6l1 11h6l1-11" stroke={color} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-    save:    <svg {...p}><rect x="3" y="3" width="14" height="14" rx="1.5" stroke={color} strokeWidth="1.4"/><path d="M7 3v5h6V3M7 13h6" stroke={color} strokeWidth="1.3" strokeLinecap="round"/></svg>,
-    chevron: <svg {...p}><path d="M5 7.5L10 12.5L15 7.5" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-    lock:    <svg {...p}><rect x="4" y="9" width="12" height="9" rx="1.5" stroke={color} strokeWidth="1.4"/><path d="M7 9V6a3 3 0 016 0v3" stroke={color} strokeWidth="1.4" strokeLinecap="round"/></svg>,
-    logout:  <svg {...p}><path d="M13 10H4M7 7l-3 3 3 3M11 6V4h5v12h-5v-2" stroke={color} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-    edit:    <svg {...p}><path d="M14 3l3 3-9 9H5v-3L14 3Z" stroke={color} strokeWidth="1.4" strokeLinejoin="round"/></svg>,
+    back: <svg {...p}><path d="M12.5 5L7.5 10L12.5 15" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>,
+    plus: <svg {...p}><path d="M10 4v12M4 10h12" stroke={color} strokeWidth="1.5" strokeLinecap="round" /></svg>,
+    trash: <svg {...p}><path d="M4 6h12M8 6V4h4v2M6 6l1 11h6l1-11" stroke={color} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>,
+    save: <svg {...p}><rect x="3" y="3" width="14" height="14" rx="1.5" stroke={color} strokeWidth="1.4" /><path d="M7 3v5h6V3M7 13h6" stroke={color} strokeWidth="1.3" strokeLinecap="round" /></svg>,
+    chevron: <svg {...p}><path d="M5 7.5L10 12.5L15 7.5" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>,
+    lock: <svg {...p}><rect x="4" y="9" width="12" height="9" rx="1.5" stroke={color} strokeWidth="1.4" /><path d="M7 9V6a3 3 0 016 0v3" stroke={color} strokeWidth="1.4" strokeLinecap="round" /></svg>,
+    logout: <svg {...p}><path d="M13 10H4M7 7l-3 3 3 3M11 6V4h5v12h-5v-2" stroke={color} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>,
+    edit: <svg {...p}><path d="M14 3l3 3-9 9H5v-3L14 3Z" stroke={color} strokeWidth="1.4" strokeLinejoin="round" /></svg>,
   };
   return m[type] ?? null;
 }
 
 const F = {
   label: { fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", letterSpacing: "0.15em", display: "block", marginBottom: 5 } as React.CSSProperties,
-  input: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Sans JP', sans-serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none", boxSizing: "border-box" } as React.CSSProperties,
-  textarea: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Serif JP', serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none", resize: "vertical", boxSizing: "border-box", lineHeight: 1.8 } as React.CSSProperties,
+  input: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Sans JP', sans-serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none" } as React.CSSProperties,
+  textarea: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Serif JP', serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none", fontFamily: "'Noto Serif JP', serif", minHeight: 120 } as React.CSSProperties,
 };
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -92,19 +92,21 @@ function LoginScreen({ onLogin }: { onLogin: (pw: string) => void }) {
   };
 
   return (
-  <div style={{ minHeight: "100vh", background: "#f5f4f0", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 24 }}>
-    <div style={{ width: "100%", maxWidth: 320 }}>
-      <h1 style={{ fontSize: 24, fontFamily: "'Noto Sans JP', sans-serif", marginBottom: 24, textAlign: "center" }}>管理者ログイン</h1>
-      <Field label="パスワード">
-        <input style={F.input} type="password" value={pw} onChange={e => setPw(e.target.value)} placeholder="パスワードを入力" onKeyPress={e => e.key === "Enter" && attempt()} />
-      </Field>
-      {err && <div style={{ color: "#d32f2f", fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", marginBottom: 12, textAlign: "center" }}>パスワードが正しくありません</div>}
-      <button onClick={attempt} style={{ width: "100%", padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
-        ログイン
-      </button>
+    <div style={{ minHeight: "100vh", background: "#f5f4f0", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 24 }}>
+      <div style={{ width: "100%", maxWidth: 320 }}>
+        <h1 style={{ fontSize: 24, fontFamily: "'Noto Sans JP', sans-serif", marginBottom: 24, textAlign: "center" }}>管理者ログイン</h1>
+        <Field label="パスワード">
+          <input style={F.input} type="password" value={pw} onChange={e => setPw(e.target.value)} placeholder="パスワードを入力" onKeyPress={e => e.key === "Enter" && attempt()} />
+        </Field>
+        {err && <div style={{ color: "#d32f2f", fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", marginBottom: 12, textAlign: "center" }}>パスワードが正しくありません</div>}
+        <button onClick={attempt} style={{ width: "100%", padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
+          ログイン
+        </button>
+      </div>
     </div>
-  </div>
-);
+  );
+}
+
 function ElectionForm({ election, onSave, onCancel, onDelete }: {
   election: Election;
   onSave: (e: Election) => void;
@@ -139,7 +141,139 @@ function ElectionForm({ election, onSave, onCancel, onDelete }: {
 
       <div style={{ display: "flex", gap: 8 }}>
         <button onClick={() => onSave(data)} style={{
-          flex: 1, padding: 12, background: "#1a1a}}}>
-            </div>
-            
+          flex: 1, padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6
+        }}>
+          <Icon type="save" size={14} color="#fff" /> 保存
+        </button>
+        <button onClick={onCancel} style={{
+          flex: 1, padding: 12, background: "#f0f0f0", color: "#333", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer"
+        }}>
+          キャンセル
+        </button>
+        {onDelete && (
+          <button onClick={onDelete} style={{
+            padding: 12, background: "#ffebee", color: "#d32f2f", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer"
+          }}>
+            <Icon type="trash" size={14} color="#d32f2f" />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
 
+function CandidateForm({ candidate, onSave, onCancel }: {
+  candidate: Candidate;
+  onSave: (c: Candidate) => void;
+  onCancel: () => void;
+}) {
+  const [data, setData] = useState({ ...candidate });
+  const up = (k: keyof Candidate, v: string | Policy[]) => setData(d => ({ ...d, [k]: v }));
+
+  return (
+    <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
+      <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
+        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>候補者情報</div>
+        <Field label="名前"><input style={F.input} value={data.name} onChange={e => up("name", e.target.value)} placeholder="山田太郎" /></Field>
+        <Field label="党派"><input style={F.input} value={data.party} onChange={e => up("party", e.target.value)} placeholder="例：自由民主党" /></Field>
+        <Field label="キャッチフレーズ"><input style={F.input} value={data.tagline} onChange={e => up("tagline", e.target.value)} placeholder="変革と挑戦" /></Field>
+        <Field label="メッセージ"><textarea style={F.textarea} value={data.message} onChange={e => up("message", e.target.value)} placeholder="メッセージを入力" /></Field>
+        <Field label="プロフィール"><textarea style={F.textarea} value={data.profile} onChange={e => up("profile", e.target.value)} placeholder="プロフィールを入力" /></Field>
+      </div>
+
+      <div style={{ display: "flex", gap: 8 }}>
+        <button onClick={() => onSave(data)} style={{
+          flex: 1, padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer"
+        }}>
+          <Icon type="save" size={14} color="#fff" /> 保存
+        </button>
+        <button onClick={onCancel} style={{
+          flex: 1, padding: 12, background: "#f0f0f0", color: "#333", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer"
+        }}>
+          キャンセル
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default function AdminPage() {
+  const [pw, setPw] = useState("");
+  const [elections, setElections] = useState<Election[]>([]);
+  const [candidates, setCandidates] = useState<Candidate[]>([]);
+  const [toast, setToast] = useState("");
+  const [editElection, setEditElection] = useState<Election | null>(null);
+  const [editCandidate, setEditCandidate] = useState<Candidate | null>(null);
+
+  const show = (msg: string) => { setToast(msg); };
+
+  const fetchElections = async () => {
+    const res = await fetch("/api/admin/elections", { headers: { "x-admin-password": pw } });
+    if (res.ok) { setElections(await res.json()); }
+  };
+
+  const fetchCandidates = async (electionId?: string) => {
+    const url = electionId ? `/api/admin/candidates?electionId=${electionId}` : "/api/admin/candidates";
+    const res = await fetch(url, { headers: { "x-admin-password": pw } });
+    if (res.ok) { setCandidates(await res.json()); }
+  };
+
+  useEffect(() => {
+    if (pw) { fetchElections(); }
+  }, [pw]);
+
+  if (!pw) {
+    return <LoginScreen onLogin={setPw} />;
+  }
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#f5f4f0", display: "flex", flexDirection: "column" }}>
+      <div style={{ background: "#fff", borderBottom: "1px solid #ebebeb", padding: "16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <h1 style={{ fontSize: 18, fontFamily: "'Noto Sans JP', sans-serif", margin: 0 }}>管理者パネル</h1>
+        <button onClick={() => setPw("")} style={{ padding: "8px 16px", background: "#f0f0f0", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
+          <Icon type="logout" size={14} color="#666" /> ログアウト
+        </button>
+      </div>
+
+      <div style={{ flex: 1, display: "flex", gap: 0 }}>
+        <div style={{ width: 280, background: "#fff", borderRight: "1px solid #ebebeb", overflowY: "auto" }}>
+          <div style={{ padding: 16 }}>
+            <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
+              <button onClick={() => setEditElection({ id: "", prefecture: "", city: "", name: "", type: "", announcementDate: "", electionDate: "", status: "upcoming" })} style={{ flex: 1, padding: 9, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 4 }}>
+                <Icon type="plus" size={14} color="#fff" /> 選挙
+              </button>
+            </div>
+            {elections.map((e, i) => (
+              <div key={i} onClick={() => { setEditElection(e); fetchCandidates(e.id); }} style={{ padding: 10, background: "#f9f9f9", borderRadius: 7, marginBottom: 8, cursor: "pointer", fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", borderLeft: editElection?.id === e.id ? "3px solid #1a1a1a" : "3px solid transparent" }}>
+                {e.name}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+          {editElection ? (
+            <ElectionForm election={editElection} onSave={async (e) => {
+              const res = await fetch("/api/admin/elections", { method: "POST", headers: { "x-admin-password": pw, "Content-Type": "application/json" }, body: JSON.stringify(e) });
+              if (res.ok) { show("選挙情報を保存しました"); fetchElections(); setEditElection(null); }
+            }} onCancel={() => setEditElection(null)} onDelete={async () => {
+              const res = await fetch(`/api/admin/elections/${editElection.id}`, { method: "DELETE", headers: { "x-admin-password": pw } });
+              if (res.ok) { show("選挙を削除しました"); fetchElections(); setEditElection(null); }
+            }} />
+          ) : editCandidate ? (
+            <CandidateForm candidate={editCandidate} onSave={async (c) => {
+              const res = await fetch("/api/admin/candidates", { method: "POST", headers: { "x-admin-password": pw, "Content-Type": "application/json" }, body: JSON.stringify(c) });
+              if (res.ok) { show("候補者情報を保存しました"); fetchCandidates(editElection?.id); setEditCandidate(null); }
+            }} onCancel={() => setEditCandidate(null)} />
+          ) : (
+            <div style={{ flex: 1, padding: 24, display: "flex", alignItems: "center", justifyContent: "center", color: "#aaa", fontFamily: "'Noto Sans JP', sans-serif" }}>
+              選挙または候補者を選択してください
+            </div>
+          )}
+        </div>
+      </div>
+
+      <Toast msg={toast} onDone={() => setToast("")} />
+    </div>
+  );
+}
