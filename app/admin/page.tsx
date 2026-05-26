@@ -92,8 +92,19 @@ function LoginScreen({ onLogin }: { onLogin: (pw: string) => void }) {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f5f4f0", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 24></div>);}
-      
+  <div style={{ minHeight: "100vh", background: "#f5f4f0", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 24 }}>
+    <div style={{ width: "100%", maxWidth: 320 }}>
+      <h1 style={{ fontSize: 24, fontFamily: "'Noto Sans JP', sans-serif", marginBottom: 24, textAlign: "center" }}>管理者ログイン</h1>
+      <Field label="パスワード">
+        <input style={F.input} type="password" value={pw} onChange={e => setPw(e.target.value)} placeholder="パスワードを入力" onKeyPress={e => e.key === "Enter" && attempt()} />
+      </Field>
+      {err && <div style={{ color: "#d32f2f", fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", marginBottom: 12, textAlign: "center" }}>パスワードが正しくありません</div>}
+      <button onClick={attempt} style={{ width: "100%", padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
+        ログイン
+      </button>
+    </div>
+  </div>
+);
 function ElectionForm({ election, onSave, onCancel, onDelete }: {
   election: Election;
   onSave: (e: Election) => void;
