@@ -27,4 +27,5 @@ export async function POST(req: NextRequest) {
   const { elections, sha } = await req.json();
   await saveElections(elections, sha);
   return NextResponse.json({ ok: true });
+}
 
