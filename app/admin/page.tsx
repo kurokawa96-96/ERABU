@@ -128,5 +128,7 @@ function ElectionForm({ election, onSave, onCancel, onDelete }: {
 
       <div style={{ display: "flex", gap: 8 }}>
         <button onClick={() => onSave(data)} style={{
-          flex: 1, padding: 12, background: "#1a1a
+          flex: 1, padding: 12, background: "#1a1a}}}>
+            </div>
+            
 
