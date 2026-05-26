@@ -92,7 +92,8 @@ function LoginScreen({ onLogin }: { onLogin: (pw: string) => void }) {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f5f4f0", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 24
+    <div style={{ minHeight: "100vh", background: "#f5f4f0", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 24></div>);}
+      
 function ElectionForm({ election, onSave, onCancel, onDelete }: {
   election: Election;
   onSave: (e: Election) => void;
