@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 const POLICY_ICONS = [
   "education", "medical", "environment", "industry",
@@ -57,7 +57,7 @@ function Icon({ type, size = 16, color = "#666" }: { type: string; size?: number
 const F = {
   label: { fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", letterSpacing: "0.15em", display: "block", marginBottom: 5 } as React.CSSProperties,
   input: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Sans JP', sans-serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none" } as React.CSSProperties,
-  textarea: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Serif JP', serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none", minHeight: 80, fontFamily: "'Noto Sans JP', sans-serif" } as React.CSSProperties,
+  textarea: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Serif JP', serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none", fontFamily: "'Noto Sans JP', sans-serif" } as React.CSSProperties,
 };
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -112,7 +112,7 @@ function LoginScreen({ onLogin }: { onLogin: (pw: string) => void }) {
           <input style={F.input} type="password" value={pw} onChange={e => setPw(e.target.value)} placeholder="パスワードを入力" onKeyDown={e => e.key === "Enter" && !loading && attempt()} disabled={loading} />
         </Field>
         {err && <div style={{ color: "#d32f2f", fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", marginBottom: 12, textAlign: "center" }}>パスワードが正しくありません</div>}
-        <button onClick={attempt} disabled={loading} style={{ width: "100%", padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", cursor: loading ? "not-allowed" : "pointer" }}>
+        <button onClick={attempt} disabled={loading} style={{ width: "100%", padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.6 : 1 }}>
           {loading ? "ログイン中..." : "ログイン"}
         </button>
       </div>
@@ -170,7 +170,7 @@ function ElectionForm({ election, onSave, onCancel, onDelete }: {
           <Icon type="save" size={14} color="#fff" /> {saving ? "保存中..." : "保存"}
         </button>
         <button onClick={onCancel} disabled={saving} style={{
-          flex: 1, padding: 12, background: "#f0f0f0", color: "#333", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer", opacity: saving ? 0.6 : 1
+          flex: 1, padding: 12, background: "#f0f0f0", color: "#333", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer"
         }}>
           キャンセル
         </button>
@@ -268,7 +268,7 @@ function CandidateForm({ candidate, onSave, onCancel }: {
           <Icon type="save" size={14} color="#fff" /> {saving ? "保存中..." : "保存"}
         </button>
         <button onClick={onCancel} disabled={saving} style={{
-          flex: 1, padding: 12, background: "#f0f0f0", color: "#333", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer", opacity: saving ? 0.6 : 1
+          flex: 1, padding: 12, background: "#f0f0f0", color: "#333", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer"
         }}>
           キャンセル
         </button>
@@ -284,10 +284,11 @@ export default function AdminPage() {
   const [toast, setToast] = useState("");
   const [editElection, setEditElection] = useState<Election | null>(null);
   const [editCandidate, setEditCandidate] = useState<Candidate | null>(null);
+  const [selectedElectionId, setSelectedElectionId] = useState<string | null>(null);
 
   const show = (msg: string) => { setToast(msg); };
 
-  const fetchElections = async () => {
+  const fetchElections = useCallback(async () => {
     try {
       const res = await fetch("/api/admin/elections", { headers: { "x-admin-password": pw } });
       if (res.ok) { setElections(await res.json()); }
@@ -295,9 +296,9 @@ export default function AdminPage() {
       console.error("Failed to fetch elections:", error);
       show("選挙情報の取得に失敗しました");
     }
-  };
+  }, [pw]);
 
-  const fetchCandidates = async (electionId?: string) => {
+  const fetchCandidates = useCallback(async (electionId?: string) => {
     try {
       const url = electionId ? `/api/admin/candidates?electionId=${electionId}` : "/api/admin/candidates";
       const res = await fetch(url, { headers: { "x-admin-password": pw } });
@@ -306,11 +307,36 @@ export default function AdminPage() {
       console.error("Failed to fetch candidates:", error);
       show("候補者情報の取得に失敗しました");
     }
-  };
+  }, [pw]);
 
   useEffect(() => {
-    if (pw) { fetchElections(); }
-  }, [pw]);
+    if (pw) { 
+      fetchElections(); 
+    }
+  }, [pw, fetchElections]);
+
+  const handleSelectElection = (election: Election) => {
+    setEditElection(election);
+    setSelectedElectionId(election.id);
+    setEditCandidate(null);
+    fetchCandidates(election.id);
+  };
+
+  const handleCreateElection = () => {
+    const newElection: Election = { 
+      id: "", 
+      prefecture: "", 
+      city: "", 
+      name: "", 
+      type: "", 
+      announcementDate: "", 
+      electionDate: "", 
+      status: "upcoming" 
+    };
+    setEditElection(newElection);
+    setEditCandidate(null);
+    setSelectedElectionId(null);
+  };
 
   if (!pw) {
     return <LoginScreen onLogin={setPw} />;
@@ -320,7 +346,7 @@ export default function AdminPage() {
     <div style={{ minHeight: "100vh", background: "#f5f4f0", display: "flex", flexDirection: "column" }}>
       <div style={{ background: "#fff", borderBottom: "1px solid #ebebeb", padding: "16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <h1 style={{ fontSize: 18, fontFamily: "'Noto Sans JP', sans-serif", margin: 0 }}>管理者パネル</h1>
-        <button onClick={() => setPw("")} style={{ padding: "8px 16px", background: "#f0f0f0", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
+        <button onClick={() => { setPw(""); setEditElection(null); setEditCandidate(null); }} style={{ padding: "8px 16px", background: "#f0f0f0", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
           <Icon type="logout" size={14} color="#666" /> ログアウト
         </button>
       </div>
@@ -329,12 +355,12 @@ export default function AdminPage() {
         <div style={{ width: 280, background: "#fff", borderRight: "1px solid #ebebeb", overflowY: "auto" }}>
           <div style={{ padding: 16 }}>
             <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
-              <button onClick={() => setEditElection({ id: "", prefecture: "", city: "", name: "", type: "", announcementDate: "", electionDate: "", status: "upcoming" })} style={{ flex: 1, padding: 9, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
+              <button onClick={handleCreateElection} style={{ flex: 1, padding: 9, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
                 <Icon type="plus" size={14} color="#fff" /> 選挙
               </button>
             </div>
             {elections.map((e) => (
-              <div key={e.id} onClick={() => { setEditElection(e); fetchCandidates(e.id); }} style={{ padding: 10, background: "#f9f9f9", borderRadius: 7, marginBottom: 8, cursor: "pointer", fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif" }}>
+              <div key={e.id} onClick={() => handleSelectElection(e)} style={{ padding: 10, background: selectedElectionId === e.id ? "#e8e8e8" : "#f9f9f9", borderRadius: 7, marginBottom: 8, cursor: "pointer", fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif" }}>
                 {e.name}
               </div>
             ))}
@@ -343,21 +369,56 @@ export default function AdminPage() {
 
         <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
           {editElection ? (
-            <ElectionForm election={editElection} onSave={async (e) => {
-              const res = await fetch("/api/admin/elections", { method: "POST", headers: { "x-admin-password": pw, "Content-Type": "application/json" }, body: JSON.stringify(e) });
-              if (res.ok) { show("選挙情報を保存しました"); await fetchElections(); setEditElection(null); }
-              else { show("保存に失敗しました"); }
-            }} onCancel={() => setEditElection(null)} onDelete={editElection.id ? async () => {
-              const res = await fetch(`/api/admin/elections/${editElection.id}`, { method: "DELETE", headers: { "x-admin-password": pw } });
-              if (res.ok) { show("選挙を削除しました"); await fetchElections(); setEditElection(null); }
-              else { show("削除に失敗しました"); }
-            } : undefined} />
+            <ElectionForm 
+              election={editElection} 
+              onSave={async (e) => {
+                const res = await fetch("/api/admin/elections", { 
+                  method: "POST", 
+                  headers: { "x-admin-password": pw, "Content-Type": "application/json" }, 
+                  body: JSON.stringify(e) 
+                });
+                if (res.ok) { 
+                  show("選挙情報を保存しました"); 
+                  await fetchElections(); 
+                  setEditElection(null);
+                  setEditCandidate(null);
+                }
+                else { show("保存に失敗しました"); }
+              }} 
+              onCancel={() => { setEditElection(null); setEditCandidate(null); }} 
+              onDelete={editElection.id ? async () => {
+                const res = await fetch(`/api/admin/elections/${editElection.id}`, { 
+                  method: "DELETE", 
+                  headers: { "x-admin-password": pw } 
+                });
+                if (res.ok) { 
+                  show("選挙を削除しました"); 
+                  await fetchElections(); 
+                  setEditElection(null);
+                  setEditCandidate(null);
+                  setSelectedElectionId(null);
+                }
+                else { show("削除に失敗しました"); }
+              } : undefined} 
+            />
           ) : editCandidate ? (
-            <CandidateForm candidate={editCandidate} onSave={async (c) => {
-              const res = await fetch("/api/admin/candidates", { method: "POST", headers: { "x-admin-password": pw, "Content-Type": "application/json" }, body: JSON.stringify(c) });
-              if (res.ok) { show("候補者情報を保存しました"); await fetchCandidates(editElection?.id); setEditCandidate(null); }
-              else { show("保存に失敗しました"); }
-            }} onCancel={() => setEditCandidate(null)} />
+            <CandidateForm 
+              candidate={editCandidate} 
+              onSave={async (c) => {
+                const res = await fetch("/api/admin/candidates", { 
+                  method: "POST", 
+                  headers: { "x-admin-password": pw, "Content-Type": "application/json" }, 
+                  body: JSON.stringify(c) 
+                });
+                if (res.ok) { 
+                  show("候補者情報を保存しました"); 
+                  await fetchCandidates(selectedElectionId || undefined); 
+                  setEditCandidate(null);
+                }
+                else { show("保存に失敗しました"); }
+              }} 
+              onCancel={() => setEditCandidate(null)} 
+            />
           ) : (
             <div style={{ flex: 1, padding: 24, display: "flex", alignItems: "center", justifyContent: "center", color: "#aaa", fontFamily: "'Noto Sans JP', sans-serif" }}>
               選挙または候補者を選択してください
