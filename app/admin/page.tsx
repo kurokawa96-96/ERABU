@@ -57,7 +57,7 @@ function Icon({ type, size = 16, color = "#666" }: { type: string; size?: number
 const F = {
   label: { fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", letterSpacing: "0.15em", display: "block", marginBottom: 5 } as React.CSSProperties,
   input: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Sans JP', sans-serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none" } as React.CSSProperties,
-  textarea: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Serif JP', serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none" } as React.CSSProperties,
+  textarea: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Serif JP', serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none", minHeight: 80, fontFamily: "'Noto Sans JP', sans-serif" } as React.CSSProperties,
 };
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -109,10 +109,10 @@ function LoginScreen({ onLogin }: { onLogin: (pw: string) => void }) {
       <div style={{ width: "100%", maxWidth: 320 }}>
         <h1 style={{ fontSize: 24, fontFamily: "'Noto Sans JP', sans-serif", marginBottom: 24, textAlign: "center" }}>管理者ログイン</h1>
         <Field label="パスワード">
-          <input style={F.input} type="password" value={pw} onChange={e => setPw(e.target.value)} placeholder="パスワードを入力" onKeyPress={e => e.key === "Enter" && !loading && attempt()} disabled={loading} />
+          <input style={F.input} type="password" value={pw} onChange={e => setPw(e.target.value)} placeholder="パスワードを入力" onKeyDown={e => e.key === "Enter" && !loading && attempt()} disabled={loading} />
         </Field>
         {err && <div style={{ color: "#d32f2f", fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", marginBottom: 12, textAlign: "center" }}>パスワードが正しくありません</div>}
-        <button onClick={attempt} disabled={loading} style={{ width: "100%", padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.6 : 1 }}>
+        <button onClick={attempt} disabled={loading} style={{ width: "100%", padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", cursor: loading ? "not-allowed" : "pointer" }}>
           {loading ? "ログイン中..." : "ログイン"}
         </button>
       </div>
@@ -205,6 +205,22 @@ function CandidateForm({ candidate, onSave, onCancel }: {
 
   const up = (k: keyof Candidate, v: string | Policy[]) => setData(d => ({ ...d, [k]: v }));
 
+  const addPolicy = () => {
+    const newPolicies = [...data.policies, { icon: "education", label: "", issue: "", solution: "", deadline: "", budget: "" }];
+    up("policies", newPolicies);
+  };
+
+  const removePolicy = (idx: number) => {
+    const newPolicies = data.policies.filter((_, i) => i !== idx);
+    up("policies", newPolicies);
+  };
+
+  const updatePolicy = (idx: number, key: keyof Policy, val: string) => {
+    const newPolicies = [...data.policies];
+    newPolicies[idx] = { ...newPolicies[idx], [key]: val };
+    up("policies", newPolicies);
+  };
+
   return (
     <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
       <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
@@ -214,6 +230,35 @@ function CandidateForm({ candidate, onSave, onCancel }: {
         <Field label="キャッチフレーズ"><input style={F.input} value={data.tagline} onChange={e => up("tagline", e.target.value)} placeholder="変革と挑戦" /></Field>
         <Field label="メッセージ"><textarea style={F.textarea} value={data.message} onChange={e => up("message", e.target.value)} placeholder="メッセージを入力" /></Field>
         <Field label="プロフィール"><textarea style={F.textarea} value={data.profile} onChange={e => up("profile", e.target.value)} placeholder="プロフィールを入力" /></Field>
+      </div>
+
+      {/* Policies Section */}
+      <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
+        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>政策</div>
+        {data.policies.map((p, idx) => (
+          <div key={idx} style={{ marginBottom: 16, padding: 10, background: "#f9f9f9", borderRadius: 7 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+              <Field label="アイコン">
+                <select style={F.input} value={p.icon} onChange={e => updatePolicy(idx, "icon", e.target.value)}>
+                  {POLICY_ICONS.map(icon => <option key={icon} value={icon}>{icon}</option>)}
+                </select>
+              </Field>
+              <Field label="ラベル"><input style={F.input} value={p.label} onChange={e => updatePolicy(idx, "label", e.target.value)} placeholder="政策タイトル" /></Field>
+            </div>
+            <Field label="課題"><textarea style={F.textarea} value={p.issue} onChange={e => updatePolicy(idx, "issue", e.target.value)} placeholder="課題説明" /></Field>
+            <Field label="解決策"><textarea style={F.textarea} value={p.solution} onChange={e => updatePolicy(idx, "solution", e.target.value)} placeholder="解決策" /></Field>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+              <Field label="期限"><input style={F.input} value={p.deadline} onChange={e => updatePolicy(idx, "deadline", e.target.value)} placeholder="2025年" /></Field>
+              <Field label="予算"><input style={F.input} value={p.budget} onChange={e => updatePolicy(idx, "budget", e.target.value)} placeholder="予算額" /></Field>
+            </div>
+            <button onClick={() => removePolicy(idx)} style={{ padding: 8, background: "#ffebee", color: "#d32f2f", border: "none", borderRadius: 7, fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
+              <Icon type="trash" size={12} color="#d32f2f" /> 削除
+            </button>
+          </div>
+        ))}
+        <button onClick={addPolicy} style={{ width: "100%", padding: 10, background: "#f0f0f0", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
+          <Icon type="plus" size={14} color="#666" /> 政策を追加
+        </button>
       </div>
 
       <div style={{ display: "flex", gap: 8 }}>
