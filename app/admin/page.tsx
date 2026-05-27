@@ -56,8 +56,8 @@ function Icon({ type, size = 16, color = "#666" }: { type: string; size?: number
 
 const F = {
   label: { fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", letterSpacing: "0.15em", display: "block", marginBottom: 5 } as React.CSSProperties,
-  input: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Sans JP', sans-serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none" } as React.CSSProperties,
-  textarea: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Serif JP', serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none", fontFamily: "'Noto Serif JP', serif", minHeight: 120 } as React.CSSProperties,
+  input: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Sans JP', sans-serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none", transition: "border-color 0.2s" } as React.CSSProperties,
+  textarea: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Serif JP', serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none", transition: "border-color 0.2s", resize: "vertical" as const } as React.CSSProperties,
 };
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -82,13 +82,26 @@ function Toast({ msg, onDone }: { msg: string; onDone: () => void }) {
 function LoginScreen({ onLogin }: { onLogin: (pw: string) => void }) {
   const [pw, setPw] = useState("");
   const [err, setErr] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const attempt = async () => {
-    const res = await fetch("/api/admin/elections", {
-      headers: { "x-admin-password": pw },
-    });
-    if (res.ok) { onLogin(pw); }
-    else { setErr(true); setTimeout(() => setErr(false), 1500); }
+    setLoading(true);
+    try {
+      const res = await fetch("/api/admin/elections", {
+        headers: { "x-admin-password": pw },
+      });
+      if (res.ok) { 
+        onLogin(pw); 
+      } else { 
+        setErr(true); 
+        setTimeout(() => setErr(false), 1500); 
+      }
+    } catch {
+      setErr(true);
+      setTimeout(() => setErr(false), 1500);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -96,11 +109,11 @@ function LoginScreen({ onLogin }: { onLogin: (pw: string) => void }) {
       <div style={{ width: "100%", maxWidth: 320 }}>
         <h1 style={{ fontSize: 24, fontFamily: "'Noto Sans JP', sans-serif", marginBottom: 24, textAlign: "center" }}>管理者ログイン</h1>
         <Field label="パスワード">
-          <input style={F.input} type="password" value={pw} onChange={e => setPw(e.target.value)} placeholder="パスワードを入力" onKeyPress={e => e.key === "Enter" && attempt()} />
+          <input style={F.input} type="password" value={pw} onChange={e => setPw(e.target.value)} placeholder="パスワードを入力" onKeyPress={e => e.key === "Enter" && !loading && attempt()} disabled={loading} />
         </Field>
         {err && <div style={{ color: "#d32f2f", fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", marginBottom: 12, textAlign: "center" }}>パスワードが正しくありません</div>}
-        <button onClick={attempt} style={{ width: "100%", padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
-          ログイン
+        <button onClick={attempt} disabled={loading} style={{ width: "100%", padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.6 : 1 }}>
+          {loading ? "ログイン中..." : "ログイン"}
         </button>
       </div>
     </div>
@@ -114,6 +127,17 @@ function ElectionForm({ election, onSave, onCancel, onDelete }: {
   onDelete?: () => void;
 }) {
   const [data, setData] = useState({ ...election });
+  const [saving, setSaving] = useState(false);
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      await onSave(data);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const up = (k: keyof Election, v: string) => setData(d => ({ ...d, [k]: v }));
 
   return (
@@ -140,19 +164,19 @@ function ElectionForm({ election, onSave, onCancel, onDelete }: {
       </div>
 
       <div style={{ display: "flex", gap: 8 }}>
-        <button onClick={() => onSave(data)} style={{
-          flex: 1, padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6
+        <button onClick={handleSave} disabled={saving} style={{
+          flex: 1, padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, opacity: saving ? 0.6 : 1
         }}>
-          <Icon type="save" size={14} color="#fff" /> 保存
+          <Icon type="save" size={14} color="#fff" /> {saving ? "保存中..." : "保存"}
         </button>
-        <button onClick={onCancel} style={{
-          flex: 1, padding: 12, background: "#f0f0f0", color: "#333", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer"
+        <button onClick={onCancel} disabled={saving} style={{
+          flex: 1, padding: 12, background: "#f0f0f0", color: "#333", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer", opacity: saving ? 0.6 : 1
         }}>
           キャンセル
         </button>
         {onDelete && (
-          <button onClick={onDelete} style={{
-            padding: 12, background: "#ffebee", color: "#d32f2f", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer"
+          <button onClick={onDelete} disabled={saving} style={{
+            padding: 12, background: "#ffebee", color: "#d32f2f", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer", opacity: saving ? 0.6 : 1
           }}>
             <Icon type="trash" size={14} color="#d32f2f" />
           </button>
@@ -168,6 +192,17 @@ function CandidateForm({ candidate, onSave, onCancel }: {
   onCancel: () => void;
 }) {
   const [data, setData] = useState({ ...candidate });
+  const [saving, setSaving] = useState(false);
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      await onSave(data);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const up = (k: keyof Candidate, v: string | Policy[]) => setData(d => ({ ...d, [k]: v }));
 
   return (
@@ -182,13 +217,13 @@ function CandidateForm({ candidate, onSave, onCancel }: {
       </div>
 
       <div style={{ display: "flex", gap: 8 }}>
-        <button onClick={() => onSave(data)} style={{
-          flex: 1, padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer"
+        <button onClick={handleSave} disabled={saving} style={{
+          flex: 1, padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer", opacity: saving ? 0.6 : 1
         }}>
-          <Icon type="save" size={14} color="#fff" /> 保存
+          <Icon type="save" size={14} color="#fff" /> {saving ? "保存中..." : "保存"}
         </button>
-        <button onClick={onCancel} style={{
-          flex: 1, padding: 12, background: "#f0f0f0", color: "#333", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer"
+        <button onClick={onCancel} disabled={saving} style={{
+          flex: 1, padding: 12, background: "#f0f0f0", color: "#333", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer", opacity: saving ? 0.6 : 1
         }}>
           キャンセル
         </button>
@@ -208,14 +243,24 @@ export default function AdminPage() {
   const show = (msg: string) => { setToast(msg); };
 
   const fetchElections = async () => {
-    const res = await fetch("/api/admin/elections", { headers: { "x-admin-password": pw } });
-    if (res.ok) { setElections(await res.json()); }
+    try {
+      const res = await fetch("/api/admin/elections", { headers: { "x-admin-password": pw } });
+      if (res.ok) { setElections(await res.json()); }
+    } catch (error) {
+      console.error("Failed to fetch elections:", error);
+      show("選挙情報の取得に失敗しました");
+    }
   };
 
   const fetchCandidates = async (electionId?: string) => {
-    const url = electionId ? `/api/admin/candidates?electionId=${electionId}` : "/api/admin/candidates";
-    const res = await fetch(url, { headers: { "x-admin-password": pw } });
-    if (res.ok) { setCandidates(await res.json()); }
+    try {
+      const url = electionId ? `/api/admin/candidates?electionId=${electionId}` : "/api/admin/candidates";
+      const res = await fetch(url, { headers: { "x-admin-password": pw } });
+      if (res.ok) { setCandidates(await res.json()); }
+    } catch (error) {
+      console.error("Failed to fetch candidates:", error);
+      show("候補者情報の取得に失敗しました");
+    }
   };
 
   useEffect(() => {
@@ -243,8 +288,8 @@ export default function AdminPage() {
                 <Icon type="plus" size={14} color="#fff" /> 選挙
               </button>
             </div>
-            {elections.map((e, i) => (
-              <div key={i} onClick={() => { setEditElection(e); fetchCandidates(e.id); }} style={{ padding: 10, background: "#f9f9f9", borderRadius: 7, marginBottom: 8, cursor: "pointer", fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", borderLeft: editElection?.id === e.id ? "3px solid #1a1a1a" : "3px solid transparent" }}>
+            {elections.map((e) => (
+              <div key={e.id} onClick={() => { setEditElection(e); fetchCandidates(e.id); }} style={{ padding: 10, background: "#f9f9f9", borderRadius: 7, marginBottom: 8, cursor: "pointer", fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif" }}>
                 {e.name}
               </div>
             ))}
@@ -255,15 +300,18 @@ export default function AdminPage() {
           {editElection ? (
             <ElectionForm election={editElection} onSave={async (e) => {
               const res = await fetch("/api/admin/elections", { method: "POST", headers: { "x-admin-password": pw, "Content-Type": "application/json" }, body: JSON.stringify(e) });
-              if (res.ok) { show("選挙情報を保存しました"); fetchElections(); setEditElection(null); }
-            }} onCancel={() => setEditElection(null)} onDelete={async () => {
+              if (res.ok) { show("選挙情報を保存しました"); await fetchElections(); setEditElection(null); }
+              else { show("保存に失敗しました"); }
+            }} onCancel={() => setEditElection(null)} onDelete={editElection.id ? async () => {
               const res = await fetch(`/api/admin/elections/${editElection.id}`, { method: "DELETE", headers: { "x-admin-password": pw } });
-              if (res.ok) { show("選挙を削除しました"); fetchElections(); setEditElection(null); }
-            }} />
+              if (res.ok) { show("選挙を削除しました"); await fetchElections(); setEditElection(null); }
+              else { show("削除に失敗しました"); }
+            } : undefined} />
           ) : editCandidate ? (
             <CandidateForm candidate={editCandidate} onSave={async (c) => {
               const res = await fetch("/api/admin/candidates", { method: "POST", headers: { "x-admin-password": pw, "Content-Type": "application/json" }, body: JSON.stringify(c) });
-              if (res.ok) { show("候補者情報を保存しました"); fetchCandidates(editElection?.id); setEditCandidate(null); }
+              if (res.ok) { show("候補者情報を保存しました"); await fetchCandidates(editElection?.id); setEditCandidate(null); }
+              else { show("保存に失敗しました"); }
             }} onCancel={() => setEditCandidate(null)} />
           ) : (
             <div style={{ flex: 1, padding: 24, display: "flex", alignItems: "center", justifyContent: "center", color: "#aaa", fontFamily: "'Noto Sans JP', sans-serif" }}>
