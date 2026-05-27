@@ -56,8 +56,8 @@ function Icon({ type, size = 16, color = "#666" }: { type: string; size?: number
 
 const F = {
   label: { fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", letterSpacing: "0.15em", display: "block", marginBottom: 5 } as React.CSSProperties,
-  input: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Sans JP', sans-serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none", transition: "border-color 0.2s" } as React.CSSProperties,
-  textarea: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Serif JP', serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none", transition: "border-color 0.2s", resize: "vertical" as const } as React.CSSProperties,
+  input: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Sans JP', sans-serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none" } as React.CSSProperties,
+  textarea: { width: "100%", padding: "9px 11px", fontSize: 12.5, fontFamily: "'Noto Serif JP', serif", border: "1px solid #e0e0e0", borderRadius: 7, background: "#fafafa", color: "#1a1a1a", outline: "none" } as React.CSSProperties,
 };
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -165,7 +165,7 @@ function ElectionForm({ election, onSave, onCancel, onDelete }: {
 
       <div style={{ display: "flex", gap: 8 }}>
         <button onClick={handleSave} disabled={saving} style={{
-          flex: 1, padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, opacity: saving ? 0.6 : 1
+          flex: 1, padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer", opacity: saving ? 0.6 : 1
         }}>
           <Icon type="save" size={14} color="#fff" /> {saving ? "保存中..." : "保存"}
         </button>
@@ -275,7 +275,7 @@ export default function AdminPage() {
     <div style={{ minHeight: "100vh", background: "#f5f4f0", display: "flex", flexDirection: "column" }}>
       <div style={{ background: "#fff", borderBottom: "1px solid #ebebeb", padding: "16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <h1 style={{ fontSize: 18, fontFamily: "'Noto Sans JP', sans-serif", margin: 0 }}>管理者パネル</h1>
-        <button onClick={() => setPw("")} style={{ padding: "8px 16px", background: "#f0f0f0", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
+        <button onClick={() => setPw("")} style={{ padding: "8px 16px", background: "#f0f0f0", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
           <Icon type="logout" size={14} color="#666" /> ログアウト
         </button>
       </div>
@@ -284,12 +284,12 @@ export default function AdminPage() {
         <div style={{ width: 280, background: "#fff", borderRight: "1px solid #ebebeb", overflowY: "auto" }}>
           <div style={{ padding: 16 }}>
             <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
-              <button onClick={() => setEditElection({ id: "", prefecture: "", city: "", name: "", type: "", announcementDate: "", electionDate: "", status: "upcoming" })} style={{ flex: 1, padding: 9, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 4 }}>
+              <button onClick={() => setEditElection({ id: "", prefecture: "", city: "", name: "", type: "", announcementDate: "", electionDate: "", status: "upcoming" })} style={{ flex: 1, padding: 9, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
                 <Icon type="plus" size={14} color="#fff" /> 選挙
               </button>
             </div>
             {elections.map((e) => (
-              <div key={e.id} onClick={() => { setEditElection(e); fetchCandidates(e.id); }} style={{ padding: 10, background: "#f9f9f9", borderRadius: 7, marginBottom: 8, cursor: "pointer", fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif" }}>
+              <div key={e.id} onClick={() => { setEditElection(e); fetchCandidates(e.id); }} style={{ padding: 10, background: "#f9f9f9", borderRadius: 7, marginBottom: 8, cursor: "pointer", fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif" }}>
                 {e.name}
               </div>
             ))}
