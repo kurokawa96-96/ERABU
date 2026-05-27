@@ -170,13 +170,13 @@ function ElectionForm({ election, onSave, onCancel, onDelete }: {
           <Icon type="save" size={14} color="#fff" /> {saving ? "保存中..." : "保存"}
         </button>
         <button onClick={onCancel} disabled={saving} style={{
-          flex: 1, padding: 12, background: "#f0f0f0", color: "#333", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer"
+          flex: 1, padding: 12, background: "#f0f0f0", color: "#333", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer", opacity: saving ? 0.6 : 1
         }}>
           キャンセル
         </button>
         {onDelete && (
           <button onClick={onDelete} disabled={saving} style={{
-            padding: 12, background: "#ffebee", color: "#d32f2f", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer", opacity: saving ? 0.6 : 1
+            padding: 12, background: "#ffebee", color: "#d32f2f", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer"
           }}>
             <Icon type="trash" size={14} color="#d32f2f" />
           </button>
@@ -268,7 +268,7 @@ function CandidateForm({ candidate, onSave, onCancel }: {
           <Icon type="save" size={14} color="#fff" /> {saving ? "保存中..." : "保存"}
         </button>
         <button onClick={onCancel} disabled={saving} style={{
-          flex: 1, padding: 12, background: "#f0f0f0", color: "#333", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer"
+          flex: 1, padding: 12, background: "#f0f0f0", color: "#333", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: saving ? "not-allowed" : "pointer", opacity: saving ? 0.6 : 1
         }}>
           キャンセル
         </button>
@@ -315,14 +315,14 @@ export default function AdminPage() {
     }
   }, [pw, fetchElections]);
 
-  const handleSelectElection = (election: Election) => {
+  const handleSelectElection = useCallback((election: Election) => {
     setEditElection(election);
     setSelectedElectionId(election.id);
     setEditCandidate(null);
     fetchCandidates(election.id);
-  };
+  }, [fetchCandidates]);
 
-  const handleCreateElection = () => {
+  const handleCreateElection = useCallback(() => {
     const newElection: Election = { 
       id: "", 
       prefecture: "", 
@@ -336,7 +336,7 @@ export default function AdminPage() {
     setEditElection(newElection);
     setEditCandidate(null);
     setSelectedElectionId(null);
-  };
+  }, []);
 
   if (!pw) {
     return <LoginScreen onLogin={setPw} />;
@@ -346,7 +346,7 @@ export default function AdminPage() {
     <div style={{ minHeight: "100vh", background: "#f5f4f0", display: "flex", flexDirection: "column" }}>
       <div style={{ background: "#fff", borderBottom: "1px solid #ebebeb", padding: "16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <h1 style={{ fontSize: 18, fontFamily: "'Noto Sans JP', sans-serif", margin: 0 }}>管理者パネル</h1>
-        <button onClick={() => { setPw(""); setEditElection(null); setEditCandidate(null); }} style={{ padding: "8px 16px", background: "#f0f0f0", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
+        <button onClick={() => { setPw(""); setEditElection(null); setEditCandidate(null); setSelectedElectionId(null); }} style={{ padding: "8px 16px", background: "#f0f0f0", border: "none", borderRadius: 7, fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
           <Icon type="logout" size={14} color="#666" /> ログアウト
         </button>
       </div>
