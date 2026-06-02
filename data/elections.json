@@ -48,5 +48,15 @@
     "announcementDate": "2025-09-01",
     "electionDate": "2025-09-14",
     "status": "upcoming"
+  },
+  {
+    "id": "e1780377979098",
+    "prefecture": "東京都",
+    "city": "中野区",
+    "name": "中野区長選挙",
+    "type": "区長選挙",
+    "announcementDate": "2026-05-31",
+    "electionDate": "2026-06-07",
+    "status": "ongoing"
   }
 ]
