@@ -133,217 +133,8 @@ function LoginScreen({ onLogin }: { onLogin: (pw: string) => void }) {
     </div>
   );
 }
-function ElectionForm({ election, onSave, onCancel, onDelete }: {
-  election: Election;
-  onSave: (e: Election) => void;
-  onCancel: () => void;
-  onDelete?: () => void;
-}) {
-  const [data, setData] = useState({ ...election });
-  const up = (k: keyof Election, v: string) => setData(d => ({ ...d, [k]: v }));
 
-  return (
-    <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
-      <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
-        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>選挙情報</div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <Field label="都道府県"><input style={inputStyle} value={data.prefecture} onChange={e => up("prefecture", e.target.value)} placeholder="例：東京都" /></Field>
-          <Field label="市区町村"><input style={inputStyle} value={data.city} onChange={e => up("city", e.target.value)} placeholder="例：世田谷区" /></Field>
-        </div>
-        <Field label="選挙名"><input style={inputStyle} value={data.name} onChange={e => up("name", e.target.value)} placeholder="例：世田谷区議会議員選挙" /></Field>
-        <Field label="種別"><input style={inputStyle} value={data.type} onChange={e => up("type", e.target.value)} placeholder="例：市議会議員" /></Field>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <Field label="告示日"><input style={inputStyle} type="date" value={data.announcementDate} onChange={e => up("announcementDate", e.target.value)} /></Field>
-          <Field label="投票日"><input style={inputStyle} type="date" value={data.electionDate} onChange={e => up("electionDate", e.target.value)} /></Field>
-        </div>
-        <Field label="ステータス">
-          <select style={{ ...inputStyle, appearance: "none" }} value={data.status} onChange={e => up("status", e.target.value)}>
-            <option value="upcoming">upcoming（予定）</option>
-            <option value="ongoing">ongoing（開催中）</option>
-            <option value="past">past（終了）</option>
-          </select>
-        </Field>
-      </div>
-
-      <div style={{ display: "flex", gap: 8 }}>
-        <button onClick={() => onSave(data)} style={{
-          flex: 1, padding: 12, background: "#1a1a1a", color: "#fff",
-          border: "none", borderRadius: 9, fontSize: 13,
-          fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
-          display: "flex", alignItems: "center", justifyContent: "center", gap: 7,
-        }}>
-          <Icon type="save" size={14} color="#fff" /> 保存する
-        </button>
-        <button onClick={onCancel} style={{
-          padding: "12px 16px", background: "none",
-          border: "1px solid #e0e0e0", borderRadius: 9,
-          fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif",
-          color: "#888", cursor: "pointer",
-        }}>戻る</button>
-      </div>
-
-      {onDelete && (
-        <button onClick={onDelete} style={{
-          width: "100%", marginTop: 10, padding: 10, background: "none",
-          border: "1px solid #f0d0d0", borderRadius: 9, color: "#c07070",
-          fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
-        }}>この選挙を削除する</button>
-      )}
-    </div>
-  );
-}
-
-function ElectionsTab({ password, onToast }: { password: string; onToast: (m: string) => void }) {
-  const [elections, setElections] = useState<Election[]>([]);
-  const [sha, setSha] = useState("");
-  const [editing, setEditing] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch("/api/admin/elections", { headers: { "x-admin-password": password } })
-      .then(r => r.json())
-      .then(d => { setElections(d.data); setSha(d.sha); });
-  }, [password]);
-
-  const save = async (el: Election) => {
-    const next = elections.map(e => e.id === el.id ? el : e);
-    await fetch("/api/admin/elections", {
-      method: "POST",
-      headers: { "x-admin-password": password, "Content-Type": "application/json" },
-      body: JSON.stringify({ elections: next, sha }),
-    });
-    setElections(next);
-    setEditing(null);
-    onToast("保存しました");
-  };
-
-  const add = () => {
-    const fresh: Election = {
-      id: `e${Date.now()}`, prefecture: "", city: "", name: "",
-      type: "", announcementDate: "", electionDate: "", status: "upcoming",
-    };
-    setElections(p => [...p, fresh]);
-    setEditing(fresh.id);
-  };
-
-  const remove = async (id: string) => {
-    const next = elections.filter(e => e.id !== id);
-    await fetch("/api/admin/elections", {
-      method: "POST",
-      headers: { "x-admin-password": password, "Content-Type": "application/json" },
-      body: JSON.stringify({ elections: next, sha }),
-    });
-    setElections(next);
-    setEditing(null);
-    onToast("削除しました");
-  };
-
-  if (editing) {
-    const el = elections.find(e => e.id === editing)!;
-    return (
-      <>
-        <div style={{ padding: "14px 16px", background: "#fff", borderBottom: "1px solid #ebebeb", display: "flex", alignItems: "center", gap: 10 }}>
-          <button onClick={() => setEditing(null)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
-            <Icon type="back" size={18} color="#1a1a1a" />
-          </button>
-          <span style={{ fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", color: "#1a1a1a" }}>
-            {el.name || "新しい選挙"}
-          </span>
-        </div>
-        <ElectionForm election={el} onSave={save} onCancel={() => setEditing(null)} onDelete={() => remove(el.id)} />
-      </>
-    );
-  }
-
-  return (
-    <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em" }}>{elections.length}件登録中</div>
-        <button onClick={add} style={{
-          display: "flex", alignItems: "center", gap: 5,
-          padding: "7px 13px", background: "#1a1a1a", border: "none",
-          borderRadius: 8, color: "#fff", fontSize: 11.5,
-          fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
-        }}>
-          <Icon type="plus" size={13} color="#fff" /> 選挙を追加
-        </button>
-      </div>
-      {elections.map(el => (
-        <button key={el.id} onClick={() => setEditing(el.id)} style={{
-          width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
-          padding: "14px 16px", background: "#fff", border: "1px solid #ebebeb",
-          borderRadius: 11, marginBottom: 8, cursor: "pointer", textAlign: "left",
-        }}>
-          <div>
-            <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>
-              {el.prefecture} {el.city}
-            </div>
-            <div style={{ fontSize: 14, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>
-              {el.name || "名称未設定"}
-            </div>
-            <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>
-              投票日 {el.electionDate}
-            </div>
-          </div>
-          <Icon type="edit" size={14} color="#ccc" />
-        </button>
-      ))}
-    </div>
-  );
-}
-
-const TABS = [
-  { id: "elections", label: "選挙" },
-  { id: "candidates", label: "候補者" },
-];
-
-export default function AdminPage() {
-  const [auth, setAuth] = useState(false);
-  const [password, setPassword] = useState("");
-  const [tab, setTab] = useState("elections");
-  const [toast, setToast] = useState("");const [elections, setElections] = useState<Election[]>([]);
-
-useEffect(() => {
-  if (auth) {
-    fetch("/api/admin/elections", { headers: { "x-admin-password": password } })
-      .then(r => r.json())
-      .then(d => setElections(d.data || []));
-  }
-}, [auth, password]);
-
-  if (!auth) return <LoginScreen onLogin={pw => { setPassword(pw); setAuth(true); }} />;
-
-  return (
-    <div style={{ maxWidth: 390, margin: "0 auto", minHeight: "100vh", background: "#f5f4f0", display: "flex", flexDirection: "column" }}>
-      <div style={{
-        background: "#fff", borderBottom: "1px solid #e8e8e8",
-        padding: "0 16px", height: 52,
-        display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0,
-      }}>
-        <div>
-          <span style={{ fontSize: 18, fontFamily: "'Cormorant Garamond', serif", letterSpacing: "0.2em", color: "#1a1a1a" }}>ERABU</span>
-          <span style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.2em", marginLeft: 8 }}>ADMIN</span>
-        </div>
-        <button onClick={() => setAuth(false)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
-          <Icon type="logout" size={16} color="#bbb" />
-        </button>
-      </div>
-
-      <div style={{ display: "flex", background: "#fff", borderBottom: "1px solid #e8e8e8", flexShrink: 0 }}>
-        {TABS.map(t => (
-          <button key={t.id} onClick={() => setTab(t.id)} style={{
-            flex: 1, padding: "12px 4px",
-            background: "none", border: "none", cursor: "pointer",
-            borderBottom: tab === t.id ? "2px solid #1a1a1a" : "2px solid transparent",
-            fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif",
-            color: tab === t.id ? "#1a1a1a" : "#bbb",
-          }}>
-            {t.label}
-          </button>
-        ))}
-      </div>
-
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
-        {tab === "elections" && <ElectionsTab password={password} onToast={setToast} />}function PolicyForm({ policy, onChange, onRemove, index }: {
+function PolicyForm({ policy, onChange, onRemove, index }: {
   policy: Policy;
   onChange: (p: Policy) => void;
   onRemove: () => void;
@@ -401,7 +192,6 @@ useEffect(() => {
     </div>
   );
 }
-
 function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
   candidate: Candidate;
   elections: Election[];
@@ -501,7 +291,164 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
       )}
     </div>
   );
-}function CandidatesTab({ password, onToast, elections }: {
+}
+
+function ElectionForm({ election, onSave, onCancel, onDelete }: {
+  election: Election;
+  onSave: (e: Election) => void;
+  onCancel: () => void;
+  onDelete?: () => void;
+}) {
+  const [data, setData] = useState({ ...election });
+  const up = (k: keyof Election, v: string) => setData(d => ({ ...d, [k]: v }));
+
+  return (
+    <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
+      <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
+        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>選挙情報</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          <Field label="都道府県"><input style={inputStyle} value={data.prefecture} onChange={e => up("prefecture", e.target.value)} placeholder="例：東京都" /></Field>
+          <Field label="市区町村"><input style={inputStyle} value={data.city} onChange={e => up("city", e.target.value)} placeholder="例：世田谷区" /></Field>
+        </div>
+        <Field label="選挙名"><input style={inputStyle} value={data.name} onChange={e => up("name", e.target.value)} placeholder="例：世田谷区議会議員選挙" /></Field>
+        <Field label="種別"><input style={inputStyle} value={data.type} onChange={e => up("type", e.target.value)} placeholder="例：市議会議員" /></Field>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          <Field label="告示日"><input style={inputStyle} type="date" value={data.announcementDate} onChange={e => up("announcementDate", e.target.value)} /></Field>
+          <Field label="投票日"><input style={inputStyle} type="date" value={data.electionDate} onChange={e => up("electionDate", e.target.value)} /></Field>
+        </div>
+        <Field label="ステータス">
+          <select style={{ ...inputStyle, appearance: "none" }} value={data.status} onChange={e => up("status", e.target.value)}>
+            <option value="upcoming">upcoming（予定）</option>
+            <option value="ongoing">ongoing（開催中）</option>
+            <option value="past">past（終了）</option>
+          </select>
+        </Field>
+      </div>
+      <div style={{ display: "flex", gap: 8 }}>
+        <button onClick={() => onSave(data)} style={{
+          flex: 1, padding: 12, background: "#1a1a1a", color: "#fff",
+          border: "none", borderRadius: 9, fontSize: 13,
+          fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
+          display: "flex", alignItems: "center", justifyContent: "center", gap: 7,
+        }}>
+          <Icon type="save" size={14} color="#fff" /> 保存する
+        </button>
+        <button onClick={onCancel} style={{
+          padding: "12px 16px", background: "none",
+          border: "1px solid #e0e0e0", borderRadius: 9,
+          fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif",
+          color: "#888", cursor: "pointer",
+        }}>戻る</button>
+      </div>
+      {onDelete && (
+        <button onClick={onDelete} style={{
+          width: "100%", marginTop: 10, padding: 10, background: "none",
+          border: "1px solid #f0d0d0", borderRadius: 9, color: "#c07070",
+          fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
+        }}>この選挙を削除する</button>
+      )}
+    </div>
+  );
+}
+function ElectionsTab({ password, onToast }: { password: string; onToast: (m: string) => void }) {
+  const [elections, setElections] = useState<Election[]>([]);
+  const [sha, setSha] = useState("");
+  const [editing, setEditing] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("/api/admin/elections", { headers: { "x-admin-password": password } })
+      .then(r => r.json())
+      .then(d => { setElections(d.data); setSha(d.sha); });
+  }, [password]);
+
+  const save = async (el: Election) => {
+    const next = elections.map(e => e.id === el.id ? el : e);
+    await fetch("/api/admin/elections", {
+      method: "POST",
+      headers: { "x-admin-password": password, "Content-Type": "application/json" },
+      body: JSON.stringify({ elections: next, sha }),
+    });
+    setElections(next);
+    setEditing(null);
+    onToast("保存しました");
+  };
+
+  const add = () => {
+    const fresh: Election = {
+      id: `e${Date.now()}`, prefecture: "", city: "", name: "",
+      type: "", announcementDate: "", electionDate: "", status: "upcoming",
+    };
+    setElections(p => [...p, fresh]);
+    setEditing(fresh.id);
+  };
+
+  const remove = async (id: string) => {
+    const next = elections.filter(e => e.id !== id);
+    await fetch("/api/admin/elections", {
+      method: "POST",
+      headers: { "x-admin-password": password, "Content-Type": "application/json" },
+      body: JSON.stringify({ elections: next, sha }),
+    });
+    setElections(next);
+    setEditing(null);
+    onToast("削除しました");
+  };
+
+  if (editing) {
+    const el = elections.find(e => e.id === editing)!;
+    return (
+      <>
+        <div style={{ padding: "14px 16px", background: "#fff", borderBottom: "1px solid #ebebeb", display: "flex", alignItems: "center", gap: 10 }}>
+          <button onClick={() => setEditing(null)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+            <Icon type="back" size={18} color="#1a1a1a" />
+          </button>
+          <span style={{ fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", color: "#1a1a1a" }}>
+            {el.name || "新しい選挙"}
+          </span>
+        </div>
+        <ElectionForm election={el} onSave={save} onCancel={() => setEditing(null)} onDelete={() => remove(el.id)} />
+      </>
+    );
+  }
+
+  return (
+    <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em" }}>{elections.length}件登録中</div>
+        <button onClick={add} style={{
+          display: "flex", alignItems: "center", gap: 5,
+          padding: "7px 13px", background: "#1a1a1a", border: "none",
+          borderRadius: 8, color: "#fff", fontSize: 11.5,
+          fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
+        }}>
+          <Icon type="plus" size={13} color="#fff" /> 選挙を追加
+        </button>
+      </div>
+      {elections.map(el => (
+        <button key={el.id} onClick={() => setEditing(el.id)} style={{
+          width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+          padding: "14px 16px", background: "#fff", border: "1px solid #ebebeb",
+          borderRadius: 11, marginBottom: 8, cursor: "pointer", textAlign: "left",
+        }}>
+          <div>
+            <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>
+              {el.prefecture} {el.city}
+            </div>
+            <div style={{ fontSize: 14, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>
+              {el.name || "名称未設定"}
+            </div>
+            <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>
+              投票日 {el.electionDate}
+            </div>
+          </div>
+          <Icon type="edit" size={14} color="#ccc" />
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function CandidatesTab({ password, onToast, elections }: {
   password: string;
   onToast: (m: string) => void;
   elections: Election[];
@@ -551,11 +498,23 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
 
   if (editing) {
     const c = candidates.find(x => x.id === editing)!;
-    return <CandidateForm
-      candidate={c} elections={elections}
-      onSave={save} onCancel={() => setEditing(null)}
-      onDelete={() => remove(c.id)}
-    />;
+    return (
+      <>
+        <div style={{ padding: "14px 16px", background: "#fff", borderBottom: "1px solid #ebebeb", display: "flex", alignItems: "center", gap: 10 }}>
+          <button onClick={() => setEditing(null)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+            <Icon type="back" size={18} color="#1a1a1a" />
+          </button>
+          <span style={{ fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", color: "#1a1a1a" }}>
+            {c.name || "新しい候補者"}
+          </span>
+        </div>
+        <CandidateForm
+          candidate={c} elections={elections}
+          onSave={save} onCancel={() => setEditing(null)}
+          onDelete={() => remove(c.id)}
+        />
+      </>
+    );
   }
 
   return (
@@ -596,13 +555,67 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
     </div>
   );
 }
+
+const TABS = [
+  { id: "elections", label: "選挙" },
+  { id: "candidates", label: "候補者" },
+];
+
+export default function AdminPage() {
+  const [auth, setAuth] = useState(false);
+  const [password, setPassword] = useState("");
+  const [tab, setTab] = useState("elections");
+  const [toast, setToast] = useState("");
+  const [elections, setElections] = useState<Election[]>([]);
+
+  useEffect(() => {
+    if (auth) {
+      fetch("/api/admin/elections", { headers: { "x-admin-password": password } })
+        .then(r => r.json())
+        .then(d => setElections(d.data || []));
+    }
+  }, [auth, password]);
+
+  if (!auth) return <LoginScreen onLogin={pw => { setPassword(pw); setAuth(true); }} />;
+
+  return (
+    <div style={{ maxWidth: 390, margin: "0 auto", minHeight: "100vh", background: "#f5f4f0", display: "flex", flexDirection: "column" }}>
+      <div style={{
+        background: "#fff", borderBottom: "1px solid #e8e8e8",
+        padding: "0 16px", height: 52,
+        display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0,
+      }}>
+        <div>
+          <span style={{ fontSize: 18, fontFamily: "'Cormorant Garamond', serif", letterSpacing: "0.2em", color: "#1a1a1a" }}>ERABU</span>
+          <span style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.2em", marginLeft: 8 }}>ADMIN</span>
+        </div>
+        <button onClick={() => setAuth(false)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+          <Icon type="logout" size={16} color="#bbb" />
+        </button>
+      </div>
+
+      <div style={{ display: "flex", background: "#fff", borderBottom: "1px solid #e8e8e8", flexShrink: 0 }}>
+        {TABS.map(t => (
+          <button key={t.id} onClick={() => setTab(t.id)} style={{
+            flex: 1, padding: "12px 4px",
+            background: "none", border: "none", cursor: "pointer",
+            borderBottom: tab === t.id ? "2px solid #1a1a1a" : "2px solid transparent",
+            fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif",
+            color: tab === t.id ? "#1a1a1a" : "#bbb",
+          }}>
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+        {tab === "elections" && <ElectionsTab password={password} onToast={setToast} />}
         {tab === "candidates" && (
-  <CandidatesTab
-    password={password}
-    onToast={setToast}
-    elections={elections}
-  />
-)}
+          <CandidatesTab
+            password={password}
+            onToast={setToast}
+            elections={elections}
+          />
         )}
       </div>
 
