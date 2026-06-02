@@ -28,4 +28,3 @@ export async function POST(req: NextRequest) {
   await saveElections(elections, sha);
   return NextResponse.json({ ok: true });
 }
-
