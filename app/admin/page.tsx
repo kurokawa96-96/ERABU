@@ -574,7 +574,7 @@ export default function AdminPage() {
         .then(r => r.json())
         .then(d => setElections(d.data || []));
     }
-  }, [auth, password]);
+  }, [auth, password, tab]);
 
   if (!auth) return <LoginScreen onLogin={pw => { setPassword(pw); setAuth(true); }} />;
 
