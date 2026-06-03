@@ -21,8 +21,9 @@ async function getCandidates(electionId: string) {
   }
 }
 
-export default async function ElectionPage({ params }: { params: { id: string } }) {
-  const election = await getElection(params.id);
+export default async function ElectionPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const election = await getElection(id);
   if (!election) notFound();
 
   const candidates = await getCandidates(election.id);
