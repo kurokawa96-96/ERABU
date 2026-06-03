@@ -98,3 +98,122 @@ function IncumbentCard({ incumbent }: { incumbent: Incumbent }) {
             <div key={item.label} style={{ background: "#fafaf8", borderRadius: 9, padding: "11px 12px" }}>
               <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 3 }}>
                 {item.label}
+                </div>
+              <div style={{ fontSize: 22, fontFamily: "'Cormorant Garamond', serif", color: "#1a1a1a" }}>
+                {item.value}
+                <span style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginLeft: 3 }}>回</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section icon="vote" label="重要議案への賛否記録">
+        {incumbent.billVotes.map((vote, i) => (
+          <div key={`${vote.bill}-${i}`} style={{
+            padding: "10px 0", borderTop: i === 0 ? "none" : "1px solid #f2f2f2",
+            display: "grid", gridTemplateColumns: "1fr auto", gap: 10, alignItems: "center",
+          }}>
+            <div>
+              <div style={{ fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", color: "#222", lineHeight: 1.55 }}>
+                {vote.bill}
+              </div>
+              <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>
+                {vote.category} / {vote.date}
+              </div>
+            </div>
+            <div style={{
+              minWidth: 42, textAlign: "center", borderRadius: 999,
+              padding: "4px 8px", background: vote.vote === "反対" ? "#f8eeee" : "#eef5f1",
+              color: vote.vote === "反対" ? "#9a5555" : "#2f6f4e",
+              fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", fontWeight: 700,
+            }}>
+              {vote.vote}
+            </div>
+          </div>
+        ))}
+      </Section>
+
+      <Section icon="promise" label="公約と実績の照合">
+        {incumbent.promises.map((promise, i) => (
+          <div key={`${promise.title}-${i}`} style={{
+            padding: "10px 0", borderTop: i === 0 ? "none" : "1px solid #f2f2f2",
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "center", marginBottom: 5 }}>
+              <div style={{ fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", color: "#222", fontWeight: 700, lineHeight: 1.55 }}>
+                {promise.title}
+              </div>
+              <PromiseStatus status={promise.status} />
+            </div>
+            <div style={{ fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif", color: "#777", lineHeight: 1.7 }}>
+              {promise.evidence}
+            </div>
+          </div>
+        ))}
+      </Section>
+
+      <Section icon="report" label="活動報告">
+        {incumbent.activityReports.map((report, i) => (
+          <div key={`${report.title}-${i}`} style={{
+            padding: "10px 0", borderTop: i === 0 ? "none" : "1px solid #f2f2f2",
+          }}>
+            <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginBottom: 3 }}>
+              {report.date}
+            </div>
+            <div style={{ fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", color: "#222", fontWeight: 700, marginBottom: 3 }}>
+              {report.title}
+            </div>
+            <div style={{ fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif", color: "#777", lineHeight: 1.7 }}>
+              {report.summary}
+            </div>
+          </div>
+        ))}
+      </Section>
+    </article>
+  );
+}
+
+export default async function IncumbentsPage() {
+  const incumbents = await getIncumbents();
+
+  return (
+    <div style={{ maxWidth: 480, margin: "0 auto", minHeight: "100vh", background: "#f5f4f0" }}>
+      <div style={{
+        background: "#fff", borderBottom: "1px solid #e8e8e8",
+        padding: "0 20px", height: 54,
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        position: "sticky", top: 0, zIndex: 20,
+      }}>
+        <Link href="/" style={{ textDecoration: "none" }}>
+          <Icon type="back" size={20} color="#1a1a1a" />
+        </Link>
+        <div style={{ fontSize: 21, fontFamily: "'Cormorant Garamond', serif", letterSpacing: "0.22em", color: "#1a1a1a" }}>
+          ERABU
+        </div>
+        <div style={{ width: 20 }} />
+      </div>
+
+      <div style={{ padding: "24px 24px 18px", textAlign: "center" }}>
+        <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", letterSpacing: "0.16em", marginBottom: 7 }}>
+          INCUMBENTS
+        </div>
+        <div style={{ fontSize: 18, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a", letterSpacing: "0.06em" }}>
+          現職議員を見る
+        </div>
+        <div style={{ fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", lineHeight: 1.8, marginTop: 7 }}>
+          発言・賛否・公約・活動を同じ形式で確認できます
+        </div>
+      </div>
+
+      <div style={{ padding: "0 14px 34px" }}>
+        {incumbents.map(incumbent => (
+          <IncumbentCard key={incumbent.id} incumbent={incumbent} />
+        ))}
+      </div>
+
+      <div style={{ textAlign: "center", padding: "0 0 32px", fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#d0d0d0", letterSpacing: "0.12em" }}>
+        分かるから、選べる
+      </div>
+    </div>
+  );
+}
