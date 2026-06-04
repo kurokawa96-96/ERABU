@@ -7,6 +7,9 @@
     "city": "中野区",
     "assembly": "中野区長",
     "term": "2018年 - 現在",
+    "tagline": "区民とともに、中野の未来をつくる",
+    "message": "",
+    "attendanceRate": 95,
     "speechCount": 18,
     "questionCount": 12,
     "billVotes": [
@@ -56,6 +59,9 @@
     "city": "世田谷区",
     "assembly": "世田谷区議会",
     "term": "2023年 - 現在",
+    "tagline": "市民の声を政策に変える",
+    "message": "",
+    "attendanceRate": 98,
     "speechCount": 24,
     "questionCount": 16,
     "billVotes": [
@@ -98,3 +104,4 @@
     ]
   }
 ]
+
