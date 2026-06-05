@@ -625,6 +625,110 @@ export default function AdminPage() {
     onToast={setToast}
   />
 )}
+function IncumbentsTab({ password, onToast }: {
+  password: string;
+  onToast: (m: string) => void;
+}) {
+  const [incumbents, setIncumbents] = useState<Incumbent[]>([]);
+  const [sha, setSha] = useState("");
+  const [editing, setEditing] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("/api/admin/incumbents", { headers: { "x-admin-password": password } })
+      .then(r => r.json())
+      .then(d => { setIncumbents(d.data || []); setSha(d.sha || ""); });
+  }, [password]);
+
+  const save = async (inc: Incumbent) => {
+    const next = incumbents.map(x => x.id === inc.id ? inc : x);
+    await fetch("/api/admin/incumbents", {
+      method: "POST",
+      headers: { "x-admin-password": password, "Content-Type": "application/json" },
+      body: JSON.stringify({ incumbents: next, sha }),
+    });
+    setIncumbents(next);
+    setEditing(null);
+    onToast("保存しました");
+  };
+
+  const add = () => {
+    const fresh: Incumbent = {
+      id: `i${Date.now()}`, name: "", party: "", prefecture: "",
+      city: "", assembly: "", term: "", tagline: "", message: "",
+      attendanceRate: 0, speechCount: 0, questionCount: 0,
+      billVotes: [], promises: [], activityReports: [],
+    };
+    setIncumbents(p => [...p, fresh]);
+    setEditing(fresh.id);
+  };
+
+  const remove = async (id: string) => {
+    const next = incumbents.filter(x => x.id !== id);
+    await fetch("/api/admin/incumbents", {
+      method: "POST",
+      headers: { "x-admin-password": password, "Content-Type": "application/json" },
+      body: JSON.stringify({ incumbents: next, sha }),
+    });
+    setIncumbents(next);
+    setEditing(null);
+    onToast("削除しました");
+  };
+
+  if (editing) {
+    const inc = incumbents.find(x => x.id === editing)!;
+    return (
+      <>
+        <div style={{ padding: "14px 16px", background: "#fff", borderBottom: "1px solid #ebebeb", display: "flex", alignItems: "center", gap: 10 }}>
+          <button onClick={() => setEditing(null)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+            <Icon type="back" size={18} color="#1a1a1a" />
+          </button>
+          <span style={{ fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", color: "#1a1a1a" }}>
+            {inc.name || "新しい現職議員"}
+          </span>
+        </div>
+        <IncumbentForm incumbent={inc} onSave={save} onCancel={() => setEditing(null)} onDelete={() => remove(inc.id)} />
+      </>
+    );
+  }
+
+  return (
+    <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em" }}>
+          {incumbents.length}名登録中
+        </div>
+        <button onClick={add} style={{
+          display: "flex", alignItems: "center", gap: 5,
+          padding: "7px 13px", background: "#1a1a1a", border: "none",
+          borderRadius: 8, color: "#fff", fontSize: 11.5,
+          fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
+        }}>
+          <Icon type="plus" size={13} color="#fff" /> 現職議員を追加
+        </button>
+      </div>
+      {incumbents.map(inc => (
+        <button key={inc.id} onClick={() => setEditing(inc.id)} style={{
+          width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+          padding: "14px 16px", background: "#fff", border: "1px solid #ebebeb",
+          borderRadius: 11, marginBottom: 8, cursor: "pointer", textAlign: "left",
+        }}>
+          <div>
+            <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>
+              {inc.prefecture} {inc.city} / {inc.assembly}
+            </div>
+            <div style={{ fontSize: 14, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>
+              {inc.name || "氏名未設定"}
+            </div>
+            <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>
+              {inc.party || "政党未設定"}
+            </div>
+          </div>
+          <Icon type="edit" size={14} color="#ccc" />
+        </button>
+      ))}
+    </div>
+  );
+}
 
       </div>
 
