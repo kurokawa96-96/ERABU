@@ -612,13 +612,20 @@ export default function AdminPage() {
 
       <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
         {tab === "elections" && <ElectionsTab password={password} onToast={setToast} />}
-        {tab === "candidates" && (
-          <CandidatesTab
-            password={password}
-            onToast={setToast}
-            elections={elections}
-          />
-        )}
+{tab === "candidates" && (
+  <CandidatesTab
+    password={password}
+    onToast={setToast}
+    elections={elections}
+  />
+)}
+{tab === "incumbents" && (
+  <IncumbentsTab
+    password={password}
+    onToast={setToast}
+  />
+)}
+
       </div>
 
       <Toast msg={toast} onDone={() => setToast("")} />
