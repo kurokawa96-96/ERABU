@@ -559,7 +559,9 @@ function CandidatesTab({ password, onToast, elections }: {
 const TABS = [
   { id: "elections", label: "選挙" },
   { id: "candidates", label: "候補者" },
+  { id: "incumbents", label: "現職議員" },
 ];
+
 
 export default function AdminPage() {
   const [auth, setAuth] = useState(false);
