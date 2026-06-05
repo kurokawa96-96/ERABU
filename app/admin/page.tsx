@@ -572,3 +572,188 @@ function IncumbentForm({ incumbent, onSave, onCancel, onDelete }: {
    </div>
  );
 }
+function IncumbentForm({ incumbent, onSave, onCancel, onDelete }: {
+ incumbent: Incumbent;
+ onSave: (inc: Incumbent) => void;
+ onCancel: () => void;
+ onDelete?: () => void;
+}) {
+ const [data, setData] = useState({ ...incumbent });
+ const up = (k: keyof Incumbent, v: string | number) => setData(d => ({ ...d, [k]: v }));
+
+ const addPromise = () => setData(d => ({
+   ...d, promises: [...d.promises, { title: "", status: "未着手" as const, evidence: "" }]
+ }));
+
+ const updatePromise = (i: number, key: keyof IncumbentPromise, v: string) =>
+   setData(d => ({ ...d, promises: d.promises.map((p, idx) => idx === i ? { ...p, [key]: v } : p) }));
+
+ const removePromise = (i: number) =>
+   setData(d => ({ ...d, promises: d.promises.filter((_, idx) => idx !== i) }));
+
+ const addReport = () => setData(d => ({
+   ...d, activityReports: [...d.activityReports, { date: "", title: "", summary: "" }]
+ }));
+
+ const updateReport = (i: number, key: keyof ActivityReport, v: string) =>
+   setData(d => ({ ...d, activityReports: d.activityReports.map((r, idx) => idx === i ? { ...r, [key]: v } : r) }));
+
+ const removeReport = (i: number) =>
+   setData(d => ({ ...d, activityReports: d.activityReports.filter((_, idx) => idx !== i) }));
+
+ const addVote = () => setData(d => ({
+   ...d, billVotes: [...d.billVotes, { bill: "", category: "", vote: "賛成", date: "" }]
+ }));
+
+ const updateVote = (i: number, key: keyof BillVote, v: string) =>
+   setData(d => ({ ...d, billVotes: d.billVotes.map((v2, idx) => idx === i ? { ...v2, [key]: v } : v2) }));
+
+ const removeVote = (i: number) =>
+   setData(d => ({ ...d, billVotes: d.billVotes.filter((_, idx) => idx !== i) }));
+
+ return (
+   <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
+
+     {/* 基本情報 */}
+     <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
+       <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>基本情報</div>
+       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+         <Field label="都道府県"><input style={inputStyle} value={data.prefecture} onChange={e => up("prefecture", e.target.value)} placeholder="例：東京都" /></Field>
+         <Field label="市区町村"><input style={inputStyle} value={data.city} onChange={e => up("city", e.target.value)} placeholder="例：中野区" /></Field>
+       </div>
+       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+         <Field label="氏名"><input style={inputStyle} value={data.name} onChange={e => up("name", e.target.value)} /></Field>
+         <Field label="所属政党"><input style={inputStyle} value={data.party} onChange={e => up("party", e.target.value)} /></Field>
+       </div>
+       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+         <Field label="役職"><input style={inputStyle} value={data.assembly} onChange={e => up("assembly", e.target.value)} placeholder="例：中野区長" /></Field>
+         <Field label="任期"><input style={inputStyle} value={data.term} onChange={e => up("term", e.target.value)} placeholder="例：2018年 - 現在" /></Field>
+       </div>
+     </div>
+
+     {/* 理念・メッセージ */}
+     <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
+       <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>理念・メッセージ</div>
+       <Field label="タグライン">
+         <input style={inputStyle} value={data.tagline} onChange={e => up("tagline", e.target.value)} placeholder="例：区民とともに、中野の未来をつくる" />
+       </Field>
+       <Field label="メッセージ">
+         <textarea style={{ ...textareaStyle, minHeight: 80 }} value={data.message} onChange={e => up("message", e.target.value)} />
+       </Field>
+     </div>
+
+     {/* 公約 */}
+     <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
+       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+         <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em" }}>公約</div>
+         <button onClick={addPromise} style={{ display: "flex", alignItems: "center", gap: 4, padding: "5px 10px", background: "#f5f4f0", border: "1px solid #e0e0e0", borderRadius: 7, fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", color: "#555", cursor: "pointer" }}>
+           <Icon type="plus" size={12} color="#555" /> 追加
+         </button>
+       </div>
+       {data.promises.map((p, i) => (
+         <div key={i} style={{ border: "1px solid #e8e8e8", borderRadius: 9, padding: "12px", marginBottom: 8 }}>
+           <Field label="公約タイトル"><input style={inputStyle} value={p.title} onChange={e => updatePromise(i, "title", e.target.value)} /></Field>
+           <Field label="達成状況">
+             <select style={{ ...inputStyle, appearance: "none" }} value={p.status} onChange={e => updatePromise(i, "status", e.target.value)}>
+               <option value="未着手">未着手</option>
+               <option value="進行中">進行中</option>
+               <option value="達成">達成</option>
+               <option value="変更">変更</option>
+             </select>
+           </Field>
+           <Field label="根拠・コメント"><textarea style={{ ...textareaStyle, minHeight: 60 }} value={p.evidence} onChange={e => updatePromise(i, "evidence", e.target.value)} /></Field>
+           <button onClick={() => removePromise(i)} style={{ display: "flex", alignItems: "center", gap: 4, padding: "5px 10px", background: "none", border: "1px solid #f0d0d0", borderRadius: 7, color: "#c07070", fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
+             <Icon type="trash" size={12} color="#c07070" /> 削除
+           </button>
+         </div>
+       ))}
+     </div>
+
+     {/* 活動記録 */}
+     <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
+       <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>議会活動記録</div>
+       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+         <Field label="出席率(%)"><input style={inputStyle} type="number" value={data.attendanceRate} onChange={e => up("attendanceRate", Number(e.target.value))} /></Field>
+         <Field label="発言回数"><input style={inputStyle} type="number" value={data.speechCount} onChange={e => up("speechCount", Number(e.target.value))} /></Field>
+         <Field label="質問回数"><input style={inputStyle} type="number" value={data.questionCount} onChange={e => up("questionCount", Number(e.target.value))} /></Field>
+       </div>
+     </div>
+
+     {/* 賛否記録 */}
+     <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
+       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+         <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em" }}>賛否記録</div>
+         <button onClick={addVote} style={{ display: "flex", alignItems: "center", gap: 4, padding: "5px 10px", background: "#f5f4f0", border: "1px solid #e0e0e0", borderRadius: 7, fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", color: "#555", cursor: "pointer" }}>
+           <Icon type="plus" size={12} color="#555" /> 追加
+         </button>
+       </div>
+       {data.billVotes.map((v, i) => (
+         <div key={i} style={{ border: "1px solid #e8e8e8", borderRadius: 9, padding: "12px", marginBottom: 8 }}>
+           <Field label="議案名"><input style={inputStyle} value={v.bill} onChange={e => updateVote(i, "bill", e.target.value)} /></Field>
+           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+             <Field label="カテゴリ"><input style={inputStyle} value={v.category} onChange={e => updateVote(i, "category", e.target.value)} /></Field>
+             <Field label="賛否">
+               <select style={{ ...inputStyle, appearance: "none" }} value={v.vote} onChange={e => updateVote(i, "vote", e.target.value)}>
+                 <option value="賛成">賛成</option>
+                 <option value="反対">反対</option>
+                 <option value="棄権">棄権</option>
+               </select>
+             </Field>
+             <Field label="日付"><input style={inputStyle} type="date" value={v.date} onChange={e => updateVote(i, "date", e.target.value)} /></Field>
+           </div>
+           <button onClick={() => removeVote(i)} style={{ display: "flex", alignItems: "center", gap: 4, padding: "5px 10px", background: "none", border: "1px solid #f0d0d0", borderRadius: 7, color: "#c07070", fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
+             <Icon type="trash" size={12} color="#c07070" /> 削除
+           </button>
+         </div>
+       ))}
+     </div>
+
+     {/* 活動報告 */}
+     <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
+       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+         <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em" }}>活動報告</div>
+         <button onClick={addReport} style={{ display: "flex", alignItems: "center", gap: 4, padding: "5px 10px", background: "#f5f4f0", border: "1px solid #e0e0e0", borderRadius: 7, fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", color: "#555", cursor: "pointer" }}>
+           <Icon type="plus" size={12} color="#555" /> 追加
+         </button>
+       </div>
+       {data.activityReports.map((r, i) => (
+         <div key={i} style={{ border: "1px solid #e8e8e8", borderRadius: 9, padding: "12px", marginBottom: 8 }}>
+           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+             <Field label="日付"><input style={inputStyle} type="date" value={r.date} onChange={e => updateReport(i, "date", e.target.value)} /></Field>
+             <Field label="タイトル"><input style={inputStyle} value={r.title} onChange={e => updateReport(i, "title", e.target.value)} /></Field>
+           </div>
+           <Field label="内容"><textarea style={{ ...textareaStyle, minHeight: 60 }} value={r.summary} onChange={e => updateReport(i, "summary", e.target.value)} /></Field>
+           <button onClick={() => removeReport(i)} style={{ display: "flex", alignItems: "center", gap: 4, padding: "5px 10px", background: "none", border: "1px solid #f0d0d0", borderRadius: 7, color: "#c07070", fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer" }}>
+             <Icon type="trash" size={12} color="#c07070" /> 削除
+           </button>
+         </div>
+       ))}
+     </div>
+
+     <div style={{ display: "flex", gap: 8 }}>
+       <button onClick={() => onSave(data)} style={{
+         flex: 1, padding: 12, background: "#1a1a1a", color: "#fff",
+         border: "none", borderRadius: 9, fontSize: 13,
+         fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
+         display: "flex", alignItems: "center", justifyContent: "center", gap: 7,
+       }}>
+         <Icon type="save" size={14} color="#fff" /> 保存する
+       </button>
+       <button onClick={onCancel} style={{
+         padding: "12px 16px", background: "none",
+         border: "1px solid #e0e0e0", borderRadius: 9,
+         fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif",
+         color: "#888", cursor: "pointer",
+       }}>戻る</button>
+     </div>
+
+     {onDelete && (
+       <button onClick={onDelete} style={{
+         width: "100%", marginTop: 10, padding: 10, background: "none",
+         border: "1px solid #f0d0d0", borderRadius: 9, color: "#c07070",
+         fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
+       }}>この現職議員を削除する</button>
+     )}
+   </div>
+ );
+}
