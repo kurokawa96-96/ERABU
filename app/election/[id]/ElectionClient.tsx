@@ -110,6 +110,7 @@ function CandidateCard({ candidate, isOpen, onToggle }: {
       border: `1px solid ${isOpen ? "#d8d8d8" : "#ebebeb"}`,
       marginBottom: 8, overflow: "hidden",
       transition: "border-color 0.3s",
+　　　　position: "relative",
     }}>
       <button onClick={onToggle} style={{
         width: "100%", display: "flex", alignItems: "center",
