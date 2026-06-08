@@ -18,7 +18,7 @@ export default function PollingPage() {
 
   const handleSearch = () => {
     if (!query.trim()) return;
-    const url = `https://www.google.com/maps/search/${encodeURIComponent(query + " 投票所")}`;
+    const url = `https://www.google.com/maps/search/${encodeURIComponent(query + " 選挙管理委員会")}`;
     window.open(url, "_blank");
   };
 
@@ -49,8 +49,10 @@ export default function PollingPage() {
           投票所を探す
         </div>
         <div style={{ fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", lineHeight: 1.8 }}>
-          お住まいの市区町村名を入力してください
-        </div>
+  お住まいの市区町村名を入力してください。
+  選挙管理委員会で投票所をご確認いただけます。
+</div>
+
       </div>
 
       {/* Search */}
