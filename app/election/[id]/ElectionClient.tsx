@@ -129,6 +129,17 @@ function CandidateCard({ candidate, isOpen, onToggle }: {
           <Icon type="chevronDown" size={16} color={isOpen ? "#1a1a1a" : "#ccc"} />
         </div>
       </button>
+　　　　<button
+  onClick={e => { e.stopPropagation(); onSave(); }}
+  style={{
+    position: "absolute", top: 12, right: 48,
+    background: "none", border: "none", cursor: "pointer", padding: 4,
+  }}
+>
+  <svg width="16" height="16" viewBox="0 0 20 20" fill={isSaved ? "#1a1a1a" : "none"}>
+    <path d="M5 2h10v16l-5-4-5 4V2Z" stroke="#1a1a1a" strokeWidth="1.4" strokeLinejoin="round"/>
+  </svg>
+</button>
 
       <div style={{
         maxHeight: isOpen ? "1200px" : 0,
