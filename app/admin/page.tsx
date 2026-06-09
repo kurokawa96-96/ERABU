@@ -26,6 +26,7 @@ interface Candidate {
   message: string;
   profile: string;
   policies: Policy[];
+  editToken?: string;
 }
 
 interface Election {
