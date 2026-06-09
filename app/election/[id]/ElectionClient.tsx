@@ -228,11 +228,27 @@ const [savedIds, setSavedIds] = useState<string[]>(() => {
 });
 
 const toggleSave = (id: string) => {
+  const candidate = shuffled.find(c => c.id === id);
   const next = savedIds.includes(id)
     ? savedIds.filter(x => x !== id)
     : [...savedIds, id];
   setSavedIds(next);
   localStorage.setItem("erabu_saved", JSON.stringify(next));
+
+  if (candidate && !savedIds.includes(id)) {
+    const details = JSON.parse(localStorage.getItem("erabu_saved_details") ?? "[]");
+    const newDetail = {
+      id: candidate.id,
+      name: candidate.name,
+      party: candidate.party,
+      electionName: election.name,
+      electionId: election.id,
+    };
+    localStorage.setItem("erabu_saved_details", JSON.stringify([...details, newDetail]));
+  } else {
+    const details = JSON.parse(localStorage.getItem("erabu_saved_details") ?? "[]");
+    localStorage.setItem("erabu_saved_details", JSON.stringify(details.filter((d: { id: string }) => d.id !== id)));
+  }
 };
   return (
     <div style={{ maxWidth: 480, margin: "0 auto", minHeight: "100vh", background: "#f5f4f0" }}>
