@@ -705,7 +705,10 @@ function CandidatesTab({ password, onToast, elections }: {
     tagline: "", message: "", profile: "", policies: [],
     editToken: token,
   };
-
+  setCandidates(p => [...p, fresh]);
+  setEditing(fresh.id);
+};
+   
  const remove = async (id: string) => {
    const next = candidates.filter(c => c.id !== id);
    await fetch("/api/admin/candidates", {
