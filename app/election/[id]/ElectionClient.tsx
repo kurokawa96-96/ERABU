@@ -99,10 +99,12 @@ function PolicyBlock({ policy }: { policy: Policy }) {
     </div>
   );
 }
-function CandidateCard({ candidate, isOpen, onToggle }: {
+function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
   candidate: Candidate;
   isOpen: boolean;
   onToggle: () => void;
+  isSaved: boolean;
+  onSave: () => void;
 }) {
   return (
     <div style={{
@@ -218,7 +220,20 @@ export default function ElectionClient({ election, candidates }: {
 }) {
   const [openId, setOpenId] = useState<string | null>(null);
   const [shuffled] = useState(() => [...candidates].sort(() => Math.random() - 0.5));
+const [savedIds, setSavedIds] = useState<string[]>(() => {
+  if (typeof window === "undefined") return [];
+  try {
+    return JSON.parse(localStorage.getItem("erabu_saved") ?? "[]");
+  } catch { return []; }
+});
 
+const toggleSave = (id: string) => {
+  const next = savedIds.includes(id)
+    ? savedIds.filter(x => x !== id)
+    : [...savedIds, id];
+  setSavedIds(next);
+  localStorage.setItem("erabu_saved", JSON.stringify(next));
+};
   return (
     <div style={{ maxWidth: 480, margin: "0 auto", minHeight: "100vh", background: "#f5f4f0" }}>
       {/* Header */}
@@ -264,15 +279,17 @@ export default function ElectionClient({ election, candidates }: {
       <div style={{ padding: "4px 14px 40px" }}>
         {shuffled.length === 0 ? (
           <div style={{ textAlign: "center", padding: "40px 0", fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb" }}>
-            候補者情報は準備中ですわ
+            候補者情報は準備中です
           </div>
         ) : (
           shuffled.map(c => (
             <CandidateCard
-              key={c.id} candidate={c}
-              isOpen={openId === c.id}
-              onToggle={() => setOpenId(openId === c.id ? null : c.id)}
-            />
+  key={c.id} candidate={c}
+  isOpen={openId === c.id}
+  onToggle={() => setOpenId(openId === c.id ? null : c.id)}
+  isSaved={savedIds.includes(c.id)}
+  onSave={() => toggleSave(c.id)}
+/>
           ))
         )}
       </div>
