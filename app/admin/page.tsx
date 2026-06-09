@@ -698,13 +698,12 @@ function CandidatesTab({ password, onToast, elections }: {
  };
 
  const add = () => {
-   const fresh: Candidate = {
-     id: `c${Date.now()}`, electionId: "", name: "", party: "",
-     tagline: "", message: "", profile: "", policies: [],
-   };
-   setCandidates(p => [...p, fresh]);
-   setEditing(fresh.id);
- };
+  const token = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+  const fresh: Candidate = {
+    id: `c${Date.now()}`, electionId: "", name: "", party: "",
+    tagline: "", message: "", profile: "", policies: [],
+    editToken: token,
+  };
 
  const remove = async (id: string) => {
    const next = candidates.filter(c => c.id !== id);
