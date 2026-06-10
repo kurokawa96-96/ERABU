@@ -164,7 +164,7 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
   <div style={{ fontSize: 15, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a", letterSpacing: "0.05em" }}>
     {candidate.name}
   </div>
-  {candidate.updates && candidate.updates[0] && (
+ <div> {candidate.updates && candidate.updates[0] && (
     <UpdateBadge update={candidate.updates[0]} />
   )}
 </div>
