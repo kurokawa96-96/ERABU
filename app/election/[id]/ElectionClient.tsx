@@ -114,6 +114,28 @@ function PolicyBlock({ policy }: { policy: Policy }) {
     </div>
   );
 }
+const UPDATE_COLORS: Record<string, string> = {
+  message: "#2D4A6B",
+  policy: "#3D5A48",
+  schedule: "#5C3D2E",
+  info: "#4A3570",
+};
+
+function UpdateBadge({ update }: { update: { type: string; label: string; date: string } }) {
+  const color = UPDATE_COLORS[update.type] ?? "#888";
+  return (
+    <div style={{
+      display: "inline-flex", alignItems: "center", gap: 5,
+      marginTop: 5, padding: "3px 9px",
+      background: `${color}14`, borderRadius: 20,
+    }}>
+      <div style={{ width: 6, height: 6, borderRadius: "50%", background: color, flexShrink: 0 }} />
+      <span style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color, letterSpacing: "0.05em" }}>
+        {update.label}　{update.date}
+      </span>
+    </div>
+  );
+}
 function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
   candidate: Candidate;
   isOpen: boolean;
@@ -136,11 +158,15 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
       }}>
         <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#f0f0f0", flexShrink: 0 }} />
         <div style={{ flex: 1, textAlign: "left" }}>
-          <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", letterSpacing: "0.1em", marginBottom: 3 }}>
-            {candidate.party || "　"}
-          </div>
-          <div style={{ fontSize: 15, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a", letterSpacing: "0.05em" }}>
-  {candidate.name}
+  <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", letterSpacing: "0.1em", marginBottom: 3 }}>
+    {candidate.party || "　"}
+  </div>
+  <div style={{ fontSize: 15, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a", letterSpacing: "0.05em" }}>
+    {candidate.name}
+  </div>
+  {candidate.updates && candidate.updates[0] && (
+    <UpdateBadge update={candidate.updates[0]} />
+  )}
 </div>
 
 {candidate.updates && candidate.updates[0] && (
