@@ -157,7 +157,7 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
         background: "none", border: "none", cursor: "pointer",
       }}>
         <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#f0f0f0", flexShrink: 0 }} />
-        <div style={{ flex: 1, textAlign: "left" }}>
+        
 <div style={{ flex: 1, textAlign: "left" }}>
   <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", letterSpacing: "0.1em", marginBottom: 3 }}>
     {candidate.party || "　"}
@@ -169,10 +169,7 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
     <UpdateBadge update={candidate.updates[0]} />
   )}
 </div>
-  {candidate.updates && candidate.updates[0] && (
-    <UpdateBadge update={candidate.updates[0]} />
-  )}
-</div>
+  
 
 {candidate.updates && candidate.updates[0] && (
   <div style={{
