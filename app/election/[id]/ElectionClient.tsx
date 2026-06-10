@@ -36,7 +36,7 @@ interface Candidate {
   message: string;
   profile: string;
   policies: Policy[];
-  updates?: Update[];
+  updates: Update[];
 }
 
 interface Election {
