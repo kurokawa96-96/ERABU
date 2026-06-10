@@ -142,6 +142,36 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
           <div style={{ fontSize: 15, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a", letterSpacing: "0.05em" }}>
             {candidate.name}
           </div>
+{candidate.updates && candidate.updates.length > 0 && (() => {
+  const latest = candidate.updates[0];
+  const colors: Record<string, string> = {
+    message:  "#2D4A6B",
+    policy:   "#3D5A48",
+    schedule: "#5C3D2E",
+    info:     "#4A3570",
+  };
+  const color = colors[latest.type] ?? "#888";
+  return (
+    <div style={{
+      display: "inline-flex", alignItems: "center", gap: 5,
+      marginTop: 5, padding: "3px 9px",
+      background: `${color}14`,
+      borderRadius: 20,
+    }}>
+      <div style={{
+        width: 6, height: 6, borderRadius: "50%",
+        background: color, flexShrink: 0,
+      }} />
+      <span style={{
+        fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif",
+        color: color, letterSpacing: "0.05em",
+      }}>
+        {latest.label}　{latest.date}
+      </span>
+    </div>
+  );
+})()}
+
         </div>
         <div style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.3s ease" }}>
           <Icon type="chevronDown" size={16} color={isOpen ? "#1a1a1a" : "#ccc"} />
