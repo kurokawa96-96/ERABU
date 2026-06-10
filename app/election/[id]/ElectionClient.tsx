@@ -11,7 +11,22 @@ interface Policy {
   deadline: string;
   budget: string;
 }
+interface Update {
+  type: string;
+  label: string;
+  date: string;
+}
 
+interface Notice {
+  date: string;
+  title: string;
+  content: string;
+}
+
+interface CandidateLink {
+  label: string;
+  url: string;
+}
 interface Candidate {
   id: string;
   electionId: string;
