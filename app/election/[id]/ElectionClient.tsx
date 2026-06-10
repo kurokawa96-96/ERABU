@@ -168,35 +168,7 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
     <UpdateBadge update={candidate.updates[0]} />
   )}
 </div>
-{candidate.updates && candidate.updates[0] && (
-  <div style={{
-    display: "inline-flex", alignItems: "center", gap: 5,
-    marginTop: 5, padding: "3px 9px",
-    background: `${{
-      message: "#2D4A6B", policy: "#3D5A48",
-      schedule: "#5C3D2E", info: "#4A3570",
-    }[candidate.updates[0].type] ?? "#888"}14`,
-    borderRadius: 20,
-  }}>
-    <div style={{
-      width: 6, height: 6, borderRadius: "50%",
-      background: ({
-        message: "#2D4A6B", policy: "#3D5A48",
-        schedule: "#5C3D2E", info: "#4A3570",
-      }[candidate.updates[0].type] ?? "#888"),
-      flexShrink: 0,
-    }} />
-    <span style={{
-      fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif",
-      color: ({
-        message: "#2D4A6B", policy: "#3D5A48",
-        schedule: "#5C3D2E", info: "#4A3570",
-      }[candidate.updates[0].type] ?? "#888"),
-      letterSpacing: "0.05em",
-    }}>
-      {candidate.updates[0].label}　{candidate.updates[0].date}
-    </span>
-  </div>
+
 )}
         </div>
         <div style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.3s ease" }}>
