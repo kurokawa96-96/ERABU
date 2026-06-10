@@ -36,6 +36,7 @@ interface Candidate {
   message: string;
   profile: string;
   policies: Policy[];
+  updates?: Update[];
 }
 
 interface Election {
@@ -170,6 +171,7 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
 </div>
         <div style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.3s ease" }}>
           <Icon type="chevronDown" size={16} color={isOpen ? "#1a1a1a" : "#ccc"} />
+        </div>
         </div>
       </button>
 　　　　<button
