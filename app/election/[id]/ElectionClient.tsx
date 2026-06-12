@@ -230,7 +230,29 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
               {candidate.message}
             </div>
           )}
-
+{candidate.notices && candidate.notices.length > 0 && (
+  <div style={{ marginTop: 14 }}>
+    <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 10 }}>
+      お知らせ
+    </div>
+    {candidate.notices.map((notice, i) => (
+      <div key={i} style={{
+        padding: "10px 0",
+        borderTop: i === 0 ? "none" : "1px solid #f2f2f2",
+      }}>
+        <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginBottom: 3 }}>
+          {notice.date}
+        </div>
+        <div style={{ fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", color: "#222", fontWeight: 700, marginBottom: 3 }}>
+          {notice.title}
+        </div>
+        <div style={{ fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif", color: "#777", lineHeight: 1.7 }}>
+          {notice.content}
+        </div>
+      </div>
+    ))}
+  </div>
+)}
           {candidate.profile && (
             <details style={{ marginTop: 12 }}>
               <summary style={{
