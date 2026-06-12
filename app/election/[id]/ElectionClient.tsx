@@ -268,33 +268,50 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
                 fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif",
                 color: "#999", lineHeight: 1.7,
               }}>
+                         {candidate.profile && (
+            <details style={{ marginTop: 12 }}>
+              <summary style={{
+                fontSize: 10.5, fontFamily: "'Noto Sans JP', sans-serif",
+                color: "#bbb", letterSpacing: "0.1em",
+                cursor: "pointer", listStyle: "none",
+                display: "flex", alignItems: "center", gap: 5,
+              }}>
+                <Icon type="chevronRight" size={11} color="#ccc" /> 経歴
+              </summary>
+              <div style={{
+                marginTop: 8, paddingLeft: 12,
+                fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif",
+                color: "#999", lineHeight: 1.7,
+              }}>
                 {candidate.profile}
               </div>
             </details>
-  {candidate.links && candidate.links.length > 0 && (
-  <div style={{ marginTop: 14, display: "flex", flexWrap: "wrap", gap: 8 }}>
-    {candidate.links.map((link, i) => (
-      
-        key={i}
-        href={link.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          display: "inline-flex", alignItems: "center", gap: 5,
-          padding: "6px 12px", borderRadius: 20,
-          border: "1px solid #e0e0e0", background: "#fafaf8",
-          fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif",
-          color: "#555", textDecoration: "none",
-        }}
-      >
-        {link.label || "リンク"}
-        <svg width="11" height="11" viewBox="0 0 20 20" fill="none">
-          <path d="M8 12l8-8M11 4h5v5" stroke="#999" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </a>
-    ))}
-  </div>
-)}
+          )}
+
+          {candidate.links && candidate.links.length > 0 && (
+            <div style={{ marginTop: 14, display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {candidate.links.map((link, i) => (
+                <a
+                  key={i}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: 5,
+                    padding: "6px 12px", borderRadius: 20,
+                    border: "1px solid #e0e0e0", background: "#fafaf8",
+                    fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif",
+                    color: "#555", textDecoration: "none",
+                  }}
+                >
+                  {link.label || "リンク"}
+                  <svg width="11" height="11" viewBox="0 0 20 20" fill="none">
+                    <path d="M8 12l8-8M11 4h5v5" stroke="#999" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
