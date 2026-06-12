@@ -237,7 +237,13 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
   onCancel: () => void;
   onDelete?: () => void;
 }) {
-  const [data, setData] = useState({ ...candidate });
+  const [data, setData] = useState<Candidate>({
+  ...candidate,
+  tagline: candidate.tagline ?? "",
+  message: candidate.message ?? "",
+  profile: candidate.profile ?? "",
+  policies: Array.isArray(candidate.policies) ? candidate.policies : [],
+});
   const up = (k: keyof Candidate, v: string) => setData(d => ({ ...d, [k]: v }));
 
   const addPolicy = () => setData(d => ({
@@ -683,7 +689,10 @@ function CandidatesTab({ password, onToast, elections }: {
  useEffect(() => {
    fetch("/api/admin/candidates", { headers: { "x-admin-password": password } })
      .then(r => r.json())
-     .then(d => { setCandidates(d.data || []); setSha(d.sha || ""); });
+     .then(d => {
+  setCandidates(Array.isArray(d.data) ? d.data : []);
+  setSha(d.sha || "");
+});
  }, [password]);
 
  const save = async (c: Candidate) => {
