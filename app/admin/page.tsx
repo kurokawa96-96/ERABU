@@ -758,25 +758,48 @@ function CandidatesTab({ password, onToast, elections }: {
        </button>
      </div>
      {candidates.map(c => (
-       <button key={c.id} onClick={() => setEditing(c.id)} style={{
-         width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
-         padding: "14px 16px", background: "#fff", border: "1px solid #ebebeb",
-         borderRadius: 11, marginBottom: 8, cursor: "pointer", textAlign: "left",
-       }}>
-         <div>
-           <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>
-             {elections.find(e => e.id === c.electionId)?.name || "選挙未設定"}
-           </div>
-           <div style={{ fontSize: 14, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>
-             {c.name || "氏名未設定"}
-           </div>
-           <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>
-             {c.party || "政党未設定"}
-           </div>
-         </div>
-         <Icon type="edit" size={14} color="#ccc" />
-       </button>
-     ))}
+  <div key={c.id} style={{
+    background: "#fff", border: "1px solid #ebebeb",
+    borderRadius: 11, marginBottom: 8, overflow: "hidden",
+  }}>
+    <button onClick={() => setEditing(c.id)} style={{
+      width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+      padding: "14px 16px", background: "none", border: "none",
+      cursor: "pointer", textAlign: "left",
+    }}>
+      <div>
+        <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>
+          {elections.find(e => e.id === c.electionId)?.name || "選挙未設定"}
+        </div>
+        <div style={{ fontSize: 14, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>
+          {c.name || "氏名未設定"}
+        </div>
+        <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>
+          {c.party || "政党未設定"}
+        </div>
+      </div>
+      <Icon type="edit" size={14} color="#ccc" />
+    </button>
+    {c.editToken && (
+      <button
+        onClick={() => {
+          const url = `${window.location.origin}/candidate/edit/${c.editToken}`;
+          navigator.clipboard.writeText(url);
+          onToast("編集用URLをコピーしました");
+        }}
+        style={{
+          width: "100%", padding: "9px 16px",
+          background: "#fafaf8", border: "none", borderTop: "1px solid #f0f0f0",
+          display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
+          fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", color: "#888",
+          cursor: "pointer",
+        }}
+      >
+        編集用URLをコピー
+      </button>
+    )}
+  </div>
+))}
    </div>
  );
 }
