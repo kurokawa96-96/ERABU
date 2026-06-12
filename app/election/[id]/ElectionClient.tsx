@@ -37,8 +37,9 @@ interface Candidate {
   profile: string;
   policies: Policy[];
   updates: Update[];
+  notices?: Notice[];
+  links?: CandidateLink[];
 }
-
 interface Election {
   id: string;
   prefecture: string;
