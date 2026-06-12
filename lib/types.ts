@@ -53,6 +53,9 @@ export interface Incumbent {
   city: string;
   assembly: string;
   term: string;
+  tagline: string;
+  message: string;
+  attendanceRate: number;
   speechCount: number;
   questionCount: number;
   billVotes: IncumbentBillVote[];
