@@ -1,30 +1,14 @@
-[
-  {
-    "id": "c1780378070737",
-    "electionId": "e1780377979098",
-    "name": "酒井 直人 ",
-    "party": "",
-    "tagline": "",
-    "message": "",
-    "profile": "",
-    "policies": [],
-    "notices": [],
+{
+  "id": "c001",
+  "editToken": "xxx",
+  "electionId": "e001",
+  "name": "候補者名",
+  "party": "",
+  "tagline": "",
+  "message": "",
+  "profile": "",
+  "policies": [],
+  "notices": [],
   "links": [],
   "updates": []
-
-  },
-  {
-    "id": "c1780887131669",
-    "electionId": "e002",
-    "name": "日光太郎",
-    "party": "",
-    "tagline": "",
-    "message": "国破れて山河あり",
-    "profile": "",
-    "policies": [],
-    "notices": [],
-  "links": [],
-  "updates": []
-
-  }
-]
+}
