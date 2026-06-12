@@ -253,40 +253,25 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
     ))}
   </div>
 )}
-          {candidate.profile && (
-            <details style={{ marginTop: 12 }}>
-              <summary style={{
-                fontSize: 10.5, fontFamily: "'Noto Sans JP', sans-serif",
-                color: "#bbb", letterSpacing: "0.1em",
-                cursor: "pointer", listStyle: "none",
-                display: "flex", alignItems: "center", gap: 5,
-              }}>
-                <Icon type="chevronRight" size={11} color="#ccc" /> 経歴
-              </summary>
-              <div style={{
-                marginTop: 8, paddingLeft: 12,
-                fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif",
-                color: "#999", lineHeight: 1.7,
-              }}>
-                         {candidate.profile && (
-            <details style={{ marginTop: 12 }}>
-              <summary style={{
-                fontSize: 10.5, fontFamily: "'Noto Sans JP', sans-serif",
-                color: "#bbb", letterSpacing: "0.1em",
-                cursor: "pointer", listStyle: "none",
-                display: "flex", alignItems: "center", gap: 5,
-              }}>
-                <Icon type="chevronRight" size={11} color="#ccc" /> 経歴
-              </summary>
-              <div style={{
-                marginTop: 8, paddingLeft: 12,
-                fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif",
-                color: "#999", lineHeight: 1.7,
-              }}>
-                {candidate.profile}
-              </div>
-            </details>
-          )}
+         {candidate.profile && (
+  <details style={{ marginTop: 12 }}>
+    <summary style={{
+      fontSize: 10.5, fontFamily: "'Noto Sans JP', sans-serif",
+      color: "#bbb", letterSpacing: "0.1em",
+      cursor: "pointer", listStyle: "none",
+      display: "flex", alignItems: "center", gap: 5,
+    }}>
+      <Icon type="chevronRight" size={11} color="#ccc" /> 経歴
+    </summary>
+    <div style={{
+      marginTop: 8, paddingLeft: 12,
+      fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif",
+      color: "#999", lineHeight: 1.7,
+    }}>
+      {candidate.profile}
+    </div>
+  </details>
+)}
 
           {candidate.links && candidate.links.length > 0 && (
             <div style={{ marginTop: 14, display: "flex", flexWrap: "wrap", gap: 8 }}>
