@@ -237,13 +237,15 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
   onCancel: () => void;
   onDelete?: () => void;
 }) {
-  const [data, setData] = useState<Candidate>({
+  const initialCandidate: Candidate = {
   ...candidate,
   tagline: candidate.tagline ?? "",
   message: candidate.message ?? "",
   profile: candidate.profile ?? "",
   policies: Array.isArray(candidate.policies) ? candidate.policies : [],
-});
+};
+
+const [data, setData] = useState(initialCandidate);
   const up = (k: keyof Candidate, v: string) => setData(d => ({ ...d, [k]: v }));
 
   const addPolicy = () => setData(d => ({
