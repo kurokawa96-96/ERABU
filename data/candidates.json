@@ -1,14 +1,16 @@
-{
-  "id": "c001",
-  "editToken": "xxx",
-  "electionId": "e001",
-  "name": "候補者名",
-  "party": "",
-  "tagline": "",
-  "message": "",
-  "profile": "",
-  "policies": [],
-  "notices": [],
-  "links": [],
-  "updates": []
-}
+[
+  {
+    "id": "c001",
+    "editToken": "xxx",
+    "electionId": "e001",
+    "name": "候補者名",
+    "party": "",
+    "tagline": "",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "notices": [],
+    "links": [],
+    "updates": []
+  }
+]
