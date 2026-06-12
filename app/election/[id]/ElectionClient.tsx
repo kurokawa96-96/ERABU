@@ -295,7 +295,6 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
     ))}
   </div>
 )}
-          )}
         </div>
       </div>
     </div>
