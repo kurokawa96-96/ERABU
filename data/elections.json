@@ -11,13 +11,13 @@
   },
   {
     "id": "e002",
-    "prefecture": "東京都",
-    "city": "世田谷区",
-    "name": "世田谷区議会議員選挙",
-    "type": "区議会議員",
-    "announcementDate": "2025-07-08",
-    "electionDate": "2025-07-20",
-    "status": "upcoming"
+    "prefecture": "茨城県",
+    "city": "石岡市",
+    "name": "石岡市長選挙",
+    "type": "市長選挙",
+    "announcementDate": "2025-06-21",
+    "electionDate": "2025-06-14",
+    "status": "ongoing"
   },
   {
     "id": "e003",
