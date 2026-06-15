@@ -57,4 +57,34 @@
     "policies": [],
     "editToken": "9bybh6m7vgpbbii056sykk"
   }
+  [
+  {
+    "id": "c001",
+    "electionId": "e001",
+    "name": "工藤 のり子",
+    "party": "日本共産党",
+    "tagline": "",
+    "message": "",
+    "profile": "78歳、女性、現職",
+    "policies": [],
+    "notices": [],
+    "links": [],
+    "updates": [],
+    "editToken": "cxsfxyigbtneol55qurq0q" 
+  },
+  
+    "id": "c002",
+    "electionId": "e001",
+    "name": "伊藤 かずみ",
+    "party": "無所属",
+    "tagline": "",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "notices": [],
+    "links": [],
+    "updates": [],
+    "editToken":"s66ogtlzpzrru3raoc432m"
+  }
+
 ]
