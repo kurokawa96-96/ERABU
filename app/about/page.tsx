@@ -184,12 +184,28 @@ export default function AboutPage() {
           </div>
         </Section>
 
-        {/* お問い合わせ */}
-        <Section label="CONTACT">
-          <Card>
-            <Row icon="link" title="情報の誤りを報告する" sub="掲載内容に誤りや問題を発見された場合はこちらからご連絡ください。" last />
-          </Card>
-        </Section>
+       {/* お問い合わせ */}
+<Section label="CONTACT">
+  <Card>
+    <div style={{ fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", color: "#555", lineHeight: 1.8, marginBottom: 14 }}>
+      掲載申請・情報の誤り報告・データ利用のご相談など、お気軽にご連絡くださいませ。
+    </div>
+    <a
+    　href="https://forms.gle/enuCZEgUrfZDhyTNA"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        display: "flex", alignItems: "center", justifyContent: "center", gap: 7,
+        width: "100%", padding: 12, background: "#1a1a1a",
+        color: "#fff", borderRadius: 9, textDecoration: "none",
+        fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif",
+        letterSpacing: "0.05em", boxSizing: "border-box",
+      }}
+    >
+      お問い合わせフォームを開く
+    </a>
+  </Card>
+</Section>
 
       </div>
 
