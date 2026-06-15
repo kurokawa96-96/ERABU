@@ -1,13 +1,13 @@
 [
   {
     "id": "e001",
-    "prefecture": "北海道",
-    "city": "札幌市",
-    "name": "札幌市議会議員選挙",
-    "type": "市議会議員",
-    "announcementDate": "2025-07-01",
-    "electionDate": "2025-07-13",
-    "status": "upcoming"
+    "prefecture": "青森県",
+    "city": "五所川原市",
+    "name": "五所川原市長選挙",
+    "type": "市長選挙",
+    "announcementDate": "2025-06-14",
+    "electionDate": "2025-06-14",
+    "status": "ongoing"
   },
   {
     "id": "e002",
