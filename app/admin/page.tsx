@@ -698,16 +698,19 @@ function CandidatesTab({ password, onToast, elections }: {
  }, [password]);
 
  const save = async (c: Candidate) => {
-   const next = candidates.map(x => x.id === c.id ? c : x);
-   await fetch("/api/admin/candidates", {
-     method: "POST",
-     headers: { "x-admin-password": password, "Content-Type": "application/json" },
-     body: JSON.stringify({ candidates: next, sha }),
-   });
-   setCandidates(next);
-   setEditing(null);
-   onToast("保存しました");
- };
+  const next = candidates.map(x => x.id === c.id ? c : x);
+  await fetch("/api/admin/candidates", {
+    method: "POST",
+    headers: { "x-admin-password": password, "Content-Type": "application/json" },
+    body: JSON.stringify({ candidates: next, sha }),
+  });
+  setCandidates(next);
+  setEditing(null);
+  onToast("保存しました");
+  fetch("/api/admin/candidates", { headers: { "x-admin-password": password } })
+    .then(r => r.json())
+    .then(d => setSha(d.sha || ""));
+};
 
  const add = () => {
   const token = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
