@@ -95,7 +95,7 @@ export default function AboutPage() {
               color: "#2a2a2a", lineHeight: 2.1, letterSpacing: "0.04em",
               whiteSpace: "pre-line",
             }}>
-              {`ERABUは、「誰を選んだらいいかわからない」という声から始まりました。
+              {`ERABUは、「選挙で、誰を選んだらいいかわからない」という声から始まりました。
 
 関心がないのではなく、候補者の思想や理念が有権者まで届いていない。
 
