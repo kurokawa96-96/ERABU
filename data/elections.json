@@ -21,13 +21,13 @@
   },
   {
     "id": "e003",
-    "prefecture": "神奈川県",
-    "city": "横浜市",
-    "name": "横浜市長選挙",
-    "type": "市長",
-    "announcementDate": "2025-07-22",
-    "electionDate": "2025-08-03",
-    "status": "upcoming"
+    "prefecture": "沖縄県",
+    "city": "南大東村",
+    "name": "南大東村長選挙",
+    "type": "村長",
+    "announcementDate": "2025-06-16",
+    "electionDate": "2025-06-21",
+    "status": "ongoing"
   },
   {
     "id": "e004",
@@ -58,5 +58,15 @@
     "announcementDate": "2026-05-31",
     "electionDate": "2026-06-07",
     "status": "ongoing"
+  },
+  {
+    "id": "e1781508243115",
+    "prefecture": "",
+    "city": "",
+    "name": "",
+    "type": "",
+    "announcementDate": "",
+    "electionDate": "",
+    "status": "upcoming"
   }
 ]
