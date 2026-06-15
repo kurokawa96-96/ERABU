@@ -603,7 +603,9 @@ function ElectionsTab({ password, onToast }: { password: string; onToast: (m: st
    setEditing(null);
    onToast("保存しました");
  };
-
+fetch("/api/admin/elections", { headers: { "x-admin-password": password } })
+    .then(r => r.json())
+    .then(d => setSha(d.sha || ""));
  const add = () => {
    const fresh: Election = {
      id: `e${Date.now()}`, prefecture: "", city: "", name: "",
@@ -843,7 +845,9 @@ function IncumbentsTab({ password, onToast }: {
    setEditing(null);
    onToast("保存しました");
  };
-
+fetch("/api/admin/incumbents", { headers: { "x-admin-password": password } })
+    .then(r => r.json())
+    .then(d => setSha(d.sha || ""));
  const add = () => {
    const fresh: Incumbent = {
      id: `i${Date.now()}`, name: "", party: "", prefecture: "",
