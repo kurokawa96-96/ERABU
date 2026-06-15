@@ -191,7 +191,7 @@ export default function AboutPage() {
       掲載申請・情報の誤り報告・データ利用のご相談など、お気軽にご連絡くださいませ。
     </div>
     <a
-    　href="https://docs.google.com/forms/d/e/1FAIpQLSejDYoL3o8IWFPsREN3f5h1TiNbFaLnjfzO8vJs4Bg8Uis9bQ/viewform?embedded=true" width="640" height="790" frameborder="0" marginheight="0" marginwidth="0"
+    　href="https://docs.google.com/forms/d/e/1FAIpQLSejDYoL3o8IWFPsREN3f5h1TiNbFaLnjfzO8vJs4Bg8Uis9bQ/viewform" 
       target="_blank"
       rel="noopener noreferrer"
       style={{
