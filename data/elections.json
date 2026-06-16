@@ -68,5 +68,15 @@
     "announcementDate": "",
     "electionDate": "",
     "status": "upcoming"
+  },
+  {
+    "id": "e1781573216763",
+    "prefecture": "京都府",
+    "city": "宮津市",
+    "name": "宮津市長選挙",
+    "type": "市長選挙",
+    "announcementDate": "2026-06-14",
+    "electionDate": "2026-06-21",
+    "status": "ongoing"
   }
 ]
