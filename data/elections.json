@@ -31,13 +31,13 @@
   },
   {
     "id": "e004",
-    "prefecture": "大阪府",
-    "city": "大阪市",
-    "name": "大阪市議会議員選挙",
-    "type": "市議会議員",
-    "announcementDate": "2025-08-05",
-    "electionDate": "2025-08-17",
-    "status": "upcoming"
+    "prefecture": "沖縄県",
+    "city": "南大東村",
+    "name": "南大東村議会議員選挙",
+    "type": "村議会議員",
+    "announcementDate": "2025-06-16",
+    "electionDate": "2025-06-21",
+    "status": "ongoing"
   },
   {
     "id": "e005",
