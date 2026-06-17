@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const PASSWORD = process.env.ADMIN_PASSWORD ?? "erabu2025";
+const PASSWORD = process.env.ADMIN_PASSWORD ?? "kurokuro96";
 const GITHUB_API = "https://api.github.com";
 
 function checkAuth(req: NextRequest) {
