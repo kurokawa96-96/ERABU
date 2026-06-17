@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+ふimport { NextRequest, NextResponse } from "next/server";
 
 const PASSWORD = process.env.ADMIN_PASSWORD ?? "kurokuro96";
 const GITHUB_API = "https://api.github.com";
@@ -59,11 +59,19 @@ export async function POST(req: NextRequest) {
   if (!checkAuth(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+
   try {
     const { candidates, sha } = await req.json();
     await putFile(candidates, sha);
     return NextResponse.json({ ok: true });
-  } catch {
-    return NextResponse.json({ error: "Save failed" }, { status: 500 });
+  } catch (error) {
+    console.error("candidate save error:", error);
+
+    return NextResponse.json(
+      {
+        error: String(error)
+      },
+      { status: 500 }
+    );
   }
 }
