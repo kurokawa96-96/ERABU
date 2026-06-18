@@ -1,26 +1,18 @@
 [
   {
     "id": "c001",
-    "editToken": "xxx",
     "electionId": "e001",
     "name": "千葉 広久",
     "party": "無所属",
-    "tagline": "",
-    "message": "",
-    "profile": "",
-    "policies": [],
-    "notices": [],
-    "links": [],
-    "updates": []
+    "tagline": "", "message": "", "profile": "",
+    "policies": [], "notices": [], "links": [], "updates": [],
+    "editToken": "xxx"
   },
   {
     "id": "c1781498820447",
     "electionId": "e002",
     "name": "といた 和之",
-    "party": "",
-    "tagline": "",
-    "message": "",
-    "profile": "",
+    "party": "", "tagline": "", "message": "", "profile": "",
     "policies": [],
     "editToken": "jhc5q5v7w4po7i1l0vufc"
   },
@@ -28,10 +20,7 @@
     "id": "c1781498895991",
     "electionId": "e002",
     "name": "幕内 幹男",
-    "party": "",
-    "tagline": "",
-    "message": "",
-    "profile": "",
+    "party": "", "tagline": "", "message": "", "profile": "",
     "policies": [],
     "editToken": "op4ts8u5fjr1usu5p6sw"
   },
@@ -39,10 +28,7 @@
     "id": "c1781499086230",
     "electionId": "e002",
     "name": "やじま ようじ",
-    "party": "",
-    "tagline": "",
-    "message": "",
-    "profile": "",
+    "party": "", "tagline": "", "message": "", "profile": "",
     "policies": [],
     "editToken": "g747ed5c86m7d0k0n0pa2a"
   },
@@ -50,28 +36,18 @@
     "id": "c1781508317417",
     "electionId": "e003",
     "name": "新垣 利治",
-    "party": "",
-    "tagline": "",
-    "message": "",
-    "profile": "",
+    "party": "", "tagline": "", "message": "", "profile": "",
     "policies": [],
     "editToken": "9bybh6m7vgpbbii056sykk"
   },
-  
   {
-    "id": "c001",
+    "id": "c002",
     "electionId": "e001",
     "name": "工藤 のり子",
     "party": "日本共産党",
-    "tagline": "",
-    "message": "",
+    "tagline": "", "message": "",
     "profile": "78歳、女性、現職",
-    "policies": [],
-    "notices": [],
-    "links": [],
-    "updates": [],
-    "editToken": "cxsfxyigbtneol55qurq0q" 
-  },
-  
-   
+    "policies": [], "notices": [], "links": [], "updates": [],
+    "editToken": "cxsfxyigbtneol55qurq0q"
+  }
 ]
