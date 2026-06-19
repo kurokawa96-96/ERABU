@@ -68,6 +68,10 @@ function Icon({ type, size = 18, color = "#1a1a1a" }: { type: string; size?: num
     data: <svg {...p}><rect x="3" y="3" width="14" height="14" rx="1.5" stroke={color} strokeWidth="1.4"/><path d="M7 7h6M7 10h6M7 13h4" stroke={color} strokeWidth="1.3" strokeLinecap="round"/></svg>,
     energy: <svg {...p}><path d="M11 2L4 11h6l-1 7 7-9h-6l1-7Z" stroke={color} strokeWidth="1.4" strokeLinejoin="round"/></svg>,
     digital: <svg {...p}><rect x="2" y="4" width="16" height="11" rx="1.5" stroke={color} strokeWidth="1.4"/><path d="M7 18h6M10 15v3" stroke={color} strokeWidth="1.4" strokeLinecap="round"/></svg>,
+    economy: <svg {...p}><path d="M3 14c0-4 3-7 7-7s7 3 7 7" stroke={color} strokeWidth="1.4" strokeLinecap="round"/><path d="M10 7V4M7 5l3-1 3 1" stroke={color} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+finance: <svg {...p}><rect x="2" y="5" width="16" height="12" rx="1.5" stroke={color} strokeWidth="1.4"/><path d="M2 9h16" stroke={color} strokeWidth="1.3"/><circle cx="10" cy="13" r="2" stroke={color} strokeWidth="1.3"/></svg>,
+tax: <svg {...p}><path d="M4 16L16 4" stroke={color} strokeWidth="1.5" strokeLinecap="round"/><circle cx="6" cy="6" r="2" stroke={color} strokeWidth="1.3"/><circle cx="14" cy="14" r="2" stroke={color} strokeWidth="1.3"/></svg>,
+welfare: <svg {...p}><path d="M10 17c-4-2.5-7-5.5-7-9a4 4 0 018 0 4 4 0 018 0c0 3.5-3 6.5-7 9Z" stroke={color} strokeWidth="1.4" strokeLinejoin="round"/></svg>,
   };
   return icons[type] ?? icons["data"];
 }
