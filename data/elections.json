@@ -78,5 +78,15 @@
     "announcementDate": "2026-06-14",
     "electionDate": "2026-06-21",
     "status": "ongoing"
+  },
+  {
+    "id": "e1781868274151",
+    "prefecture": "滋賀県",
+    "city": "",
+    "name": "滋賀県知事選挙",
+    "type": "県知事選挙",
+    "announcementDate": "2026-06-18",
+    "electionDate": "2026-07-05",
+    "status": "upcoming"
   }
 ]
