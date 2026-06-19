@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 const POLICY_ICONS = [
   "education","medical","environment","industry",
   "transport","reform","participation","childcare",
-  "data","energy","digital"
+  "data","energy","digital","economy","finance","tax","welfare"
 ];
 
 interface Policy {
