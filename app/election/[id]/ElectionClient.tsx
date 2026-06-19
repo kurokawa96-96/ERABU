@@ -81,13 +81,9 @@ const POLICY_ROWS: { key: keyof Policy; label: string }[] = [
 
 function PolicyBlock({ policy }: { policy: Policy }) {
   const allEmpty = POLICY_ROWS.every(r => !policy[r.key]);
-
   return (
     <div style={{ background: "#fafaf8", borderRadius: 9, overflow: "hidden", marginBottom: 7 }}>
-      <div style={{
-        display: "flex", alignItems: "center", gap: 10,
-        padding: "10px 12px 8px", borderBottom: "1px solid #f0f0ee",
-      }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px 8px", borderBottom: "1px solid #f0f0ee" }}>
         <Icon type={policy.icon} size={16} color="#555" />
         <span style={{ fontSize: 12, fontWeight: 700, fontFamily: "'Noto Sans JP', sans-serif", color: "#222", letterSpacing: "0.05em" }}>
           {policy.label}
@@ -116,6 +112,7 @@ function PolicyBlock({ policy }: { policy: Policy }) {
     </div>
   );
 }
+
 const UPDATE_COLORS: Record<string, string> = {
   message: "#2D4A6B",
   policy: "#3D5A48",
@@ -126,11 +123,7 @@ const UPDATE_COLORS: Record<string, string> = {
 function UpdateBadge({ update }: { update: { type: string; label: string; date: string } }) {
   const color = UPDATE_COLORS[update.type] ?? "#888";
   return (
-    <div style={{
-      display: "inline-flex", alignItems: "center", gap: 5,
-      marginTop: 5, padding: "3px 9px",
-      background: `${color}14`, borderRadius: 20,
-    }}>
+    <div style={{ display: "inline-flex", alignItems: "center", gap: 5, marginTop: 5, padding: "3px 9px", background: `${color}14`, borderRadius: 20 }}>
       <div style={{ width: 6, height: 6, borderRadius: "50%", background: color, flexShrink: 0 }} />
       <span style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color, letterSpacing: "0.05em" }}>
         {update.label}　{update.date}
@@ -138,6 +131,7 @@ function UpdateBadge({ update }: { update: { type: string; label: string; date: 
     </div>
   );
 }
+
 function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
   candidate: Candidate;
   isOpen: boolean;
@@ -151,7 +145,7 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
       border: `1px solid ${isOpen ? "#d8d8d8" : "#ebebeb"}`,
       marginBottom: 8, overflow: "hidden",
       transition: "border-color 0.3s",
-　　　　position: "relative",
+      position: "relative",
     }}>
       <button onClick={onToggle} style={{
         width: "100%", display: "flex", alignItems: "center",
@@ -159,32 +153,30 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
         background: "none", border: "none", cursor: "pointer",
       }}>
         <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#f0f0f0", flexShrink: 0 }} />
-<div style={{ flex: 1, textAlign: "left" }}>
-  <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", letterSpacing: "0.1em", marginBottom: 3 }}>
-    {candidate.party || "　"}
-  </div>
-  <div style={{ fontSize: 15, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a", letterSpacing: "0.05em" }}>
-    {candidate.name}
-  </div>
- {candidate.updates && candidate.updates[0] && (
-    <UpdateBadge update={candidate.updates[0]} />
-  )}
-</div>
+        <div style={{ flex: 1, textAlign: "left" }}>
+          <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", letterSpacing: "0.1em", marginBottom: 3 }}>
+            {candidate.party || "　"}
+          </div>
+          <div style={{ fontSize: 15, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a", letterSpacing: "0.05em" }}>
+            {candidate.name}
+          </div>
+          {candidate.updates && candidate.updates[0] && (
+            <UpdateBadge update={candidate.updates[0]} />
+          )}
+        </div>
         <div style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.3s ease" }}>
           <Icon type="chevronDown" size={16} color={isOpen ? "#1a1a1a" : "#ccc"} />
         </div>
       </button>
-　　　　<button
-  onClick={e => { e.stopPropagation(); onSave(); }}
-  style={{
-    position: "absolute", top: 12, right: 48,
-    background: "none", border: "none", cursor: "pointer", padding: 4,
-  }}
->
-  <svg width="16" height="16" viewBox="0 0 20 20" fill={isSaved ? "#1a1a1a" : "none"}>
-    <path d="M5 2h10v16l-5-4-5 4V2Z" stroke="#1a1a1a" strokeWidth="1.4" strokeLinejoin="round"/>
-  </svg>
-</button>
+
+      <button
+        onClick={e => { e.stopPropagation(); onSave(); }}
+        style={{ position: "absolute", top: 12, right: 48, background: "none", border: "none", cursor: "pointer", padding: 4 }}
+      >
+        <svg width="16" height="16" viewBox="0 0 20 20" fill={isSaved ? "#1a1a1a" : "none"}>
+          <path d="M5 2h10v16l-5-4-5 4V2Z" stroke="#1a1a1a" strokeWidth="1.4" strokeLinejoin="round"/>
+        </svg>
+      </button>
 
       <div style={{
         maxHeight: isOpen ? "1200px" : 0,
@@ -200,11 +192,7 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
           <div style={{ height: 1, background: "#f0f0f0", marginBottom: 14 }} />
 
           {candidate.tagline && (
-            <div style={{
-              borderLeft: "2px solid #1a1a1a", paddingLeft: 12, marginBottom: 18,
-              fontSize: 13, fontFamily: "'Noto Serif JP', serif",
-              color: "#333", lineHeight: 1.8,
-            }}>
+            <div style={{ borderLeft: "2px solid #1a1a1a", paddingLeft: 12, marginBottom: 18, fontSize: 13, fontFamily: "'Noto Serif JP', serif", color: "#333", lineHeight: 1.8 }}>
               {candidate.tagline}
             </div>
           )}
@@ -221,57 +209,36 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
           )}
 
           {candidate.message && (
-            <div style={{
-              margin: "14px 0 0", padding: "11px 13px",
-              background: "#f8f8f6", borderRadius: 8,
-              fontSize: 12, fontFamily: "'Noto Serif JP', serif",
-              color: "#3a3a3a", lineHeight: 1.9,
-            }}>
+            <div style={{ margin: "14px 0 0", padding: "11px 13px", background: "#f8f8f6", borderRadius: 8, fontSize: 12, fontFamily: "'Noto Serif JP', serif", color: "#3a3a3a", lineHeight: 1.9 }}>
               {candidate.message}
             </div>
           )}
-{candidate.notices && candidate.notices.length > 0 && (
-  <div style={{ marginTop: 14 }}>
-    <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 10 }}>
-      お知らせ
-    </div>
-    {candidate.notices.map((notice, i) => (
-      <div key={i} style={{
-        padding: "10px 0",
-        borderTop: i === 0 ? "none" : "1px solid #f2f2f2",
-      }}>
-        <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginBottom: 3 }}>
-          {notice.date}
-        </div>
-        <div style={{ fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", color: "#222", fontWeight: 700, marginBottom: 3 }}>
-          {notice.title}
-        </div>
-        <div style={{ fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif", color: "#777", lineHeight: 1.7 }}>
-          {notice.content}
-        </div>
-      </div>
-    ))}
-  </div>
-)}
-         {candidate.profile && (
-  <details style={{ marginTop: 12 }}>
-    <summary style={{
-      fontSize: 10.5, fontFamily: "'Noto Sans JP', sans-serif",
-      color: "#bbb", letterSpacing: "0.1em",
-      cursor: "pointer", listStyle: "none",
-      display: "flex", alignItems: "center", gap: 5,
-    }}>
-      <Icon type="chevronRight" size={11} color="#ccc" /> 経歴
-    </summary>
-    <div style={{
-      marginTop: 8, paddingLeft: 12,
-      fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif",
-      color: "#999", lineHeight: 1.7,
-    }}>
-      {candidate.profile}
-    </div>
-  </details>
-)}
+
+          {candidate.notices && candidate.notices.length > 0 && (
+            <div style={{ marginTop: 14 }}>
+              <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 10 }}>
+                お知らせ
+              </div>
+              {candidate.notices.map((notice, i) => (
+                <div key={i} style={{ padding: "10px 0", borderTop: i === 0 ? "none" : "1px solid #f2f2f2" }}>
+                  <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginBottom: 3 }}>{notice.date}</div>
+                  <div style={{ fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", color: "#222", fontWeight: 700, marginBottom: 3 }}>{notice.title}</div>
+                  <div style={{ fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif", color: "#777", lineHeight: 1.7 }}>{notice.content}</div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {candidate.profile && (
+            <details style={{ marginTop: 12 }}>
+              <summary style={{ fontSize: 10.5, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.1em", cursor: "pointer", listStyle: "none", display: "flex", alignItems: "center", gap: 5 }}>
+                <Icon type="chevronRight" size={11} color="#ccc" /> 経歴
+              </summary>
+              <div style={{ marginTop: 8, paddingLeft: 12, fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif", color: "#999", lineHeight: 1.7 }}>
+                {candidate.profile}
+              </div>
+            </details>
+          )}
 
           {candidate.links && candidate.links.length > 0 && (
             <div style={{ marginTop: 14, display: "flex", flexWrap: "wrap", gap: 8 }}>
@@ -281,32 +248,7 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    display: "inline-flex", alignItems: "center", gap: 5,
-                    padding: "6px 12px", borderRadius: 20,
-                    border: "1px solid #e0e0e0", background: "#fafaf8",
-                    fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif",
-                    color: "#555", textDecoration: "none",
-                  }}
-                  {/* 編集案内 */}
-<Link
-  href="/pricing"
-  style={{
-    display: "block", marginTop: 16,
-    padding: "11px 14px",
-    background: "#f8f8f6",
-    border: "1px solid #e8e8e8",
-    borderRadius: 9, textDecoration: "none",
-    textAlign: "center",
-  }}
->
-  <span style={{
-    fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif",
-    color: "#a09880", letterSpacing: "0.08em",
-  }}>
-    この候補者ページは編集できます →
-  </span>
-</Link>
+                  style={{ display: "inline-flex", alignItems: "center", gap: 5, padding: "6px 12px", borderRadius: 20, border: "1px solid #e0e0e0", background: "#fafaf8", fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", color: "#555", textDecoration: "none" }}
                 >
                   {link.label || "リンク"}
                   <svg width="11" height="11" viewBox="0 0 20 20" fill="none">
@@ -316,6 +258,24 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
               ))}
             </div>
           )}
+
+          {/* 編集案内 */}
+          <Link
+            href="/pricing"
+            style={{
+              display: "block", marginTop: 16,
+              padding: "11px 14px",
+              background: "#f8f8f6",
+              border: "1px solid #e8e8e8",
+              borderRadius: 9, textDecoration: "none",
+              textAlign: "center",
+            }}
+          >
+            <span style={{ fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", color: "#a09880", letterSpacing: "0.08em" }}>
+              この候補者ページは編集できます →
+            </span>
+          </Link>
+
         </div>
       </div>
     </div>
@@ -328,45 +288,40 @@ export default function ElectionClient({ election, candidates }: {
 }) {
   const [openId, setOpenId] = useState<string | null>(null);
   const [shuffled] = useState(() => [...candidates].sort(() => Math.random() - 0.5));
-const [savedIds, setSavedIds] = useState<string[]>(() => {
-  if (typeof window === "undefined") return [];
-  try {
-    return JSON.parse(localStorage.getItem("erabu_saved") ?? "[]");
-  } catch { return []; }
-});
+  const [savedIds, setSavedIds] = useState<string[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      return JSON.parse(localStorage.getItem("erabu_saved") ?? "[]");
+    } catch { return []; }
+  });
 
-const toggleSave = (id: string) => {
-  const candidate = shuffled.find(c => c.id === id);
-  const next = savedIds.includes(id)
-    ? savedIds.filter(x => x !== id)
-    : [...savedIds, id];
-  setSavedIds(next);
-  localStorage.setItem("erabu_saved", JSON.stringify(next));
+  const toggleSave = (id: string) => {
+    const candidate = shuffled.find(c => c.id === id);
+    const next = savedIds.includes(id)
+      ? savedIds.filter(x => x !== id)
+      : [...savedIds, id];
+    setSavedIds(next);
+    localStorage.setItem("erabu_saved", JSON.stringify(next));
 
-  if (candidate && !savedIds.includes(id)) {
-    const details = JSON.parse(localStorage.getItem("erabu_saved_details") ?? "[]");
-    const newDetail = {
-      id: candidate.id,
-      name: candidate.name,
-      party: candidate.party,
-      electionName: election.name,
-      electionId: election.id,
-    };
-    localStorage.setItem("erabu_saved_details", JSON.stringify([...details, newDetail]));
-  } else {
-    const details = JSON.parse(localStorage.getItem("erabu_saved_details") ?? "[]");
-    localStorage.setItem("erabu_saved_details", JSON.stringify(details.filter((d: { id: string }) => d.id !== id)));
-  }
-};
+    if (candidate && !savedIds.includes(id)) {
+      const details = JSON.parse(localStorage.getItem("erabu_saved_details") ?? "[]");
+      const newDetail = {
+        id: candidate.id,
+        name: candidate.name,
+        party: candidate.party,
+        electionName: election.name,
+        electionId: election.id,
+      };
+      localStorage.setItem("erabu_saved_details", JSON.stringify([...details, newDetail]));
+    } else {
+      const details = JSON.parse(localStorage.getItem("erabu_saved_details") ?? "[]");
+      localStorage.setItem("erabu_saved_details", JSON.stringify(details.filter((d: { id: string }) => d.id !== id)));
+    }
+  };
+
   return (
     <div style={{ maxWidth: 480, margin: "0 auto", minHeight: "100vh", background: "#f5f4f0" }}>
-      {/* Header */}
-      <div style={{
-        background: "#fff", borderBottom: "1px solid #e8e8e8",
-        padding: "0 20px", height: 54,
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        position: "sticky", top: 0, zIndex: 20,
-      }}>
+      <div style={{ background: "#fff", borderBottom: "1px solid #e8e8e8", padding: "0 20px", height: 54, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 20 }}>
         <Link href="/" style={{ textDecoration: "none" }}>
           <Icon type="back" size={20} color="#1a1a1a" />
         </Link>
@@ -376,7 +331,6 @@ const toggleSave = (id: string) => {
         <div style={{ width: 20 }} />
       </div>
 
-      {/* Election title */}
       <div style={{ padding: "20px 24px 16px", textAlign: "center" }}>
         <div style={{ fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", letterSpacing: "0.1em", marginBottom: 4 }}>
           {election.prefecture} {election.city}
@@ -391,7 +345,6 @@ const toggleSave = (id: string) => {
 
       <div style={{ height: 1, background: "#e8e8e8", margin: "0 20px" }} />
 
-      {/* Random notice */}
       <div style={{ padding: "9px 20px", display: "flex", alignItems: "center", gap: 6 }}>
         <Icon type="info" size={12} color="#ccc" />
         <span style={{ fontSize: 9.5, fontFamily: "'Noto Sans JP', sans-serif", color: "#ccc", letterSpacing: "0.08em" }}>
@@ -399,7 +352,6 @@ const toggleSave = (id: string) => {
         </span>
       </div>
 
-      {/* Candidates */}
       <div style={{ padding: "4px 14px 40px" }}>
         {shuffled.length === 0 ? (
           <div style={{ textAlign: "center", padding: "40px 0", fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb" }}>
@@ -408,12 +360,12 @@ const toggleSave = (id: string) => {
         ) : (
           shuffled.map(c => (
             <CandidateCard
-  key={c.id} candidate={c}
-  isOpen={openId === c.id}
-  onToggle={() => setOpenId(openId === c.id ? null : c.id)}
-  isSaved={savedIds.includes(c.id)}
-  onSave={() => toggleSave(c.id)}
-/>
+              key={c.id} candidate={c}
+              isOpen={openId === c.id}
+              onToggle={() => setOpenId(openId === c.id ? null : c.id)}
+              isSaved={savedIds.includes(c.id)}
+              onSave={() => toggleSave(c.id)}
+            />
           ))
         )}
       </div>
