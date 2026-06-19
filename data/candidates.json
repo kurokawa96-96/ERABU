@@ -81,5 +81,116 @@
     "profile": "",
     "policies": [],
     "editToken": "0z0b4rckhenh1b51wfcte8v"
+  },
+  {
+    "id": "c1781869796384",
+    "electionId": "e1781868274151",
+    "name": "大すみ　もとし",
+    "party": "無所属",
+    "tagline": "４２歳　男性　新人",
+    "message": "",
+    "profile": "元地方公務員",
+    "policies": [
+      {
+        "icon": "tax",
+        "label": "交通税反対",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "tax",
+        "label": "知事退職金削減",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "reform",
+        "label": "行政改革",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "economy",
+        "label": "中小企業支援",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "transport",
+        "label": "交通安全強化",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      }
+    ],
+    "editToken": "v6lre7ko3n3bthrjz5h4"
+  },
+  {
+    "id": "c1781870307648",
+    "electionId": "e1781868274151",
+    "name": "三日月 大造",
+    "party": "無所属",
+    "tagline": "５５歳　男性　現職",
+    "message": "",
+    "profile": "",
+    "policies": [
+      {
+        "icon": "welfare",
+        "label": "ひとの健康",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "economy",
+        "label": "社会と経済の健康",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      }
+    ],
+    "editToken": "ikc7gj9e4takrfqt00l1j"
+  },
+  {
+    "id": "c1781870568490",
+    "electionId": "e1781868274151",
+    "name": "坪田 いくお",
+    "party": "無所属",
+    "tagline": "６７歳　男性　新人　明るい滋賀県政をつくる会・常任幹事、団体職員共産系支援の構図で出馬",
+    "message": "",
+    "profile": "",
+    "policies": [
+      {
+        "icon": "education",
+        "label": "",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      }
+    ],
+    "editToken": "6stlzzb056iryaondpp6o"
+  },
+  {
+    "id": "c1781870677605",
+    "electionId": "e1781868274151",
+    "name": "坂本 正明",
+    "party": "無所属",
+    "tagline": "５７歳　男性　新人　会社員",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "dzbnqtrawabkv3hjpnv"
   }
 ]
