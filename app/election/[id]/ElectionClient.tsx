@@ -288,6 +288,25 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
                     fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif",
                     color: "#555", textDecoration: "none",
                   }}
+                  {/* 編集案内 */}
+<Link
+  href="/pricing"
+  style={{
+    display: "block", marginTop: 16,
+    padding: "11px 14px",
+    background: "#f8f8f6",
+    border: "1px solid #e8e8e8",
+    borderRadius: 9, textDecoration: "none",
+    textAlign: "center",
+  }}
+>
+  <span style={{
+    fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif",
+    color: "#a09880", letterSpacing: "0.08em",
+  }}>
+    この候補者ページは編集できます →
+  </span>
+</Link>
                 >
                   {link.label || "リンク"}
                   <svg width="11" height="11" viewBox="0 0 20 20" fill="none">
