@@ -814,10 +814,22 @@ function IncumbentsTab({ password, onToast }: {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    fetch("/api/admin/incumbents", { headers: { "x-admin-password": password } })
-      .then(r => r.json())
-      .then(d => { setIncumbents(d.data || []); setSha(d.sha || ""); });
-  }, [password]);
+  fetch("/api/admin/incumbents", { headers: { "x-admin-password": password } })
+    .then(r => r.json())
+    .then(d => {
+      setIncumbents(d.data || []);
+      setSha(d.sha || "");
+
+      // 候補者タブからの移行データを取り込む
+      const pending = JSON.parse(localStorage.getItem("erabu_pending_incumbent") ?? "[]");
+      if (pending.length > 0) {
+        setIncumbents(prev => [...prev, ...pending]);
+        setDirty(true);
+        localStorage.removeItem("erabu_pending_incumbent");
+      }
+    });
+}, [password]);
+
 
   const save = (inc: Incumbent) => {
     const next = incumbents.map(x => x.id === inc.id ? inc : x);
