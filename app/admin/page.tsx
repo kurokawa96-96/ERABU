@@ -89,6 +89,7 @@ function Icon({ type, size = 16, color = "#666" }: { type: string; size?: number
     lock:    <svg {...p}><rect x="4" y="9" width="12" height="9" rx="1.5" stroke={color} strokeWidth="1.4"/><path d="M7 9V6a3 3 0 016 0v3" stroke={color} strokeWidth="1.4" strokeLinecap="round"/></svg>,
     logout:  <svg {...p}><path d="M13 10H4M7 7l-3 3 3 3M11 6V4h5v12h-5v-2" stroke={color} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>,
     edit:    <svg {...p}><path d="M14 3l3 3-9 9H5v-3L14 3Z" stroke={color} strokeWidth="1.4" strokeLinejoin="round"/></svg>,
+    folder:  <svg {...p}><path d="M2 6a2 2 0 012-2h3l2 2h7a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V6Z" stroke={color} strokeWidth="1.4" strokeLinejoin="round"/></svg>,
   };
   return m[type] ?? null;
 }
@@ -131,6 +132,34 @@ function Toast({ msg, onDone }: { msg: string; onDone: () => void }) {
   );
 }
 
+// グループヘッダー（折りたたみ可能）
+function GroupBlock({ label, count, children }: { label: string; count: number; children: React.ReactNode }) {
+  const [open, setOpen] = useState(true);
+  return (
+    <div style={{ marginBottom: 12 }}>
+      <button onClick={() => setOpen(!open)} style={{
+        width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "9px 12px", background: "#eeecea", border: "none", borderRadius: 9,
+        cursor: "pointer", marginBottom: open ? 6 : 0,
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+          <Icon type="folder" size={13} color="#888" />
+          <span style={{ fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif", color: "#555", fontWeight: 600 }}>
+            {label}
+          </span>
+          <span style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa" }}>
+            {count}件
+          </span>
+        </div>
+        <div style={{ transform: open ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>
+          <Icon type="chevron" size={13} color="#aaa" />
+        </div>
+      </button>
+      {open && <div style={{ paddingLeft: 8 }}>{children}</div>}
+    </div>
+  );
+}
+
 function LoginScreen({ onLogin }: { onLogin: (pw: string) => void }) {
   const [pw, setPw] = useState("");
   const [err, setErr] = useState(false);
@@ -152,18 +181,14 @@ function LoginScreen({ onLogin }: { onLogin: (pw: string) => void }) {
           <Icon type="lock" size={28} color="#ccc" />
         </div>
         <Field label="パスワード">
-          <input
-            type="password" value={pw}
-            onChange={e => setPw(e.target.value)}
+          <input type="password" value={pw} onChange={e => setPw(e.target.value)}
             onKeyDown={e => e.key === "Enter" && attempt()}
             style={{ ...inputStyle, borderColor: err ? "#e07070" : "#e0e0e0" }}
-            placeholder="••••••••" autoFocus
-          />
+            placeholder="••••••••" autoFocus />
         </Field>
         {err && <div style={{ fontSize: 11, color: "#e07070", textAlign: "center", marginBottom: 12, fontFamily: "'Noto Sans JP', sans-serif" }}>パスワードが違います</div>}
         <button onClick={attempt} style={{
-          width: "100%", padding: 11, background: "#1a1a1a",
-          color: "#fff", border: "none", borderRadius: 9,
+          width: "100%", padding: 11, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 9,
           fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
         }}>ログイン</button>
       </div>
@@ -204,10 +229,8 @@ function PolicyForm({ policy, onChange, onRemove, index }: {
           </div>
           {(["issue", "solution", "deadline", "budget"] as const).map(key => (
             <Field key={key} label={key === "issue" ? "課題" : key === "solution" ? "解決策" : key === "deadline" ? "期限" : "財源・根拠"}>
-              <textarea
-                style={{ ...textareaStyle, minHeight: key === "issue" || key === "solution" ? 72 : 48 }}
-                value={policy[key]} onChange={e => up(key, e.target.value)}
-              />
+              <textarea style={{ ...textareaStyle, minHeight: key === "issue" || key === "solution" ? 72 : 48 }}
+                value={policy[key]} onChange={e => up(key, e.target.value)} />
             </Field>
           ))}
           <button onClick={onRemove} style={{
@@ -269,42 +292,30 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
           </select>
         </Field>
         {data.result === "won" && (
-          <button
-            onClick={() => {
-              const newIncumbent = {
-                id: `i${Date.now()}`,
-                name: data.name, party: data.party,
-                prefecture: "", city: "", assembly: "",
-                term: new Date().getFullYear() + "年 - 現在",
-                tagline: data.tagline ?? "", message: data.message ?? "",
-                attendanceRate: 0, speechCount: 0, questionCount: 0,
-                billVotes: [],
-                promises: data.policies.map(p => ({ title: p.label, status: "未着手" as const, evidence: "" })),
-                activityReports: [],
-              };
-              const pending = JSON.parse(localStorage.getItem("erabu_pending_incumbent") ?? "[]");
-              localStorage.setItem("erabu_pending_incumbent", JSON.stringify([...pending, newIncumbent]));
-              alert(`${data.name} を現職議員タブに追加しました。現職議員タブを開いてご確認ください。`);
-            }}
-            style={{
-              width: "100%", marginTop: 4, marginBottom: 8, padding: 11,
-              background: "#f0f7f0", border: "1px solid #b0d8b0",
-              borderRadius: 9, color: "#3a7a3a", fontSize: 13,
-              fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
-            }}
-          >
+          <button onClick={() => {
+            const newIncumbent = {
+              id: `i${Date.now()}`, name: data.name, party: data.party,
+              prefecture: "", city: "", assembly: "",
+              term: new Date().getFullYear() + "年 - 現在",
+              tagline: data.tagline ?? "", message: data.message ?? "",
+              attendanceRate: 0, speechCount: 0, questionCount: 0, billVotes: [],
+              promises: data.policies.map(p => ({ title: p.label, status: "未着手" as const, evidence: "" })),
+              activityReports: [],
+            };
+            const pending = JSON.parse(localStorage.getItem("erabu_pending_incumbent") ?? "[]");
+            localStorage.setItem("erabu_pending_incumbent", JSON.stringify([...pending, newIncumbent]));
+            alert(`${data.name} を現職議員タブに追加しました。現職議員タブを開いてご確認ください。`);
+          }} style={{
+            width: "100%", marginTop: 4, marginBottom: 8, padding: 11,
+            background: "#f0f7f0", border: "1px solid #b0d8b0", borderRadius: 9,
+            color: "#3a7a3a", fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
+          }}>
             現職議員タブに移行する
           </button>
         )}
-        <Field label="タグライン">
-          <input style={inputStyle} value={data.tagline} onChange={e => up("tagline", e.target.value)} />
-        </Field>
-        <Field label="メッセージ">
-          <textarea style={{ ...textareaStyle, minHeight: 72 }} value={data.message} onChange={e => up("message", e.target.value)} />
-        </Field>
-        <Field label="経歴">
-          <textarea style={{ ...textareaStyle, minHeight: 60 }} value={data.profile} onChange={e => up("profile", e.target.value)} />
-        </Field>
+        <Field label="タグライン"><input style={inputStyle} value={data.tagline} onChange={e => up("tagline", e.target.value)} /></Field>
+        <Field label="メッセージ"><textarea style={{ ...textareaStyle, minHeight: 72 }} value={data.message} onChange={e => up("message", e.target.value)} /></Field>
+        <Field label="経歴"><textarea style={{ ...textareaStyle, minHeight: 60 }} value={data.profile} onChange={e => up("profile", e.target.value)} /></Field>
       </div>
 
       <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
@@ -322,25 +333,21 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
           <PolicyForm key={i} policy={p} index={i} onChange={val => updatePolicy(i, val)} onRemove={() => removePolicy(i)} />
         ))}
         {data.policies.length === 0 && (
-          <div style={{ textAlign: "center", padding: "20px 0", fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", color: "#ccc" }}>
-            政策がありません
-          </div>
+          <div style={{ textAlign: "center", padding: "20px 0", fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", color: "#ccc" }}>政策がありません</div>
         )}
       </div>
 
       <div style={{ display: "flex", gap: 8 }}>
         <button onClick={() => onSave(data)} style={{
-          flex: 1, padding: 12, background: "#1a1a1a", color: "#fff",
-          border: "none", borderRadius: 9, fontSize: 13,
-          fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
+          flex: 1, padding: 12, background: "#1a1a1a", color: "#fff", border: "none", borderRadius: 9,
+          fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
           display: "flex", alignItems: "center", justifyContent: "center", gap: 7,
         }}>
           <Icon type="save" size={14} color="#fff" /> 保存する
         </button>
         <button onClick={onCancel} style={{
-          padding: "12px 16px", background: "none", border: "1px solid #e0e0e0",
-          borderRadius: 9, fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif",
-          color: "#888", cursor: "pointer",
+          padding: "12px 16px", background: "none", border: "1px solid #e0e0e0", borderRadius: 9,
+          fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", color: "#888", cursor: "pointer",
         }}>戻る</button>
       </div>
       {onDelete && (
@@ -555,6 +562,115 @@ function IncumbentForm({ incumbent, onSave, onCancel, onDelete }: {
   );
 }
 
+// ========== ElectionsTab ==========
+function ElectionsTab({ password, onToast }: { password: string; onToast: (m: string) => void }) {
+  const [elections, setElections] = useState<Election[]>([]);
+  const [sha, setSha] = useState("");
+  const [editing, setEditing] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("/api/admin/elections", { headers: { "x-admin-password": password } })
+      .then(r => r.json())
+      .then(d => { setElections(d.data || []); setSha(d.sha || ""); });
+  }, [password]);
+
+  const save = async (el: Election) => {
+    const next = elections.map(e => e.id === el.id ? el : e);
+    await fetch("/api/admin/elections", {
+      method: "POST",
+      headers: { "x-admin-password": password, "Content-Type": "application/json" },
+      body: JSON.stringify({ elections: next, sha }),
+    });
+    const latest = await fetch("/api/admin/elections", { headers: { "x-admin-password": password } }).then(r => r.json());
+    setSha(latest.sha || "");
+    setElections(next);
+    setEditing(null);
+    onToast("保存しました");
+  };
+
+  const add = () => {
+    const fresh: Election = {
+      id: `e${Date.now()}`, prefecture: "", city: "", name: "",
+      type: "", announcementDate: "", electionDate: "", status: "upcoming",
+    };
+    setElections(p => [...p, fresh]);
+    setEditing(fresh.id);
+  };
+
+  const remove = async (id: string) => {
+    const next = elections.filter(e => e.id !== id);
+    await fetch("/api/admin/elections", {
+      method: "POST",
+      headers: { "x-admin-password": password, "Content-Type": "application/json" },
+      body: JSON.stringify({ elections: next, sha }),
+    });
+    const latest = await fetch("/api/admin/elections", { headers: { "x-admin-password": password } }).then(r => r.json());
+    setSha(latest.sha || "");
+    setElections(next);
+    setEditing(null);
+    onToast("削除しました");
+  };
+
+  if (editing) {
+    const el = elections.find(e => e.id === editing)!;
+    return (
+      <>
+        <div style={{ padding: "14px 16px", background: "#fff", borderBottom: "1px solid #ebebeb", display: "flex", alignItems: "center", gap: 10 }}>
+          <button onClick={() => setEditing(null)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+            <Icon type="back" size={18} color="#1a1a1a" />
+          </button>
+          <span style={{ fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", color: "#1a1a1a" }}>{el.name || "新しい選挙"}</span>
+        </div>
+        <ElectionForm election={el} onSave={save} onCancel={() => setEditing(null)} onDelete={() => remove(el.id)} />
+      </>
+    );
+  }
+
+  // 都道府県でグルーピング
+  const grouped = elections.reduce<Record<string, Election[]>>((acc, el) => {
+    const key = el.prefecture || "未設定";
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(el);
+    return acc;
+  }, {});
+
+  return (
+    <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em" }}>
+          {elections.length}件登録中
+        </div>
+        <button onClick={add} style={{
+          display: "flex", alignItems: "center", gap: 5, padding: "7px 13px", background: "#1a1a1a", border: "none",
+          borderRadius: 8, color: "#fff", fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
+        }}>
+          <Icon type="plus" size={13} color="#fff" /> 選挙を追加
+        </button>
+      </div>
+
+      {Object.entries(grouped).sort(([a], [b]) => a.localeCompare(b, "ja")).map(([pref, els]) => (
+        <GroupBlock key={pref} label={pref} count={els.length}>
+          {els.map(el => (
+            <button key={el.id} onClick={() => setEditing(el.id)} style={{
+              width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+              padding: "12px 14px", background: "#fff", border: "1px solid #ebebeb",
+              borderRadius: 10, marginBottom: 6, cursor: "pointer", textAlign: "left",
+            }}>
+              <div>
+                <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>{el.city}</div>
+                <div style={{ fontSize: 13.5, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>{el.name || "名称未設定"}</div>
+                <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>投票日 {el.electionDate}</div>
+              </div>
+              <Icon type="edit" size={14} color="#ccc" />
+            </button>
+          ))}
+        </GroupBlock>
+      ))}
+    </div>
+  );
+}
+
+// ========== CandidatesTab ==========
 function CandidatesTab({ password, onToast, elections }: {
   password: string; onToast: (m: string) => void; elections: Election[];
 }) {
@@ -614,14 +730,21 @@ function CandidatesTab({ password, onToast, elections }: {
           <button onClick={() => setEditing(null)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
             <Icon type="back" size={18} color="#1a1a1a" />
           </button>
-          <span style={{ fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", color: "#1a1a1a" }}>
-            {c.name || "新しい候補者"}
-          </span>
+          <span style={{ fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", color: "#1a1a1a" }}>{c.name || "新しい候補者"}</span>
         </div>
         <CandidateForm candidate={c} elections={elections} onSave={save} onCancel={() => setEditing(null)} onDelete={() => remove(c.id)} />
       </>
     );
   }
+
+  // 選挙名でグルーピング
+  const grouped = candidates.reduce<Record<string, Candidate[]>>((acc, c) => {
+    const el = elections.find(e => e.id === c.electionId);
+    const key = el ? `${el.prefecture} ${el.name}` : "選挙未設定";
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(c);
+    return acc;
+  }, {});
 
   return (
     <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
@@ -637,51 +760,48 @@ function CandidatesTab({ password, onToast, elections }: {
         </button>
       </div>
 
-      {candidates.map(c => (
-        <div key={c.id} style={{ background: "#fff", border: "1px solid #ebebeb", borderRadius: 11, marginBottom: 8, overflow: "hidden" }}>
-          <button onClick={() => setEditing(c.id)} style={{
-            width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
-            padding: "14px 16px", background: "none", border: "none", cursor: "pointer", textAlign: "left",
-          }}>
-            <div>
-              <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>
-                {elections.find(e => e.id === c.electionId)?.name || "選挙未設定"}
-              </div>
-              <div style={{ fontSize: 14, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>
-                {c.name || "氏名未設定"}
-              </div>
-              <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>
-                {c.party || "政党未設定"}
-                {c.result === "won" && <span style={{ marginLeft: 8, color: "#3a7a3a" }}>✓ 当選</span>}
-                {c.result === "lost" && <span style={{ marginLeft: 8, color: "#c07070" }}>落選</span>}
-                {c.result === "close" && <span style={{ marginLeft: 8, color: "#e09040" }}>次点</span>}
-              </div>
+      {Object.entries(grouped).map(([elName, cands]) => (
+        <GroupBlock key={elName} label={elName} count={cands.length}>
+          {cands.map(c => (
+            <div key={c.id} style={{ background: "#fff", border: "1px solid #ebebeb", borderRadius: 10, marginBottom: 6, overflow: "hidden" }}>
+              <button onClick={() => setEditing(c.id)} style={{
+                width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+                padding: "12px 14px", background: "none", border: "none", cursor: "pointer", textAlign: "left",
+              }}>
+                <div>
+                  <div style={{ fontSize: 13.5, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>{c.name || "氏名未設定"}</div>
+                  <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>
+                    {c.party || "政党未設定"}
+                    {c.result === "won" && <span style={{ marginLeft: 8, color: "#3a7a3a" }}>✓ 当選</span>}
+                    {c.result === "lost" && <span style={{ marginLeft: 8, color: "#c07070" }}>落選</span>}
+                    {c.result === "close" && <span style={{ marginLeft: 8, color: "#e09040" }}>次点</span>}
+                  </div>
+                </div>
+                <Icon type="edit" size={14} color="#ccc" />
+              </button>
+              {c.editToken && (
+                <button onClick={() => {
+                  const url = `${window.location.origin}/candidate/edit/${c.editToken}`;
+                  navigator.clipboard.writeText(url);
+                  onToast("編集用URLをコピーしました");
+                }} style={{
+                  width: "100%", padding: "8px 14px", background: "#fafaf8", border: "none",
+                  borderTop: "1px solid #f0f0f0", display: "flex", alignItems: "center",
+                  justifyContent: "center", gap: 6, fontSize: 11,
+                  fontFamily: "'Noto Sans JP', sans-serif", color: "#888", cursor: "pointer",
+                }}>
+                  編集用URLをコピー
+                </button>
+              )}
             </div>
-            <Icon type="edit" size={14} color="#ccc" />
-          </button>
-          {c.editToken && (
-            <button
-              onClick={() => {
-                const url = `${window.location.origin}/candidate/edit/${c.editToken}`;
-                navigator.clipboard.writeText(url);
-                onToast("編集用URLをコピーしました");
-              }}
-              style={{
-                width: "100%", padding: "9px 16px", background: "#fafaf8", border: "none",
-                borderTop: "1px solid #f0f0f0", display: "flex", alignItems: "center",
-                justifyContent: "center", gap: 6, fontSize: 11,
-                fontFamily: "'Noto Sans JP', sans-serif", color: "#888", cursor: "pointer",
-              }}
-            >
-              編集用URLをコピー
-            </button>
-          )}
-        </div>
+          ))}
+        </GroupBlock>
       ))}
     </div>
   );
 }
 
+// ========== IncumbentsTab ==========
 function IncumbentsTab({ password, onToast }: { password: string; onToast: (m: string) => void }) {
   const [incumbents, setIncumbents] = useState<Incumbent[]>([]);
   const [sha, setSha] = useState("");
@@ -695,20 +815,18 @@ function IncumbentsTab({ password, onToast }: { password: string; onToast: (m: s
         setSha(d.sha || "");
         const pending = JSON.parse(localStorage.getItem("erabu_pending_incumbent") ?? "[]");
         if (pending.length > 0) {
-          setIncumbents([...base, ...pending]);
+          const merged = [...base, ...pending];
+          setIncumbents(merged);
           localStorage.removeItem("erabu_pending_incumbent");
-          // 移行データがある場合は即座にGitHubへ保存
           fetch("/api/admin/incumbents", {
             method: "POST",
             headers: { "x-admin-password": password, "Content-Type": "application/json" },
-            body: JSON.stringify({ incumbents: [...base, ...pending], sha: d.sha }),
-          }).then(r => r.json()).then(res => {
-            if (res.ok !== false) {
-              fetch("/api/admin/incumbents", { headers: { "x-admin-password": password } })
-                .then(r => r.json()).then(latest => setSha(latest.sha || ""));
-              onToast("現職議員に移行しました");
-            }
-          });
+            body: JSON.stringify({ incumbents: merged, sha: d.sha }),
+          }).then(() =>
+            fetch("/api/admin/incumbents", { headers: { "x-admin-password": password } })
+              .then(r => r.json()).then(latest => setSha(latest.sha || ""))
+          );
+          onToast("現職議員に移行しました");
         } else {
           setIncumbents(base);
         }
@@ -762,14 +880,22 @@ function IncumbentsTab({ password, onToast }: { password: string; onToast: (m: s
           <button onClick={() => setEditing(null)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
             <Icon type="back" size={18} color="#1a1a1a" />
           </button>
-          <span style={{ fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", color: "#1a1a1a" }}>
-            {inc.name || "新しい現職議員"}
-          </span>
+          <span style={{ fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", color: "#1a1a1a" }}>{inc.name || "新しい現職議員"}</span>
         </div>
         <IncumbentForm incumbent={inc} onSave={save} onCancel={() => setEditing(null)} onDelete={() => remove(inc.id)} />
       </>
     );
   }
+
+  // 都道府県 → 市区町村の二階層グルーピング
+  const byPref = incumbents.reduce<Record<string, Record<string, Incumbent[]>>>((acc, inc) => {
+    const pref = inc.prefecture || "未設定";
+    const city = inc.city || "未設定";
+    if (!acc[pref]) acc[pref] = {};
+    if (!acc[pref][city]) acc[pref][city] = [];
+    acc[pref][city].push(inc);
+    return acc;
+  }, {});
 
   return (
     <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
@@ -784,119 +910,28 @@ function IncumbentsTab({ password, onToast }: { password: string; onToast: (m: s
           <Icon type="plus" size={13} color="#fff" /> 現職議員を追加
         </button>
       </div>
-      {incumbents.map(inc => (
-        <button key={inc.id} onClick={() => setEditing(inc.id)} style={{
-          width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
-          padding: "14px 16px", background: "#fff", border: "1px solid #ebebeb",
-          borderRadius: 11, marginBottom: 8, cursor: "pointer", textAlign: "left",
-        }}>
-          <div>
-            <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>
-              {inc.prefecture} {inc.city} / {inc.assembly}
-            </div>
-            <div style={{ fontSize: 14, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>
-              {inc.name || "氏名未設定"}
-            </div>
-            <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>
-              {inc.party || "政党未設定"}
-            </div>
-          </div>
-          <Icon type="edit" size={14} color="#ccc" />
-        </button>
-      ))}
-    </div>
-  );
-}
 
-function ElectionsTab({ password, onToast }: { password: string; onToast: (m: string) => void }) {
-  const [elections, setElections] = useState<Election[]>([]);
-  const [sha, setSha] = useState("");
-  const [editing, setEditing] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch("/api/admin/elections", { headers: { "x-admin-password": password } })
-      .then(r => r.json())
-      .then(d => { setElections(d.data); setSha(d.sha); });
-  }, [password]);
-
-  const save = async (el: Election) => {
-    const next = elections.map(e => e.id === el.id ? el : e);
-    await fetch("/api/admin/elections", {
-      method: "POST",
-      headers: { "x-admin-password": password, "Content-Type": "application/json" },
-      body: JSON.stringify({ elections: next, sha }),
-    });
-    const latest = await fetch("/api/admin/elections", { headers: { "x-admin-password": password } }).then(r => r.json());
-    setSha(latest.sha || "");
-    setElections(next);
-    setEditing(null);
-    onToast("保存しました");
-  };
-
-  const add = () => {
-    const fresh: Election = {
-      id: `e${Date.now()}`, prefecture: "", city: "", name: "",
-      type: "", announcementDate: "", electionDate: "", status: "upcoming",
-    };
-    setElections(p => [...p, fresh]);
-    setEditing(fresh.id);
-  };
-
-  const remove = async (id: string) => {
-    const next = elections.filter(e => e.id !== id);
-    await fetch("/api/admin/elections", {
-      method: "POST",
-      headers: { "x-admin-password": password, "Content-Type": "application/json" },
-      body: JSON.stringify({ elections: next, sha }),
-    });
-    const latest = await fetch("/api/admin/elections", { headers: { "x-admin-password": password } }).then(r => r.json());
-    setSha(latest.sha || "");
-    setElections(next);
-    setEditing(null);
-    onToast("削除しました");
-  };
-
-  if (editing) {
-    const el = elections.find(e => e.id === editing)!;
-    return (
-      <>
-        <div style={{ padding: "14px 16px", background: "#fff", borderBottom: "1px solid #ebebeb", display: "flex", alignItems: "center", gap: 10 }}>
-          <button onClick={() => setEditing(null)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
-            <Icon type="back" size={18} color="#1a1a1a" />
-          </button>
-          <span style={{ fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", color: "#1a1a1a" }}>
-            {el.name || "新しい選挙"}
-          </span>
-        </div>
-        <ElectionForm election={el} onSave={save} onCancel={() => setEditing(null)} onDelete={() => remove(el.id)} />
-      </>
-    );
-  }
-
-  return (
-    <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em" }}>{elections.length}件登録中</div>
-        <button onClick={add} style={{
-          display: "flex", alignItems: "center", gap: 5, padding: "7px 13px", background: "#1a1a1a", border: "none",
-          borderRadius: 8, color: "#fff", fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
-        }}>
-          <Icon type="plus" size={13} color="#fff" /> 選挙を追加
-        </button>
-      </div>
-      {elections.map(el => (
-        <button key={el.id} onClick={() => setEditing(el.id)} style={{
-          width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
-          padding: "14px 16px", background: "#fff", border: "1px solid #ebebeb",
-          borderRadius: 11, marginBottom: 8, cursor: "pointer", textAlign: "left",
-        }}>
-          <div>
-            <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>{el.prefecture} {el.city}</div>
-            <div style={{ fontSize: 14, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>{el.name || "名称未設定"}</div>
-            <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>投票日 {el.electionDate}</div>
-          </div>
-          <Icon type="edit" size={14} color="#ccc" />
-        </button>
+      {Object.entries(byPref).sort(([a], [b]) => a.localeCompare(b, "ja")).map(([pref, cities]) => (
+        <GroupBlock key={pref} label={pref} count={Object.values(cities).flat().length}>
+          {Object.entries(cities).sort(([a], [b]) => a.localeCompare(b, "ja")).map(([city, incs]) => (
+            <GroupBlock key={city} label={city} count={incs.length}>
+              {incs.map(inc => (
+                <button key={inc.id} onClick={() => setEditing(inc.id)} style={{
+                  width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+                  padding: "11px 14px", background: "#fff", border: "1px solid #ebebeb",
+                  borderRadius: 9, marginBottom: 5, cursor: "pointer", textAlign: "left",
+                }}>
+                  <div>
+                    <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>{inc.assembly}</div>
+                    <div style={{ fontSize: 13.5, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>{inc.name || "氏名未設定"}</div>
+                    <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>{inc.party || "政党未設定"}</div>
+                  </div>
+                  <Icon type="edit" size={14} color="#ccc" />
+                </button>
+              ))}
+            </GroupBlock>
+          ))}
+        </GroupBlock>
       ))}
     </div>
   );
