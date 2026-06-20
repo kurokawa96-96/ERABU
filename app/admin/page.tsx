@@ -27,6 +27,7 @@ interface Candidate {
   profile: string;
   policies: Policy[];
   editToken?: string;
+result?: "pending" | "won" | "lost" | "close";
 }
 
 interface Election {
