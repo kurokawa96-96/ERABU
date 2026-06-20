@@ -276,6 +276,59 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
           <Field label="氏名"><input style={inputStyle} value={data.name} onChange={e => up("name", e.target.value)} /></Field>
           <Field label="所属政党"><input style={inputStyle} value={data.party} onChange={e => up("party", e.target.value)} /></Field>
+<Field label="当落結果">
+  <select
+    style={{ ...inputStyle, appearance: "none" }}
+    value={data.result ?? "pending"}
+    onChange={e => up("result", e.target.value)}
+  >
+    <option value="pending">未確定</option>
+    <option value="won">当選</option>
+    <option value="lost">落選</option>
+    <option value="close">次点</option>
+  </select>
+</Field>
+
+{data.result === "won" && (
+  <button
+    onClick={() => {
+      const newIncumbent = {
+        id: `i${Date.now()}`,
+        name: data.name,
+        party: data.party,
+        prefecture: "",
+        city: "",
+        assembly: "",
+        term: new Date().getFullYear() + "年 - 現在",
+        tagline: data.tagline ?? "",
+        message: data.message ?? "",
+        attendanceRate: 0,
+        speechCount: 0,
+        questionCount: 0,
+        billVotes: [],
+        promises: data.policies.map(p => ({
+          title: p.label,
+          status: "未着手" as const,
+          evidence: "",
+        })),
+        activityReports: [],
+      };
+      // IncumbentsTabへ渡す手段がないため、localStorageで橋渡し
+      const pending = JSON.parse(localStorage.getItem("erabu_pending_incumbent") ?? "[]");
+      localStorage.setItem("erabu_pending_incumbent", JSON.stringify([...pending, newIncumbent]));
+      alert(`${data.name} を現職議員タブに追加しました。現職議員タブを開いてご確認ください。`);
+    }}
+    style={{
+      width: "100%", marginTop: 8, padding: 11,
+      background: "#f0f7f0", border: "1px solid #b0d8b0",
+      borderRadius: 9, color: "#3a7a3a", fontSize: 13,
+      fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
+    }}
+  >
+    現職議員タブに移行する
+  </button>
+)}
+
         </div>
         <Field label="タグライン">
           <input style={inputStyle} value={data.tagline} onChange={e => up("tagline", e.target.value)} />
