@@ -78,5 +78,15 @@
     "announcementDate": "2026-06-18",
     "electionDate": "2026-07-05",
     "status": "upcoming"
+  },
+  {
+    "id": "e1781954773772",
+    "prefecture": "石川県",
+    "city": "能登町",
+    "name": "中能登町議会議員選挙",
+    "type": "町議会選挙",
+    "announcementDate": "2026-06-16",
+    "electionDate": "2026-06-21",
+    "status": "ongoing"
   }
 ]
