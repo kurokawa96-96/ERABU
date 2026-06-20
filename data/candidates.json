@@ -192,5 +192,163 @@
     "profile": "",
     "policies": [],
     "editToken": "dzbnqtrawabkv3hjpnv"
+  },
+  {
+    "id": "c1781954888420",
+    "electionId": "e1781954773772",
+    "name": "土本 みのる",
+    "party": "自由民主党",
+    "tagline": "50歳 (男) 現職 会社員",
+    "message": "",
+    "profile": "町立鳥屋中学校　卒業\n県立羽咋工業高校　卒業\n平成22年　中能登町議会議員に初出馬し、434票を賜ったが落選\n平成26年　中能登町議会議員選挙に出馬し、672票で初当選\n平成30年　中能登町議会議員選挙に出馬し、710票で当選\n令和4年　 中能登町議会議員に出馬し無投票で当選\n令和5年　県議会議員選挙鹿島郡選挙区に出馬し、4313票を賜ったが落選\n令和7年　中能登町議会議員補欠選挙に出馬し無投票で当選\n\n活動実績\n中能登ライオンズクラブ　会長\nMOA自然農法七尾鹿島普及会　会長\n中能登音楽フェスタ実行委員長\n中能登町柔道協会　副会長、中能登柔道教室　顧問\n自由民主党中能登町支部　青年局長\n中能登町消防団鳥屋分団　団員",
+    "policies": [
+      {
+        "icon": "welfare",
+        "label": "医療福祉",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "childcare",
+        "label": "子育て支援",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "education",
+        "label": "不登校支援",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "environment",
+        "label": "公園及びインフラ支援",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "economy",
+        "label": "物価高対策",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "economy",
+        "label": "中小企業支援",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "economy",
+        "label": "観光振興",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "economy",
+        "label": "農業支援",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "economy",
+        "label": "ふるさと納税",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "environment",
+        "label": "空き家対策",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      }
+    ],
+    "editToken": "j4ogfkq67y95ee16obehg2"
+  },
+  {
+    "id": "c1781955501255",
+    "electionId": "e1781954773772",
+    "name": "笹川 ひろみ",
+    "party": "公明党",
+    "tagline": "64歳 (女) 現職 町議会議員",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "ci1of01l7kav1pace9xwf"
+  },
+  {
+    "id": "c1781955566606",
+    "electionId": "e1781954773772",
+    "name": "みなみ 昭栄 ",
+    "party": "無所属",
+    "tagline": "79歳 (男) 現職 農業",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "fiz64p5elbd3vhz33bges"
+  },
+  {
+    "id": "c1781955626588",
+    "electionId": "e1781954773772",
+    "name": "古玉 いづみ",
+    "party": "無所属",
+    "tagline": "47歳 (女) 現職 副議長、英会話塾講師",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "njjtwwptskm62fej7rl9fo"
+  },
+  {
+    "id": "c1781955679486",
+    "electionId": "e1781954773772",
+    "name": "かど 久子",
+    "party": "無所属",
+    "tagline": "74歳 (女) 現職 無職",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "e0wl05xvw5kzb8xsp5v83"
+  },
+  {
+    "id": "c1781955742054",
+    "electionId": "e1781954773772",
+    "name": "三浦 かつよし",
+    "party": "無所属",
+    "tagline": "62歳 (男) 現職 無職",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "fe79k9ssbjbt2jrcpzg2v"
+  },
+  {
+    "id": "c1781955778797",
+    "electionId": "e1781954773772",
+    "name": "合田 ひろし",
+    "party": "無所属",
+    "tagline": "66歳 (男) 現職 中能登町議会議員",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "di5baaigioovkl82gbb9d"
   }
 ]
