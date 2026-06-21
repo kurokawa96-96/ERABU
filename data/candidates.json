@@ -406,5 +406,27 @@
     "profile": "",
     "policies": [],
     "editToken": "jgnyaxvwrmakc9rpiccyhd"
+  },
+  {
+    "id": "c1782046114926",
+    "electionId": "",
+    "name": "",
+    "party": "",
+    "tagline": "",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "ext4kco3mrmm88truoovaf"
+  },
+  {
+    "id": "c1782046145632",
+    "electionId": "e1781954773772",
+    "name": "中村　哲",
+    "party": "無所属",
+    "tagline": "４５歳　男　新人　農業",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "1a4tbsjqfirbfe3osrkvaw"
   }
 ]
