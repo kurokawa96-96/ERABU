@@ -384,5 +384,27 @@
     "profile": "",
     "policies": [],
     "editToken": "u0t4g1itroh26wcvrt4cpg"
+  },
+  {
+    "id": "c1782044534621",
+    "electionId": "e1781954773772",
+    "name": "橋本　たつや",
+    "party": "無所属",
+    "tagline": "５４歳　男　新人　無職",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "8l96mtdecicy08g56du8d"
+  },
+  {
+    "id": "c1782044672423",
+    "electionId": "e1781954773772",
+    "name": "すどう　まさひこ",
+    "party": "無所属",
+    "tagline": "４５歳　男　新人　農業",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "jgnyaxvwrmakc9rpiccyhd"
   }
 ]
