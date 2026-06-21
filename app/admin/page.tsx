@@ -257,6 +257,13 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
     profile: candidate.profile ?? "",
     policies: Array.isArray(candidate.policies) ? candidate.policies : [],
   });
+  useEffect(() => {
+  const handler = (e: KeyboardEvent) => {
+    if (e.metaKey && e.key === "s") { e.preventDefault(); onSave(data); }
+  };
+  window.addEventListener("keydown", handler);
+  return () => window.removeEventListener("keydown", handler);
+}, [data]);
   const up = (k: keyof Candidate, v: string) => setData(d => ({ ...d, [k]: v }));
 
   const addPolicy = () => setData(d => ({
@@ -365,6 +372,13 @@ function ElectionForm({ election, onSave, onCancel, onDelete }: {
   election: Election; onSave: (e: Election) => void; onCancel: () => void; onDelete?: () => void;
 }) {
   const [data, setData] = useState({ ...election });
+  useEffect(() => {
+  const handler = (e: KeyboardEvent) => {
+    if (e.metaKey && e.key === "s") { e.preventDefault(); onSave(data); }
+  };
+  window.addEventListener("keydown", handler);
+  return () => window.removeEventListener("keydown", handler);
+}, [data]);
   const up = (k: keyof Election, v: string) => setData(d => ({ ...d, [k]: v }));
 
   return (
@@ -417,6 +431,13 @@ function IncumbentForm({ incumbent, onSave, onCancel, onDelete }: {
   incumbent: Incumbent; onSave: (inc: Incumbent) => void; onCancel: () => void; onDelete?: () => void;
 }) {
   const [data, setData] = useState({ ...incumbent });
+  useEffect(() => {
+  const handler = (e: KeyboardEvent) => {
+    if (e.metaKey && e.key === "s") { e.preventDefault(); onSave(data); }
+  };
+  window.addEventListener("keydown", handler);
+  return () => window.removeEventListener("keydown", handler);
+}, [data]);
   const up = (k: keyof Incumbent, v: string | number) => setData(d => ({ ...d, [k]: v }));
 
   const addPromise = () => setData(d => ({ ...d, promises: [...d.promises, { title: "", status: "未着手" as const, evidence: "" }] }));
@@ -573,6 +594,15 @@ function ElectionsTab({ password, onToast }: { password: string; onToast: (m: st
       .then(r => r.json())
       .then(d => { setElections(d.data || []); setSha(d.sha || ""); });
   }, [password]);
+useEffect(() => {
+  const handler = (e: KeyboardEvent) => {
+    if (!(e.metaKey)) return;
+    if (e.key === "n") { e.preventDefault(); if (!editing) add(); }
+    if (e.key === "s") { e.preventDefault(); /* 保存はフォーム側で処理 */ }
+  };
+  window.addEventListener("keydown", handler);
+  return () => window.removeEventListener("keydown", handler);
+}, [editing, candidates, sha]);
 
   const save = async (el: Election) => {
     const next = elections.map(e => e.id === el.id ? el : e);
@@ -683,6 +713,15 @@ function CandidatesTab({ password, onToast, elections }: {
       .then(r => r.json())
       .then(d => { setCandidates(Array.isArray(d.data) ? d.data : []); setSha(d.sha || ""); });
   }, [password]);
+useEffect(() => {
+  const handler = (e: KeyboardEvent) => {
+    if (!(e.metaKey)) return;
+    if (e.key === "n") { e.preventDefault(); if (!editing) add(); }
+    if (e.key === "s") { e.preventDefault(); /* 保存はフォーム側で処理 */ }
+  };
+  window.addEventListener("keydown", handler);
+  return () => window.removeEventListener("keydown", handler);
+}, [editing, candidates, sha]);
 
   const save = async (c: Candidate) => {
     const next = candidates.map(x => x.id === c.id ? c : x);
@@ -832,6 +871,15 @@ function IncumbentsTab({ password, onToast }: { password: string; onToast: (m: s
         }
       });
   }, [password]);
+useEffect(() => {
+  const handler = (e: KeyboardEvent) => {
+    if (!(e.metaKey)) return;
+    if (e.key === "n") { e.preventDefault(); if (!editing) add(); }
+    if (e.key === "s") { e.preventDefault(); /* 保存はフォーム側で処理 */ }
+  };
+  window.addEventListener("keydown", handler);
+  return () => window.removeEventListener("keydown", handler);
+}, [editing, candidates, sha]);
 
   const save = async (inc: Incumbent) => {
     const next = incumbents.map(x => x.id === inc.id ? inc : x);
