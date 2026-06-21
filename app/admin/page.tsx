@@ -602,7 +602,7 @@ useEffect(() => {
   };
   window.addEventListener("keydown", handler);
   return () => window.removeEventListener("keydown", handler);
-}, [editing, candidates, sha]);
+}, [editing, elections, sha]);
 
   const save = async (el: Election) => {
     const next = elections.map(e => e.id === el.id ? el : e);
@@ -879,7 +879,7 @@ useEffect(() => {
   };
   window.addEventListener("keydown", handler);
   return () => window.removeEventListener("keydown", handler);
-}, [editing, candidates, sha]);
+}, [editing, incumbents, sha]);
 
   const save = async (inc: Incumbent) => {
     const next = incumbents.map(x => x.id === inc.id ? inc : x);
