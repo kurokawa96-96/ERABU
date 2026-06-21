@@ -259,7 +259,7 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
   });
   useEffect(() => {
   const handler = (e: KeyboardEvent) => {
-    if (e.ctrlKey && e.key === "s") { e.preventDefault(); onSave(data); }
+    if (e.metaKey && e.shiftKey === "S") { e.preventDefault(); onSave(data); }
   };
   window.addEventListener("keydown", handler);
   return () => window.removeEventListener("keydown", handler);
@@ -374,7 +374,7 @@ function ElectionForm({ election, onSave, onCancel, onDelete }: {
   const [data, setData] = useState({ ...election });
   useEffect(() => {
   const handler = (e: KeyboardEvent) => {
-    if (e.ctrlKey && e.key === "s") { e.preventDefault(); onSave(data); }
+    if (e.metaKey && e.shiftKey === "S") { e.preventDefault(); onSave(data); }
   };
   window.addEventListener("keydown", handler);
   return () => window.removeEventListener("keydown", handler);
@@ -433,7 +433,7 @@ function IncumbentForm({ incumbent, onSave, onCancel, onDelete }: {
   const [data, setData] = useState({ ...incumbent });
   useEffect(() => {
   const handler = (e: KeyboardEvent) => {
-    if (e.ctrlKey && e.key === "s") { e.preventDefault(); onSave(data); }
+    if (e.metaKey && e.shiftKey === "S") { e.preventDefault(); onSave(data); }
   };
   window.addEventListener("keydown", handler);
   return () => window.removeEventListener("keydown", handler);
@@ -596,9 +596,9 @@ function ElectionsTab({ password, onToast }: { password: string; onToast: (m: st
   }, [password]);
 useEffect(() => {
   const handler = (e: KeyboardEvent) => {
-    if (!(e.ctrlKey)) return;
-    if (e.key === "n") { e.preventDefault(); if (!editing) add(); }
-    if (e.key === "s") { e.preventDefault(); /* 保存はフォーム側で処理 */ }
+    if (!(e.metaKey && e.shiftKey)) return;
+    if (e.key === "N") { e.preventDefault(); if (!editing) add(); }
+    if (e.key === "S") { e.preventDefault(); /* 保存はフォーム側で処理 */ }
   };
   window.addEventListener("keydown", handler);
   return () => window.removeEventListener("keydown", handler);
@@ -715,9 +715,9 @@ function CandidatesTab({ password, onToast, elections }: {
   }, [password]);
 useEffect(() => {
   const handler = (e: KeyboardEvent) => {
-    if (!(e.ctrlKey)) return;
-    if (e.key === "n") { e.preventDefault(); if (!editing) add(); }
-    if (e.key === "s") { e.preventDefault(); /* 保存はフォーム側で処理 */ }
+    if (!(e.metaKey && e.shiftKey)) return;
+    if (e.key === "N") { e.preventDefault(); if (!editing) add(); }
+    if (e.key === "S") { e.preventDefault(); /* 保存はフォーム側で処理 */ }
   };
   window.addEventListener("keydown", handler);
   return () => window.removeEventListener("keydown", handler);
@@ -873,9 +873,9 @@ function IncumbentsTab({ password, onToast }: { password: string; onToast: (m: s
   }, [password]);
 useEffect(() => {
   const handler = (e: KeyboardEvent) => {
-    if (!(e.ctrlKey)) return;
-    if (e.key === "n") { e.preventDefault(); if (!editing) add(); }
-    if (e.key === "s") { e.preventDefault(); /* 保存はフォーム側で処理 */ }
+    if (!(e.metaKey && e.shiftKey)) return;
+    if (e.key === "N") { e.preventDefault(); if (!editing) add(); }
+    if (e.key === "S") { e.preventDefault(); /* 保存はフォーム側で処理 */ }
   };
   window.addEventListener("keydown", handler);
   return () => window.removeEventListener("keydown", handler);
