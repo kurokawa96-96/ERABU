@@ -259,7 +259,7 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
   });
   useEffect(() => {
   const handler = (e: KeyboardEvent) => {
-    if (e.metaKey && e.shiftKey === "S") { e.preventDefault(); onSave(data); }
+    if (e.metaKey && e.shiftKey && e.key === "S") { e.preventDefault(); onSave(data); }
   };
   window.addEventListener("keydown", handler);
   return () => window.removeEventListener("keydown", handler);
@@ -374,7 +374,7 @@ function ElectionForm({ election, onSave, onCancel, onDelete }: {
   const [data, setData] = useState({ ...election });
   useEffect(() => {
   const handler = (e: KeyboardEvent) => {
-    if (e.metaKey && e.shiftKey === "S") { e.preventDefault(); onSave(data); }
+    if (e.metaKey && e.shiftKey && e.key === "S") { e.preventDefault(); onSave(data); }
   };
   window.addEventListener("keydown", handler);
   return () => window.removeEventListener("keydown", handler);
@@ -433,7 +433,7 @@ function IncumbentForm({ incumbent, onSave, onCancel, onDelete }: {
   const [data, setData] = useState({ ...incumbent });
   useEffect(() => {
   const handler = (e: KeyboardEvent) => {
-    if (e.metaKey && e.shiftKey === "S") { e.preventDefault(); onSave(data); }
+    if (e.metaKey && e.shiftKey && e.key === "S") { e.preventDefault(); onSave(data); }
   };
   window.addEventListener("keydown", handler);
   return () => window.removeEventListener("keydown", handler);
