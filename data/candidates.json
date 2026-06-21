@@ -362,5 +362,27 @@
     "policies": [],
     "editToken": "7hj0vpefhddnjp2wz3ii4h",
     "result": "pending"
+  },
+  {
+    "id": "c1782044378745",
+    "electionId": "e1781954773772",
+    "name": "おだ　良一",
+    "party": "無所属",
+    "tagline": "７３歳　男　現職　中能登町議会議員",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "zp2w87ij5289pe70qr9hts"
+  },
+  {
+    "id": "c1782044483291",
+    "electionId": "e1781954773772",
+    "name": "福井 清久",
+    "party": "無所属",
+    "tagline": "77歳 (男) 新人 (公社)中能登町シルバー人材センター理事長",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "u0t4g1itroh26wcvrt4cpg"
   }
 ]
