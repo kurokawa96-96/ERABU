@@ -132,7 +132,6 @@ function Toast({ msg, onDone }: { msg: string; onDone: () => void }) {
   );
 }
 
-// グループヘッダー（折りたたみ可能）
 function GroupBlock({ label, count, children }: { label: string; count: number; children: React.ReactNode }) {
   const [open, setOpen] = useState(true);
   return (
@@ -144,12 +143,8 @@ function GroupBlock({ label, count, children }: { label: string; count: number; 
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
           <Icon type="folder" size={13} color="#888" />
-          <span style={{ fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif", color: "#555", fontWeight: 600 }}>
-            {label}
-          </span>
-          <span style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa" }}>
-            {count}件
-          </span>
+          <span style={{ fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif", color: "#555", fontWeight: 600 }}>{label}</span>
+          <span style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa" }}>{count}件</span>
         </div>
         <div style={{ transform: open ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>
           <Icon type="chevron" size={13} color="#aaa" />
@@ -157,6 +152,24 @@ function GroupBlock({ label, count, children }: { label: string; count: number; 
       </button>
       {open && <div style={{ paddingLeft: 8 }}>{children}</div>}
     </div>
+  );
+}
+
+// 固定追加ボタン
+function FixedAddButton({ label, onClick }: { label: string; onClick: () => void }) {
+  return (
+    <button onClick={onClick} style={{
+      position: "fixed", bottom: 24, right: 24,
+      display: "flex", alignItems: "center", gap: 7,
+      padding: "13px 20px", background: "#1a1a1a",
+      color: "#fff", border: "none", borderRadius: 24,
+      fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif",
+      cursor: "pointer", boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
+      zIndex: 100,
+    }}>
+      <Icon type="plus" size={14} color="#fff" />
+      {label}
+    </button>
   );
 }
 
@@ -257,13 +270,6 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
     profile: candidate.profile ?? "",
     policies: Array.isArray(candidate.policies) ? candidate.policies : [],
   });
-  useEffect(() => {
-  const handler = (e: KeyboardEvent) => {
-    if (e.metaKey && e.shiftKey && e.key === "S") { e.preventDefault(); onSave(data); }
-  };
-  window.addEventListener("keydown", handler);
-  return () => window.removeEventListener("keydown", handler);
-}, [data]);
   const up = (k: keyof Candidate, v: string) => setData(d => ({ ...d, [k]: v }));
 
   const addPolicy = () => setData(d => ({
@@ -372,13 +378,6 @@ function ElectionForm({ election, onSave, onCancel, onDelete }: {
   election: Election; onSave: (e: Election) => void; onCancel: () => void; onDelete?: () => void;
 }) {
   const [data, setData] = useState({ ...election });
-  useEffect(() => {
-  const handler = (e: KeyboardEvent) => {
-    if (e.metaKey && e.shiftKey && e.key === "S") { e.preventDefault(); onSave(data); }
-  };
-  window.addEventListener("keydown", handler);
-  return () => window.removeEventListener("keydown", handler);
-}, [data]);
   const up = (k: keyof Election, v: string) => setData(d => ({ ...d, [k]: v }));
 
   return (
@@ -431,13 +430,6 @@ function IncumbentForm({ incumbent, onSave, onCancel, onDelete }: {
   incumbent: Incumbent; onSave: (inc: Incumbent) => void; onCancel: () => void; onDelete?: () => void;
 }) {
   const [data, setData] = useState({ ...incumbent });
-  useEffect(() => {
-  const handler = (e: KeyboardEvent) => {
-    if (e.metaKey && e.shiftKey && e.key === "S") { e.preventDefault(); onSave(data); }
-  };
-  window.addEventListener("keydown", handler);
-  return () => window.removeEventListener("keydown", handler);
-}, [data]);
   const up = (k: keyof Incumbent, v: string | number) => setData(d => ({ ...d, [k]: v }));
 
   const addPromise = () => setData(d => ({ ...d, promises: [...d.promises, { title: "", status: "未着手" as const, evidence: "" }] }));
@@ -583,7 +575,6 @@ function IncumbentForm({ incumbent, onSave, onCancel, onDelete }: {
   );
 }
 
-// ========== ElectionsTab ==========
 function ElectionsTab({ password, onToast }: { password: string; onToast: (m: string) => void }) {
   const [elections, setElections] = useState<Election[]>([]);
   const [sha, setSha] = useState("");
@@ -594,15 +585,6 @@ function ElectionsTab({ password, onToast }: { password: string; onToast: (m: st
       .then(r => r.json())
       .then(d => { setElections(d.data || []); setSha(d.sha || ""); });
   }, [password]);
-useEffect(() => {
-  const handler = (e: KeyboardEvent) => {
-    if (!(e.metaKey && e.shiftKey)) return;
-    if (e.key === "N") { e.preventDefault(); if (!editing) add(); }
-    if (e.key === "S") { e.preventDefault(); /* 保存はフォーム側で処理 */ }
-  };
-  window.addEventListener("keydown", handler);
-  return () => window.removeEventListener("keydown", handler);
-}, [editing, elections, sha]);
 
   const save = async (el: Election) => {
     const next = elections.map(e => e.id === el.id ? el : e);
@@ -656,7 +638,6 @@ useEffect(() => {
     );
   }
 
-  // 都道府県でグルーピング
   const grouped = elections.reduce<Record<string, Election[]>>((acc, el) => {
     const key = el.prefecture || "未設定";
     if (!acc[key]) acc[key] = [];
@@ -665,19 +646,10 @@ useEffect(() => {
   }, {});
 
   return (
-    <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em" }}>
-          {elections.length}件登録中
-        </div>
-        <button onClick={add} style={{
-          display: "flex", alignItems: "center", gap: 5, padding: "7px 13px", background: "#1a1a1a", border: "none",
-          borderRadius: 8, color: "#fff", fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
-        }}>
-          <Icon type="plus" size={13} color="#fff" /> 選挙を追加
-        </button>
+    <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 80px" }}>
+      <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>
+        {elections.length}件登録中
       </div>
-
       {Object.entries(grouped).sort(([a], [b]) => a.localeCompare(b, "ja")).map(([pref, els]) => (
         <GroupBlock key={pref} label={pref} count={els.length}>
           {els.map(el => (
@@ -696,11 +668,11 @@ useEffect(() => {
           ))}
         </GroupBlock>
       ))}
+      <FixedAddButton label="選挙を追加" onClick={add} />
     </div>
   );
 }
 
-// ========== CandidatesTab ==========
 function CandidatesTab({ password, onToast, elections }: {
   password: string; onToast: (m: string) => void; elections: Election[];
 }) {
@@ -713,15 +685,6 @@ function CandidatesTab({ password, onToast, elections }: {
       .then(r => r.json())
       .then(d => { setCandidates(Array.isArray(d.data) ? d.data : []); setSha(d.sha || ""); });
   }, [password]);
-useEffect(() => {
-  const handler = (e: KeyboardEvent) => {
-    if (!(e.metaKey && e.shiftKey)) return;
-    if (e.key === "N") { e.preventDefault(); if (!editing) add(); }
-    if (e.key === "S") { e.preventDefault(); /* 保存はフォーム側で処理 */ }
-  };
-  window.addEventListener("keydown", handler);
-  return () => window.removeEventListener("keydown", handler);
-}, [editing, candidates, sha]);
 
   const save = async (c: Candidate) => {
     const next = candidates.map(x => x.id === c.id ? c : x);
@@ -776,7 +739,6 @@ useEffect(() => {
     );
   }
 
-  // 選挙名でグルーピング
   const grouped = candidates.reduce<Record<string, Candidate[]>>((acc, c) => {
     const el = elections.find(e => e.id === c.electionId);
     const key = el ? `${el.prefecture} ${el.name}` : "選挙未設定";
@@ -786,19 +748,10 @@ useEffect(() => {
   }, {});
 
   return (
-    <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em" }}>
-          {candidates.length}名登録中
-        </div>
-        <button onClick={add} style={{
-          display: "flex", alignItems: "center", gap: 5, padding: "7px 13px", background: "#1a1a1a", border: "none",
-          borderRadius: 8, color: "#fff", fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
-        }}>
-          <Icon type="plus" size={13} color="#fff" /> 候補者を追加
-        </button>
+    <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 80px" }}>
+      <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>
+        {candidates.length}名登録中
       </div>
-
       {Object.entries(grouped).map(([elName, cands]) => (
         <GroupBlock key={elName} label={elName} count={cands.length}>
           {cands.map(c => (
@@ -836,11 +789,11 @@ useEffect(() => {
           ))}
         </GroupBlock>
       ))}
+      <FixedAddButton label="候補者を追加" onClick={add} />
     </div>
   );
 }
 
-// ========== IncumbentsTab ==========
 function IncumbentsTab({ password, onToast }: { password: string; onToast: (m: string) => void }) {
   const [incumbents, setIncumbents] = useState<Incumbent[]>([]);
   const [sha, setSha] = useState("");
@@ -871,15 +824,6 @@ function IncumbentsTab({ password, onToast }: { password: string; onToast: (m: s
         }
       });
   }, [password]);
-useEffect(() => {
-  const handler = (e: KeyboardEvent) => {
-    if (!(e.metaKey && e.shiftKey)) return;
-    if (e.key === "N") { e.preventDefault(); if (!editing) add(); }
-    if (e.key === "S") { e.preventDefault(); /* 保存はフォーム側で処理 */ }
-  };
-  window.addEventListener("keydown", handler);
-  return () => window.removeEventListener("keydown", handler);
-}, [editing, incumbents, sha]);
 
   const save = async (inc: Incumbent) => {
     const next = incumbents.map(x => x.id === inc.id ? inc : x);
@@ -935,7 +879,6 @@ useEffect(() => {
     );
   }
 
-  // 都道府県 → 市区町村の二階層グルーピング
   const byPref = incumbents.reduce<Record<string, Record<string, Incumbent[]>>>((acc, inc) => {
     const pref = inc.prefecture || "未設定";
     const city = inc.city || "未設定";
@@ -946,19 +889,10 @@ useEffect(() => {
   }, {});
 
   return (
-    <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em" }}>
-          {incumbents.length}名登録中
-        </div>
-        <button onClick={add} style={{
-          display: "flex", alignItems: "center", gap: 5, padding: "7px 13px", background: "#1a1a1a", border: "none",
-          borderRadius: 8, color: "#fff", fontSize: 11.5, fontFamily: "'Noto Sans JP', sans-serif", cursor: "pointer",
-        }}>
-          <Icon type="plus" size={13} color="#fff" /> 現職議員を追加
-        </button>
+    <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 80px" }}>
+      <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>
+        {incumbents.length}名登録中
       </div>
-
       {Object.entries(byPref).sort(([a], [b]) => a.localeCompare(b, "ja")).map(([pref, cities]) => (
         <GroupBlock key={pref} label={pref} count={Object.values(cities).flat().length}>
           {Object.entries(cities).sort(([a], [b]) => a.localeCompare(b, "ja")).map(([city, incs]) => (
@@ -981,6 +915,7 @@ useEffect(() => {
           ))}
         </GroupBlock>
       ))}
+      <FixedAddButton label="現職議員を追加" onClick={add} />
     </div>
   );
 }
