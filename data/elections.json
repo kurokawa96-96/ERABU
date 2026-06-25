@@ -88,5 +88,15 @@
     "announcementDate": "2026-06-16",
     "electionDate": "2026-06-21",
     "status": "ongoing"
+  },
+  {
+    "id": "e1782358815959",
+    "prefecture": "新潟県",
+    "city": "八郎潟町",
+    "name": "八郎潟町長選挙",
+    "type": "町長選挙",
+    "announcementDate": "",
+    "electionDate": "",
+    "status": "upcoming"
   }
 ]
