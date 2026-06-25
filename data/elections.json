@@ -98,5 +98,15 @@
     "announcementDate": "",
     "electionDate": "",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782359199822",
+    "prefecture": "青森県",
+    "city": "黒石市",
+    "name": "黒石市長選挙",
+    "type": "市長選挙",
+    "announcementDate": "",
+    "electionDate": "",
+    "status": "upcoming"
   }
 ]
