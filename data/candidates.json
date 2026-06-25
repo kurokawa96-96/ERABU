@@ -409,10 +409,10 @@
   },
   {
     "id": "c1782046114926",
-    "electionId": "",
-    "name": "",
-    "party": "",
-    "tagline": "",
+    "electionId": "e1781954773772",
+    "name": "おはし　ちかこ",
+    "party": "無所属",
+    "tagline": "43歳 (女) 新人 無職",
     "message": "",
     "profile": "",
     "policies": [],
@@ -428,5 +428,16 @@
     "profile": "",
     "policies": [],
     "editToken": "1a4tbsjqfirbfe3osrkvaw"
+  },
+  {
+    "id": "c1782047935566",
+    "electionId": "",
+    "name": "",
+    "party": "",
+    "tagline": "",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "9aaa627gppcp08rwk2i3yk"
   }
 ]
