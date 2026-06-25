@@ -783,6 +783,30 @@
         "solution": "",
         "deadline": "",
         "budget": ""
+      },
+      {
+        "icon": "welfare",
+        "label": "高齢者・単身世帯にやさしいまちづくり、地域の支え合いを強化",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "childcare",
+        "label": "共働き家庭を応援、「小1の壁」対策をさらに推進",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "economy",
+        "label": "多摩川の魅力を生かす、「かわまちづくり」で新たなにぎわい創出",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
       }
     ],
     "editToken": "xyqknwr7wnmvjb7o426qss"
