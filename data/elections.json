@@ -118,5 +118,15 @@
     "announcementDate": "",
     "electionDate": "",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782375992767",
+    "prefecture": "新潟県",
+    "city": "津南町",
+    "name": "津南町長選挙",
+    "type": "町長選挙",
+    "announcementDate": "",
+    "electionDate": "",
+    "status": "upcoming"
   }
 ]
