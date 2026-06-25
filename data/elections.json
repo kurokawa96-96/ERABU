@@ -108,5 +108,15 @@
     "announcementDate": "",
     "electionDate": "",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782361390911",
+    "prefecture": "東京都",
+    "city": "杉並区",
+    "name": "杉並区町選挙",
+    "type": "区長選挙",
+    "announcementDate": "",
+    "electionDate": "",
+    "status": "upcoming"
   }
 ]
