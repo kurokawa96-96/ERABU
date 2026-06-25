@@ -128,5 +128,15 @@
     "announcementDate": "",
     "electionDate": "",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782376522218",
+    "prefecture": "東京都",
+    "city": "狛江市",
+    "name": "狛江市長選挙",
+    "type": "市長選挙",
+    "announcementDate": "",
+    "electionDate": "",
+    "status": "upcoming"
   }
 ]
