@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { useRouter } from "next/navigation";
 
 const COSTS = [
@@ -30,6 +31,11 @@ const PLANS = [
 
 export default function PricingPage() {
   const router = useRouter();
+  const planRef = useRef<HTMLDivElement>(null);
+
+  const scrollToPlan = () => {
+    planRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div style={{
@@ -52,26 +58,74 @@ export default function PricingPage() {
         <div style={{ width: 24 }} />
       </div>
 
-      <div style={{ padding: "28px 20px 60px" }}>
+      <div style={{ padding: "36px 20px 60px" }}>
 
-        {/* タイトル */}
-        <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <div style={{ fontSize: 11, color: "#c0b8a8", letterSpacing: "0.2em", marginBottom: 8 }}>
-            CANDIDATE PLAN
+        {/* 運営からのメッセージ */}
+        <div style={{
+          background: "#fff", borderRadius: 16, border: "1px solid #e8e4dc",
+          padding: "28px 22px", marginBottom: 20,
+        }}>
+          <div style={{ fontSize: 10, letterSpacing: "0.2em", color: "#c0b8a8", marginBottom: 20 }}>
+            MESSAGE
           </div>
-          <div style={{ fontSize: 22, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a", lineHeight: 1.5, marginBottom: 12 }}>
-            候補者ページを<br />あなたの言葉で伝える
+
+          <div style={{
+            fontSize: 13.5, fontFamily: "'Noto Serif JP', serif",
+            color: "#1a1a1a", lineHeight: 2.1,
+          }}>
+            ERABUは、候補者一人ひとりの想いや理念、政策を、有権者へまっすぐ届けるためのサービスです。
           </div>
-          <div style={{ fontSize: 13, color: "#8a8070", lineHeight: 1.9 }}>
-            ERABUの候補者ページは、登録することで<br />
-            プロフィール・政策・メッセージを<br />
-            自由に編集・発信できます。
+
+          <div style={{ height: 1, background: "#f0ece4", margin: "20px 0" }} />
+
+          <div style={{
+            fontSize: 13, fontFamily: "'Noto Serif JP', serif",
+            color: "#3a3a3a", lineHeight: 2.1,
+          }}>
+            <p style={{ margin: "0 0 16px" }}>
+              選挙期間だけでは伝えきれない考えや、人柄、これまでの歩みを、ご自身の言葉で残していただけます。
+            </p>
+            <p style={{ margin: "0 0 16px" }}>
+              スローガンでは伝わりきれないあなたの想いを、より深く、より具体的に届ける手段としてご活用いただけます。
+            </p>
+            <p style={{ margin: "0 0 16px" }}>
+              SNSでは流れてしまう情報も、チラシでは伝えきれない想いも、ここではいつでも読み返すことができます。
+            </p>
+            <p style={{ margin: "0 0 16px" }}>
+              地方の小さな自治体の選挙であっても、顔の見える一人ひとりに向けた政治を行うという意思を示す場としても、ぜひご活用ください。
+            </p>
+            <p style={{ margin: 0 }}>
+              あなたが何を目指し、どんな未来を描いているのか。<br />
+              その一つひとつが、有権者が「選ぶ」ための大切な材料になります。
+            </p>
           </div>
+
+          <div style={{ height: 1, background: "#f0ece4", margin: "24px 0" }} />
+
+          <div style={{
+            fontSize: 13, fontFamily: "'Noto Serif JP', serif",
+            color: "#6a6050", lineHeight: 1.9, marginBottom: 24,
+          }}>
+            ぜひ、ご自身のページを作成し、あなたの言葉を届けてください。
+          </div>
+
+          <button
+            onClick={scrollToPlan}
+            style={{
+              width: "100%", padding: 14,
+              background: "#1a1a1a", color: "#fff",
+              border: "none", borderRadius: 10,
+              fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif",
+              cursor: "pointer", letterSpacing: "0.08em",
+            }}
+          >
+            プランを見る
+          </button>
         </div>
 
         {/* 選挙コスト比較 */}
         <div style={{
-          background: "#fff", borderRadius: 14, border: "1px solid #e8e4dc",
+          background: "#fff", borderRadius: 16, border: "1px solid #e8e4dc",
           padding: "20px 18px", marginBottom: 14,
         }}>
           <div style={{ fontSize: 10, letterSpacing: "0.2em", color: "#c0b8a8", marginBottom: 16 }}>
@@ -100,7 +154,7 @@ export default function PricingPage() {
         </div>
 
         {/* プラン */}
-        <div style={{ marginBottom: 14 }}>
+        <div ref={planRef} style={{ marginBottom: 14 }}>
           <div style={{ fontSize: 10, letterSpacing: "0.2em", color: "#c0b8a8", marginBottom: 14, paddingLeft: 2 }}>
             プランを選ぶ
           </div>
@@ -147,7 +201,6 @@ export default function PricingPage() {
               </ul>
               <button
                 onClick={() => {
-                  // 課金実装後にStripeへ遷移
                   alert("準備中です。今しばらくお待ちください。");
                 }}
                 style={{
