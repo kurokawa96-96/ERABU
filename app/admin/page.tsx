@@ -17,6 +17,15 @@ interface Policy {
   budget: string;
 }
 
+interface SNS {
+  hp?: string;
+  x?: string;
+  instagram?: string;
+  facebook?: string;
+  youtube?: string;
+  other?: string;
+}
+
 interface Candidate {
   id: string;
   electionId: string;
@@ -28,6 +37,7 @@ interface Candidate {
   policies: Policy[];
   editToken?: string;
   result?: "pending" | "won" | "lost" | "close";
+  sns?: SNS;
 }
 
 interface Election {
@@ -155,7 +165,6 @@ function GroupBlock({ label, count, children }: { label: string; count: number; 
   );
 }
 
-// 固定追加ボタン
 function FixedAddButton({ label, onClick }: { label: string; onClick: () => void }) {
   return (
     <button onClick={onClick} style={{
@@ -259,6 +268,15 @@ function PolicyForm({ policy, onChange, onRemove, index }: {
   );
 }
 
+const SNS_FIELDS: { key: keyof SNS; label: string; placeholder: string }[] = [
+  { key: "hp",        label: "OFFICIAL HP", placeholder: "https://example.com" },
+  { key: "x",         label: "X（旧Twitter）", placeholder: "https://x.com/..." },
+  { key: "instagram", label: "Instagram",   placeholder: "https://instagram.com/..." },
+  { key: "facebook",  label: "Facebook",    placeholder: "https://facebook.com/..." },
+  { key: "youtube",   label: "YouTube",     placeholder: "https://youtube.com/..." },
+  { key: "other",     label: "その他",       placeholder: "https://..." },
+];
+
 function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
   candidate: Candidate; elections: Election[];
   onSave: (c: Candidate) => void; onCancel: () => void; onDelete?: () => void;
@@ -269,8 +287,10 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
     message: candidate.message ?? "",
     profile: candidate.profile ?? "",
     policies: Array.isArray(candidate.policies) ? candidate.policies : [],
+    sns: candidate.sns ?? {},
   });
   const up = (k: keyof Candidate, v: string) => setData(d => ({ ...d, [k]: v }));
+  const upSns = (k: keyof SNS, v: string) => setData(d => ({ ...d, sns: { ...d.sns, [k]: v } }));
 
   const addPolicy = () => setData(d => ({
     ...d, policies: [...d.policies, { icon: "education", label: "", issue: "", solution: "", deadline: "", budget: "" }]
@@ -329,6 +349,21 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
         <Field label="タグライン"><input style={inputStyle} value={data.tagline} onChange={e => up("tagline", e.target.value)} /></Field>
         <Field label="メッセージ"><textarea style={{ ...textareaStyle, minHeight: 72 }} value={data.message} onChange={e => up("message", e.target.value)} /></Field>
         <Field label="経歴"><textarea style={{ ...textareaStyle, minHeight: 60 }} value={data.profile} onChange={e => up("profile", e.target.value)} /></Field>
+      </div>
+
+      {/* SNS・リンク */}
+      <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
+        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>SNS・リンク</div>
+        {SNS_FIELDS.map(({ key, label, placeholder }) => (
+          <Field key={key} label={label}>
+            <input
+              style={inputStyle}
+              value={data.sns?.[key] ?? ""}
+              onChange={e => upSns(key, e.target.value)}
+              placeholder={placeholder}
+            />
+          </Field>
+        ))}
       </div>
 
       <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
@@ -704,7 +739,7 @@ function CandidatesTab({ password, onToast, elections }: {
     const token = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
     const fresh: Candidate = {
       id: `c${Date.now()}`, electionId: "", name: "", party: "",
-      tagline: "", message: "", profile: "", policies: [], editToken: token,
+      tagline: "", message: "", profile: "", policies: [], editToken: token, sns: {},
     };
     setCandidates(p => [...p, fresh]);
     setEditing(fresh.id);
