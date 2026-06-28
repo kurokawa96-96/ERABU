@@ -16,16 +16,22 @@ interface Update {
   label: string;
   date: string;
 }
-
 interface Notice {
   date: string;
   title: string;
   content: string;
 }
-
 interface CandidateLink {
   label: string;
   url: string;
+}
+interface SNS {
+  hp?: string;
+  x?: string;
+  instagram?: string;
+  facebook?: string;
+  youtube?: string;
+  other?: string;
 }
 interface Candidate {
   id: string;
@@ -39,6 +45,7 @@ interface Candidate {
   updates: Update[];
   notices?: Notice[];
   links?: CandidateLink[];
+  sns?: SNS;
 }
 interface Election {
   id: string;
@@ -69,11 +76,23 @@ function Icon({ type, size = 18, color = "#1a1a1a" }: { type: string; size?: num
     energy: <svg {...p}><path d="M11 2L4 11h6l-1 7 7-9h-6l1-7Z" stroke={color} strokeWidth="1.4" strokeLinejoin="round"/></svg>,
     digital: <svg {...p}><rect x="2" y="4" width="16" height="11" rx="1.5" stroke={color} strokeWidth="1.4"/><path d="M7 18h6M10 15v3" stroke={color} strokeWidth="1.4" strokeLinecap="round"/></svg>,
     economy: <svg {...p}><path d="M3 14c0-4 3-7 7-7s7 3 7 7" stroke={color} strokeWidth="1.4" strokeLinecap="round"/><path d="M10 7V4M7 5l3-1 3 1" stroke={color} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-finance: <svg {...p}><rect x="2" y="5" width="16" height="12" rx="1.5" stroke={color} strokeWidth="1.4"/><path d="M2 9h16" stroke={color} strokeWidth="1.3"/><circle cx="10" cy="13" r="2" stroke={color} strokeWidth="1.3"/></svg>,
-tax: <svg {...p}><path d="M4 16L16 4" stroke={color} strokeWidth="1.5" strokeLinecap="round"/><circle cx="6" cy="6" r="2" stroke={color} strokeWidth="1.3"/><circle cx="14" cy="14" r="2" stroke={color} strokeWidth="1.3"/></svg>,
-welfare: <svg {...p}><path d="M10 17c-4-2.5-7-5.5-7-9a4 4 0 018 0 4 4 0 018 0c0 3.5-3 6.5-7 9Z" stroke={color} strokeWidth="1.4" strokeLinejoin="round"/></svg>,
+    finance: <svg {...p}><rect x="2" y="5" width="16" height="12" rx="1.5" stroke={color} strokeWidth="1.4"/><path d="M2 9h16" stroke={color} strokeWidth="1.3"/><circle cx="10" cy="13" r="2" stroke={color} strokeWidth="1.3"/></svg>,
+    tax: <svg {...p}><path d="M4 16L16 4" stroke={color} strokeWidth="1.5" strokeLinecap="round"/><circle cx="6" cy="6" r="2" stroke={color} strokeWidth="1.3"/><circle cx="14" cy="14" r="2" stroke={color} strokeWidth="1.3"/></svg>,
+    welfare: <svg {...p}><path d="M10 17c-4-2.5-7-5.5-7-9a4 4 0 018 0 4 4 0 018 0c0 3.5-3 6.5-7 9Z" stroke={color} strokeWidth="1.4" strokeLinejoin="round"/></svg>,
   };
   return icons[type] ?? icons["data"];
+}
+
+// SNSアイコン（各ブランドSVG）
+function SnsIcon({ type, size = 18 }: { type: string; size?: number }) {
+  const s = { width: size, height: size, viewBox: "0 0 24 24" };
+  const icons: Record<string, React.ReactElement> = {
+    x: <svg {...s} fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>,
+    instagram: <svg {...s} fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>,
+    facebook: <svg {...s} fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>,
+    youtube: <svg {...s} fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>,
+  };
+  return icons[type] ?? null;
 }
 
 const POLICY_ROWS: { key: keyof Policy; label: string }[] = [
@@ -136,6 +155,83 @@ function UpdateBadge({ update }: { update: { type: string; label: string; date: 
   );
 }
 
+// SNSボタン一覧
+function SnsButtons({ sns }: { sns?: SNS }) {
+  if (!sns) return null;
+  const hasAny = Object.values(sns).some(v => v);
+  if (!hasAny) return null;
+
+  return (
+    <div style={{ marginTop: 14, display: "flex", flexWrap: "wrap", gap: 8 }}>
+      {sns.hp && (
+        <a href={sns.hp} target="_blank" rel="noopener noreferrer" style={{
+          display: "inline-flex", alignItems: "center", gap: 5,
+          padding: "6px 12px", borderRadius: 20,
+          border: "1px solid #1a1a1a", background: "#1a1a1a",
+          fontSize: 10.5, fontFamily: "'Noto Sans JP', sans-serif",
+          color: "#fff", textDecoration: "none", letterSpacing: "0.08em",
+        }}>
+          OFFICIAL HP
+        </a>
+      )}
+      {sns.x && (
+        <a href={sns.x} target="_blank" rel="noopener noreferrer" style={{
+          display: "inline-flex", alignItems: "center", justifyContent: "center",
+          width: 34, height: 34, borderRadius: "50%",
+          border: "1px solid #e0e0e0", background: "#fff",
+          color: "#1a1a1a", textDecoration: "none",
+        }}>
+          <SnsIcon type="x" size={15} />
+        </a>
+      )}
+      {sns.instagram && (
+        <a href={sns.instagram} target="_blank" rel="noopener noreferrer" style={{
+          display: "inline-flex", alignItems: "center", justifyContent: "center",
+          width: 34, height: 34, borderRadius: "50%",
+          border: "1px solid #e0e0e0", background: "#fff",
+          color: "#E1306C", textDecoration: "none",
+        }}>
+          <SnsIcon type="instagram" size={15} />
+        </a>
+      )}
+      {sns.facebook && (
+        <a href={sns.facebook} target="_blank" rel="noopener noreferrer" style={{
+          display: "inline-flex", alignItems: "center", justifyContent: "center",
+          width: 34, height: 34, borderRadius: "50%",
+          border: "1px solid #e0e0e0", background: "#fff",
+          color: "#1877F2", textDecoration: "none",
+        }}>
+          <SnsIcon type="facebook" size={15} />
+        </a>
+      )}
+      {sns.youtube && (
+        <a href={sns.youtube} target="_blank" rel="noopener noreferrer" style={{
+          display: "inline-flex", alignItems: "center", justifyContent: "center",
+          width: 34, height: 34, borderRadius: "50%",
+          border: "1px solid #e0e0e0", background: "#fff",
+          color: "#FF0000", textDecoration: "none",
+        }}>
+          <SnsIcon type="youtube" size={15} />
+        </a>
+      )}
+      {sns.other && (
+        <a href={sns.other} target="_blank" rel="noopener noreferrer" style={{
+          display: "inline-flex", alignItems: "center", gap: 5,
+          padding: "6px 12px", borderRadius: 20,
+          border: "1px solid #e0e0e0", background: "#fafaf8",
+          fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif",
+          color: "#555", textDecoration: "none",
+        }}>
+          その他
+          <svg width="11" height="11" viewBox="0 0 20 20" fill="none">
+            <path d="M8 12l8-8M11 4h5v5" stroke="#999" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </a>
+      )}
+    </div>
+  );
+}
+
 function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
   candidate: Candidate;
   isOpen: boolean;
@@ -183,7 +279,7 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
       </button>
 
       <div style={{
-        maxHeight: isOpen ? "1200px" : 0,
+        maxHeight: isOpen ? "1600px" : 0,
         overflow: "hidden",
         transition: "max-height 0.5s cubic-bezier(0.4,0,0.2,1)",
       }}>
@@ -201,9 +297,12 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
             </div>
           )}
 
+          {/* SNSボタン（最上部に表示） */}
+          <SnsButtons sns={candidate.sns} />
+
           {candidate.policies.length > 0 && (
             <>
-              <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 10 }}>
+              <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 10, marginTop: candidate.sns && Object.values(candidate.sns).some(v => v) ? 14 : 0 }}>
                 POLICY
               </div>
               {candidate.policies.map((p, i) => (
@@ -247,11 +346,7 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
           {candidate.links && candidate.links.length > 0 && (
             <div style={{ marginTop: 14, display: "flex", flexWrap: "wrap", gap: 8 }}>
               {candidate.links.map((link, i) => (
-                <a
-                  key={i}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <a key={i} href={link.url} target="_blank" rel="noopener noreferrer"
                   style={{ display: "inline-flex", alignItems: "center", gap: 5, padding: "6px 12px", borderRadius: 20, border: "1px solid #e0e0e0", background: "#fafaf8", fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", color: "#555", textDecoration: "none" }}
                 >
                   {link.label || "リンク"}
@@ -264,17 +359,11 @@ function CandidateCard({ candidate, isOpen, onToggle, isSaved, onSave }: {
           )}
 
           {/* 編集案内 */}
-          <Link
-            href="/pricing"
-            style={{
-              display: "block", marginTop: 16,
-              padding: "11px 14px",
-              background: "#f8f8f6",
-              border: "1px solid #e8e8e8",
-              borderRadius: 9, textDecoration: "none",
-              textAlign: "center",
-            }}
-          >
+          <Link href="/pricing" style={{
+            display: "block", marginTop: 16, padding: "11px 14px",
+            background: "#f8f8f6", border: "1px solid #e8e8e8",
+            borderRadius: 9, textDecoration: "none", textAlign: "center",
+          }}>
             <span style={{ fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif", color: "#a09880", letterSpacing: "0.08em" }}>
               この候補者ページは編集できます →
             </span>
@@ -310,11 +399,8 @@ export default function ElectionClient({ election, candidates }: {
     if (candidate && !savedIds.includes(id)) {
       const details = JSON.parse(localStorage.getItem("erabu_saved_details") ?? "[]");
       const newDetail = {
-        id: candidate.id,
-        name: candidate.name,
-        party: candidate.party,
-        electionName: election.name,
-        electionId: election.id,
+        id: candidate.id, name: candidate.name,
+        party: candidate.party, electionName: election.name, electionId: election.id,
       };
       localStorage.setItem("erabu_saved_details", JSON.stringify([...details, newDetail]));
     } else {
