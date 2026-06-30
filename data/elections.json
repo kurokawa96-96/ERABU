@@ -188,5 +188,15 @@
     "announcementDate": "2026-07-05",
     "electionDate": "2026-07-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782789305349",
+    "prefecture": "北海道",
+    "city": "長万部町",
+    "name": "長万部町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-07-07",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
