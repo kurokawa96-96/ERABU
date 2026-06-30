@@ -288,5 +288,15 @@
     "announcementDate": "2026-07-07",
     "electionDate": "2026-07-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782792648449",
+    "prefecture": "栃木県",
+    "city": "下野市",
+    "name": "下野市長選挙",
+    "type": "市長選挙",
+    "announcementDate": "2026-07-05",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
