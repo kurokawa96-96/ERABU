@@ -168,5 +168,15 @@
     "announcementDate": "2026-07-07",
     "electionDate": "2026-07-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782782148884",
+    "prefecture": "山形県",
+    "city": "南陽市",
+    "name": "南陽市長選挙",
+    "type": "市長",
+    "announcementDate": "2026-07-05",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
