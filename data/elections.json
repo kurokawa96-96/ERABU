@@ -138,5 +138,15 @@
     "announcementDate": "",
     "electionDate": "",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782779543957",
+    "prefecture": "北海道",
+    "city": "江差町",
+    "name": "江差町議会補欠選挙",
+    "type": "町議会補欠選挙",
+    "announcementDate": "",
+    "electionDate": "",
+    "status": "upcoming"
   }
 ]
