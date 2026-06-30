@@ -338,5 +338,15 @@
     "announcementDate": "2026-07-07",
     "electionDate": "2026-07-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782794822926",
+    "prefecture": "福井県",
+    "city": "越前市",
+    "name": "越前市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-07-05",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
