@@ -158,5 +158,15 @@
     "announcementDate": "",
     "electionDate": "",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782779769833",
+    "prefecture": "奈良県",
+    "city": "安堵町",
+    "name": "安堵町議会議員補欠選挙",
+    "type": "町議会議員",
+    "announcementDate": "",
+    "electionDate": "",
+    "status": "upcoming"
   }
 ]
