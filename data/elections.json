@@ -268,5 +268,15 @@
     "announcementDate": "2026-07-05",
     "electionDate": "2026-07-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782792472683",
+    "prefecture": "宮城県",
+    "city": "柴田町",
+    "name": "柴田町議会議員補欠選挙",
+    "type": "町議会議員",
+    "announcementDate": "0006-07-07",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
