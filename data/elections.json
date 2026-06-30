@@ -208,5 +208,15 @@
     "announcementDate": "2026-07-07",
     "electionDate": "2026-07-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782790293481",
+    "prefecture": "長野県",
+    "city": "白馬村",
+    "name": "白馬村長選挙",
+    "type": "村長",
+    "announcementDate": "2026-07-07",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
