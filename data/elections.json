@@ -308,5 +308,15 @@
     "announcementDate": "2026-07-07",
     "electionDate": "2026-07-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782793547709",
+    "prefecture": "北海道",
+    "city": "紋別市",
+    "name": "紋別市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-07-05",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
