@@ -198,5 +198,15 @@
     "announcementDate": "2026-07-07",
     "electionDate": "2026-07-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782789563657",
+    "prefecture": "三重県",
+    "city": "多気町",
+    "name": "多気町議会議員選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-07-07",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
