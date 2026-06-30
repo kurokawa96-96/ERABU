@@ -238,5 +238,15 @@
     "announcementDate": "2026-07-07",
     "electionDate": "2026-07-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782790915826",
+    "prefecture": "熊本県",
+    "city": "西原村",
+    "name": "西原村長選挙",
+    "type": "村長",
+    "announcementDate": "2026-07-07",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
