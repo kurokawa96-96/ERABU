@@ -218,5 +218,15 @@
     "announcementDate": "2026-07-07",
     "electionDate": "2026-07-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782790397146",
+    "prefecture": "福岡県",
+    "city": "添田町",
+    "name": "添田町議会銀選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-07-07",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
