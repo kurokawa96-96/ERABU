@@ -850,12 +850,14 @@ function CandidatesTab({ password, onToast, elections }: {
     );
   }
 
-  const grouped = candidates.reduce<Record<string, Candidate[]>>((acc, c) => {
-    const el = elections.find(e => e.id === c.electionId);
-    const key = el ? `${el.prefecture} ${el.name}` : "選挙未設定";
-    if (!acc[key]) acc[key] = [];
-    acc[key].push(c);
-    return acc;
+  const grouped = candidates.reduce<Record<string, Record<string, Candidate[]>>>((acc, c) => {
+  const el = elections.find(e => e.id === c.electionId);
+  const pref = el?.prefecture || "選挙未設定";
+  const elName = el?.name || "選挙未設定";
+  if (!acc[pref]) acc[pref] = {};
+  if (!acc[pref][elName]) acc[pref][elName] = [];
+  acc[pref][elName].push(c);
+  return acc;
   }, {});
 
   const CandidateItem = ({ c }: { c: Candidate }) => (
@@ -905,14 +907,14 @@ function CandidatesTab({ password, onToast, elections }: {
       </div>
 
       {sortMode === "area" ? (
-        Object.entries(grouped).sort(([a], [b]) => {
-          const prefA = a.split(" ")[0];
-          const prefB = b.split(" ")[0];
-          return sortByPref(prefA, prefB);
-        }).map(([elName, cands]) => (
-          <GroupBlock key={elName} label={elName} count={cands.length}>
-            {cands.map(c => <CandidateItem key={c.id} c={c} />)}
-          </GroupBlock>
+  Object.entries(grouped).sort(([a], [b]) => sortByPref(a, b)).map(([pref, elMap]) => (
+    <GroupBlock key={pref} label={pref} count={Object.values(elMap).flat().length}>
+      {Object.entries(elMap).map(([elName, cands]) => (
+        <GroupBlock key={elName} label={elName} count={cands.length}>
+          {cands.map(c => <CandidateItem key={c.id} c={c} />)}
+        </GroupBlock>
+      ))}
+    </GroupBlock>
         ))
       ) : (
         candidates.map(c => <CandidateItem key={c.id} c={c} />)
