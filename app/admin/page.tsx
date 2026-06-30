@@ -7,6 +7,21 @@ const POLICY_ICONS = [
   "transport","reform","participation","childcare",
   "data","energy","digital","economy","finance","tax","welfare"
 ];
+const PREFECTURE_ORDER: Record<string, number> = {
+  "北海道":1,"青森県":2,"岩手県":3,"宮城県":4,"秋田県":5,
+  "山形県":6,"福島県":7,"茨城県":8,"栃木県":9,"群馬県":10,
+  "埼玉県":11,"千葉県":12,"東京都":13,"神奈川県":14,"新潟県":15,
+  "富山県":16,"石川県":17,"福井県":18,"山梨県":19,"長野県":20,
+  "岐阜県":21,"静岡県":22,"愛知県":23,"三重県":24,"滋賀県":25,
+  "京都府":26,"大阪府":27,"兵庫県":28,"奈良県":29,"和歌山県":30,
+  "鳥取県":31,"島根県":32,"岡山県":33,"広島県":34,"山口県":35,
+  "徳島県":36,"香川県":37,"愛媛県":38,"高知県":39,"福岡県":40,
+  "佐賀県":41,"長崎県":42,"熊本県":43,"大分県":44,"宮崎県":45,
+  "鹿児島県":46,"沖縄県":47,
+};
+
+const sortByPref = (a: string, b: string) =>
+  (PREFECTURE_ORDER[a] ?? 99) - (PREFECTURE_ORDER[b] ?? 99);
 
 interface Policy {
   icon: string;
@@ -685,7 +700,7 @@ function ElectionsTab({ password, onToast }: { password: string; onToast: (m: st
       <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>
         {elections.length}件登録中
       </div>
-      {Object.entries(grouped).sort(([a], [b]) => a.localeCompare(b, "ja")).map(([pref, els]) => (
+      {Object.entries(grouped).sort(([a], [b]) => sortByPref(a, b)).map(([pref, els]) => (
         <GroupBlock key={pref} label={pref} count={els.length}>
           {els.map(el => (
             <button key={el.id} onClick={() => setEditing(el.id)} style={{
@@ -787,7 +802,11 @@ function CandidatesTab({ password, onToast, elections }: {
       <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>
         {candidates.length}名登録中
       </div>
-      {Object.entries(grouped).map(([elName, cands]) => (
+      {Object.entries(grouped).sort(([a], [b]) => {
+  const prefA = a.split(" ")[0];
+  const prefB = b.split(" ")[0];
+  return sortByPref(prefA, prefB);
+}).map(([elName, cands]) => (
         <GroupBlock key={elName} label={elName} count={cands.length}>
           {cands.map(c => (
             <div key={c.id} style={{ background: "#fff", border: "1px solid #ebebeb", borderRadius: 10, marginBottom: 6, overflow: "hidden" }}>
@@ -928,7 +947,7 @@ function IncumbentsTab({ password, onToast }: { password: string; onToast: (m: s
       <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>
         {incumbents.length}名登録中
       </div>
-      {Object.entries(byPref).sort(([a], [b]) => a.localeCompare(b, "ja")).map(([pref, cities]) => (
+      {Object.entries(byPref).sort(([a], [b]) => sortByPref(a, b)).map(([pref, cities]) => (
         <GroupBlock key={pref} label={pref} count={Object.values(cities).flat().length}>
           {Object.entries(cities).sort(([a], [b]) => a.localeCompare(b, "ja")).map(([city, incs]) => (
             <GroupBlock key={city} label={city} count={incs.length}>
