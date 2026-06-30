@@ -368,5 +368,15 @@
     "announcementDate": "2026-07-07",
     "electionDate": "2026-07-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782822360220",
+    "prefecture": "青森県",
+    "city": "今別町",
+    "name": "今別町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-07-07",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
