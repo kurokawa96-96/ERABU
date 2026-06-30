@@ -7,6 +7,7 @@ const POLICY_ICONS = [
   "transport","reform","participation","childcare",
   "data","energy","digital","economy","finance","tax","welfare"
 ];
+
 const PREFECTURE_ORDER: Record<string, number> = {
   "北海道":1,"青森県":2,"岩手県":3,"宮城県":4,"秋田県":5,
   "山形県":6,"福島県":7,"茨城県":8,"栃木県":9,"群馬県":10,
@@ -103,6 +104,8 @@ interface Incumbent {
   activityReports: ActivityReport[];
 }
 
+type SortMode = "area" | "registered";
+
 function Icon({ type, size = 16, color = "#666" }: { type: string; size?: number; color?: string }) {
   const p = { width: size, height: size, viewBox: "0 0 20 20", fill: "none" as const };
   const m: Record<string, React.ReactElement> = {
@@ -194,6 +197,24 @@ function FixedAddButton({ label, onClick }: { label: string; onClick: () => void
       <Icon type="plus" size={14} color="#fff" />
       {label}
     </button>
+  );
+}
+
+// 表示切り替えトグル
+function SortToggle({ mode, onChange }: { mode: SortMode; onChange: (m: SortMode) => void }) {
+  return (
+    <div style={{ display: "flex", gap: 4, background: "#eeecea", borderRadius: 8, padding: 3 }}>
+      {([["area", "地域別"], ["registered", "登録順"]] as [SortMode, string][]).map(([m, label]) => (
+        <button key={m} onClick={() => onChange(m)} style={{
+          padding: "4px 10px", borderRadius: 6, border: "none", cursor: "pointer",
+          fontSize: 11, fontFamily: "'Noto Sans JP', sans-serif",
+          background: mode === m ? "#fff" : "transparent",
+          color: mode === m ? "#1a1a1a" : "#aaa",
+          boxShadow: mode === m ? "0 1px 4px rgba(0,0,0,0.08)" : "none",
+          transition: "all 0.15s",
+        }}>{label}</button>
+      ))}
+    </div>
   );
 }
 
@@ -366,17 +387,11 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
         <Field label="経歴"><textarea style={{ ...textareaStyle, minHeight: 60 }} value={data.profile} onChange={e => up("profile", e.target.value)} /></Field>
       </div>
 
-      {/* SNS・リンク */}
       <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #ebebeb", padding: "18px 16px", marginBottom: 12 }}>
         <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>SNS・リンク</div>
         {SNS_FIELDS.map(({ key, label, placeholder }) => (
           <Field key={key} label={label}>
-            <input
-              style={inputStyle}
-              value={data.sns?.[key] ?? ""}
-              onChange={e => upSns(key, e.target.value)}
-              placeholder={placeholder}
-            />
+            <input style={inputStyle} value={data.sns?.[key] ?? ""} onChange={e => upSns(key, e.target.value)} placeholder={placeholder} />
           </Field>
         ))}
       </div>
@@ -424,11 +439,24 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
   );
 }
 
-function ElectionForm({ election, onSave, onCancel, onDelete }: {
-  election: Election; onSave: (e: Election) => void; onCancel: () => void; onDelete?: () => void;
+function ElectionForm({ election, elections, onSave, onCancel, onDelete }: {
+  election: Election; elections: Election[];
+  onSave: (e: Election) => void; onCancel: () => void; onDelete?: () => void;
 }) {
   const [data, setData] = useState({ ...election });
-  const up = (k: keyof Election, v: string) => setData(d => ({ ...d, [k]: v }));
+  const [dupWarning, setDupWarning] = useState(false);
+  const up = (k: keyof Election, v: string) => {
+    const updated = { ...data, [k]: v };
+    setData(updated);
+    // 重複チェック（自分自身は除く）
+    const isDup = elections.some(e =>
+      e.id !== election.id &&
+      e.prefecture === updated.prefecture &&
+      e.city === updated.city &&
+      e.name === updated.name
+    );
+    setDupWarning(isDup);
+  };
 
   return (
     <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 40px" }}>
@@ -439,6 +467,16 @@ function ElectionForm({ election, onSave, onCancel, onDelete }: {
           <Field label="市区町村"><input style={inputStyle} value={data.city} onChange={e => up("city", e.target.value)} placeholder="例：世田谷区" /></Field>
         </div>
         <Field label="選挙名"><input style={inputStyle} value={data.name} onChange={e => up("name", e.target.value)} placeholder="例：世田谷区議会議員選挙" /></Field>
+        {dupWarning && (
+          <div style={{
+            marginTop: -8, marginBottom: 12, padding: "8px 12px",
+            background: "#fff8e8", border: "1px solid #f0d878",
+            borderRadius: 7, fontSize: 11,
+            fontFamily: "'Noto Sans JP', sans-serif", color: "#a07820",
+          }}>
+            ⚠ 同じ都道府県・市区町村・選挙名がすでに登録されています
+          </div>
+        )}
         <Field label="種別"><input style={inputStyle} value={data.type} onChange={e => up("type", e.target.value)} placeholder="例：市議会議員" /></Field>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
           <Field label="告示日"><input style={inputStyle} type="date" value={data.announcementDate} onChange={e => up("announcementDate", e.target.value)} /></Field>
@@ -629,6 +667,7 @@ function ElectionsTab({ password, onToast }: { password: string; onToast: (m: st
   const [elections, setElections] = useState<Election[]>([]);
   const [sha, setSha] = useState("");
   const [editing, setEditing] = useState<string | null>(null);
+  const [sortMode, setSortMode] = useState<SortMode>("area");
 
   useEffect(() => {
     fetch("/api/admin/elections", { headers: { "x-admin-password": password } })
@@ -683,7 +722,7 @@ function ElectionsTab({ password, onToast }: { password: string; onToast: (m: st
           </button>
           <span style={{ fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif", color: "#1a1a1a" }}>{el.name || "新しい選挙"}</span>
         </div>
-        <ElectionForm election={el} onSave={save} onCancel={() => setEditing(null)} onDelete={() => remove(el.id)} />
+        <ElectionForm election={el} elections={elections} onSave={save} onCancel={() => setEditing(null)} onDelete={() => remove(el.id)} />
       </>
     );
   }
@@ -697,27 +736,48 @@ function ElectionsTab({ password, onToast }: { password: string; onToast: (m: st
 
   return (
     <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 80px" }}>
-      <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>
-        {elections.length}件登録中
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em" }}>
+          {elections.length}件登録中
+        </div>
+        <SortToggle mode={sortMode} onChange={setSortMode} />
       </div>
-      {Object.entries(grouped).sort(([a], [b]) => sortByPref(a, b)).map(([pref, els]) => (
-        <GroupBlock key={pref} label={pref} count={els.length}>
-          {els.map(el => (
-            <button key={el.id} onClick={() => setEditing(el.id)} style={{
-              width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
-              padding: "12px 14px", background: "#fff", border: "1px solid #ebebeb",
-              borderRadius: 10, marginBottom: 6, cursor: "pointer", textAlign: "left",
-            }}>
-              <div>
-                <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>{el.city}</div>
-                <div style={{ fontSize: 13.5, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>{el.name || "名称未設定"}</div>
-                <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>投票日 {el.electionDate}</div>
-              </div>
-              <Icon type="edit" size={14} color="#ccc" />
-            </button>
-          ))}
-        </GroupBlock>
-      ))}
+
+      {sortMode === "area" ? (
+        Object.entries(grouped).sort(([a], [b]) => sortByPref(a, b)).map(([pref, els]) => (
+          <GroupBlock key={pref} label={pref} count={els.length}>
+            {els.map(el => (
+              <button key={el.id} onClick={() => setEditing(el.id)} style={{
+                width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+                padding: "12px 14px", background: "#fff", border: "1px solid #ebebeb",
+                borderRadius: 10, marginBottom: 6, cursor: "pointer", textAlign: "left",
+              }}>
+                <div>
+                  <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>{el.city}</div>
+                  <div style={{ fontSize: 13.5, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>{el.name || "名称未設定"}</div>
+                  <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>投票日 {el.electionDate}</div>
+                </div>
+                <Icon type="edit" size={14} color="#ccc" />
+              </button>
+            ))}
+          </GroupBlock>
+        ))
+      ) : (
+        elections.map(el => (
+          <button key={el.id} onClick={() => setEditing(el.id)} style={{
+            width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+            padding: "12px 14px", background: "#fff", border: "1px solid #ebebeb",
+            borderRadius: 10, marginBottom: 6, cursor: "pointer", textAlign: "left",
+          }}>
+            <div>
+              <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>{el.prefecture} {el.city}</div>
+              <div style={{ fontSize: 13.5, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>{el.name || "名称未設定"}</div>
+              <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>投票日 {el.electionDate}</div>
+            </div>
+            <Icon type="edit" size={14} color="#ccc" />
+          </button>
+        ))
+      )}
       <FixedAddButton label="選挙を追加" onClick={add} />
     </div>
   );
@@ -729,6 +789,7 @@ function CandidatesTab({ password, onToast, elections }: {
   const [candidates, setCandidates] = useState<Candidate[]>([]);
   const [sha, setSha] = useState("");
   const [editing, setEditing] = useState<string | null>(null);
+  const [sortMode, setSortMode] = useState<SortMode>("area");
 
   useEffect(() => {
     fetch("/api/admin/candidates", { headers: { "x-admin-password": password } })
@@ -797,52 +858,65 @@ function CandidatesTab({ password, onToast, elections }: {
     return acc;
   }, {});
 
+  const CandidateItem = ({ c }: { c: Candidate }) => (
+    <div style={{ background: "#fff", border: "1px solid #ebebeb", borderRadius: 10, marginBottom: 6, overflow: "hidden" }}>
+      <button onClick={() => setEditing(c.id)} style={{
+        width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "12px 14px", background: "none", border: "none", cursor: "pointer", textAlign: "left",
+      }}>
+        <div>
+          <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>
+            {elections.find(e => e.id === c.electionId)?.name || "選挙未設定"}
+          </div>
+          <div style={{ fontSize: 13.5, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>{c.name || "氏名未設定"}</div>
+          <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>
+            {c.party || "政党未設定"}
+            {c.result === "won" && <span style={{ marginLeft: 8, color: "#3a7a3a" }}>✓ 当選</span>}
+            {c.result === "lost" && <span style={{ marginLeft: 8, color: "#c07070" }}>落選</span>}
+            {c.result === "close" && <span style={{ marginLeft: 8, color: "#e09040" }}>次点</span>}
+          </div>
+        </div>
+        <Icon type="edit" size={14} color="#ccc" />
+      </button>
+      {c.editToken && (
+        <button onClick={() => {
+          const url = `${window.location.origin}/candidate/edit/${c.editToken}`;
+          navigator.clipboard.writeText(url);
+          onToast("編集用URLをコピーしました");
+        }} style={{
+          width: "100%", padding: "8px 14px", background: "#fafaf8", border: "none",
+          borderTop: "1px solid #f0f0f0", display: "flex", alignItems: "center",
+          justifyContent: "center", gap: 6, fontSize: 11,
+          fontFamily: "'Noto Sans JP', sans-serif", color: "#888", cursor: "pointer",
+        }}>
+          編集用URLをコピー
+        </button>
+      )}
+    </div>
+  );
+
   return (
     <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 80px" }}>
-      <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>
-        {candidates.length}名登録中
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em" }}>
+          {candidates.length}名登録中
+        </div>
+        <SortToggle mode={sortMode} onChange={setSortMode} />
       </div>
-      {Object.entries(grouped).sort(([a], [b]) => {
-  const prefA = a.split(" ")[0];
-  const prefB = b.split(" ")[0];
-  return sortByPref(prefA, prefB);
-}).map(([elName, cands]) => (
-        <GroupBlock key={elName} label={elName} count={cands.length}>
-          {cands.map(c => (
-            <div key={c.id} style={{ background: "#fff", border: "1px solid #ebebeb", borderRadius: 10, marginBottom: 6, overflow: "hidden" }}>
-              <button onClick={() => setEditing(c.id)} style={{
-                width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
-                padding: "12px 14px", background: "none", border: "none", cursor: "pointer", textAlign: "left",
-              }}>
-                <div>
-                  <div style={{ fontSize: 13.5, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>{c.name || "氏名未設定"}</div>
-                  <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>
-                    {c.party || "政党未設定"}
-                    {c.result === "won" && <span style={{ marginLeft: 8, color: "#3a7a3a" }}>✓ 当選</span>}
-                    {c.result === "lost" && <span style={{ marginLeft: 8, color: "#c07070" }}>落選</span>}
-                    {c.result === "close" && <span style={{ marginLeft: 8, color: "#e09040" }}>次点</span>}
-                  </div>
-                </div>
-                <Icon type="edit" size={14} color="#ccc" />
-              </button>
-              {c.editToken && (
-                <button onClick={() => {
-                  const url = `${window.location.origin}/candidate/edit/${c.editToken}`;
-                  navigator.clipboard.writeText(url);
-                  onToast("編集用URLをコピーしました");
-                }} style={{
-                  width: "100%", padding: "8px 14px", background: "#fafaf8", border: "none",
-                  borderTop: "1px solid #f0f0f0", display: "flex", alignItems: "center",
-                  justifyContent: "center", gap: 6, fontSize: 11,
-                  fontFamily: "'Noto Sans JP', sans-serif", color: "#888", cursor: "pointer",
-                }}>
-                  編集用URLをコピー
-                </button>
-              )}
-            </div>
-          ))}
-        </GroupBlock>
-      ))}
+
+      {sortMode === "area" ? (
+        Object.entries(grouped).sort(([a], [b]) => {
+          const prefA = a.split(" ")[0];
+          const prefB = b.split(" ")[0];
+          return sortByPref(prefA, prefB);
+        }).map(([elName, cands]) => (
+          <GroupBlock key={elName} label={elName} count={cands.length}>
+            {cands.map(c => <CandidateItem key={c.id} c={c} />)}
+          </GroupBlock>
+        ))
+      ) : (
+        candidates.map(c => <CandidateItem key={c.id} c={c} />)
+      )}
       <FixedAddButton label="候補者を追加" onClick={add} />
     </div>
   );
@@ -852,6 +926,7 @@ function IncumbentsTab({ password, onToast }: { password: string; onToast: (m: s
   const [incumbents, setIncumbents] = useState<Incumbent[]>([]);
   const [sha, setSha] = useState("");
   const [editing, setEditing] = useState<string | null>(null);
+  const [sortMode, setSortMode] = useState<SortMode>("area");
 
   useEffect(() => {
     fetch("/api/admin/incumbents", { headers: { "x-admin-password": password } })
@@ -942,33 +1017,43 @@ function IncumbentsTab({ password, onToast }: { password: string; onToast: (m: s
     return acc;
   }, {});
 
+  const IncumbentItem = ({ inc }: { inc: Incumbent }) => (
+    <button onClick={() => setEditing(inc.id)} style={{
+      width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+      padding: "11px 14px", background: "#fff", border: "1px solid #ebebeb",
+      borderRadius: 9, marginBottom: 5, cursor: "pointer", textAlign: "left",
+    }}>
+      <div>
+        <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>{inc.prefecture} {inc.city} / {inc.assembly}</div>
+        <div style={{ fontSize: 13.5, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>{inc.name || "氏名未設定"}</div>
+        <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>{inc.party || "政党未設定"}</div>
+      </div>
+      <Icon type="edit" size={14} color="#ccc" />
+    </button>
+  );
+
   return (
     <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 80px" }}>
-      <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em", marginBottom: 14 }}>
-        {incumbents.length}名登録中
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+        <div style={{ fontSize: 9, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", letterSpacing: "0.18em" }}>
+          {incumbents.length}名登録中
+        </div>
+        <SortToggle mode={sortMode} onChange={setSortMode} />
       </div>
-      {Object.entries(byPref).sort(([a], [b]) => sortByPref(a, b)).map(([pref, cities]) => (
-        <GroupBlock key={pref} label={pref} count={Object.values(cities).flat().length}>
-          {Object.entries(cities).sort(([a], [b]) => a.localeCompare(b, "ja")).map(([city, incs]) => (
-            <GroupBlock key={city} label={city} count={incs.length}>
-              {incs.map(inc => (
-                <button key={inc.id} onClick={() => setEditing(inc.id)} style={{
-                  width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
-                  padding: "11px 14px", background: "#fff", border: "1px solid #ebebeb",
-                  borderRadius: 9, marginBottom: 5, cursor: "pointer", textAlign: "left",
-                }}>
-                  <div>
-                    <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#aaa", marginBottom: 2 }}>{inc.assembly}</div>
-                    <div style={{ fontSize: 13.5, fontFamily: "'Noto Serif JP', serif", color: "#1a1a1a" }}>{inc.name || "氏名未設定"}</div>
-                    <div style={{ fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#bbb", marginTop: 2 }}>{inc.party || "政党未設定"}</div>
-                  </div>
-                  <Icon type="edit" size={14} color="#ccc" />
-                </button>
-              ))}
-            </GroupBlock>
-          ))}
-        </GroupBlock>
-      ))}
+
+      {sortMode === "area" ? (
+        Object.entries(byPref).sort(([a], [b]) => sortByPref(a, b)).map(([pref, cities]) => (
+          <GroupBlock key={pref} label={pref} count={Object.values(cities).flat().length}>
+            {Object.entries(cities).sort(([a], [b]) => a.localeCompare(b, "ja")).map(([city, incs]) => (
+              <GroupBlock key={city} label={city} count={incs.length}>
+                {incs.map(inc => <IncumbentItem key={inc.id} inc={inc} />)}
+              </GroupBlock>
+            ))}
+          </GroupBlock>
+        ))
+      ) : (
+        incumbents.map(inc => <IncumbentItem key={inc.id} inc={inc} />)
+      )}
       <FixedAddButton label="現職議員を追加" onClick={add} />
     </div>
   );
