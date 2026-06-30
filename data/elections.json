@@ -178,5 +178,15 @@
     "announcementDate": "2026-07-05",
     "electionDate": "2026-07-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782782983541",
+    "prefecture": "埼玉県",
+    "city": "東松山市",
+    "name": "東松山市長選挙",
+    "type": "市長",
+    "announcementDate": "2026-07-05",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
