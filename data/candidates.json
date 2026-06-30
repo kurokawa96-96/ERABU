@@ -1111,5 +1111,17 @@
     "sns": {
       "facebook": "https://www.facebook.com/yoichi.kodama"
     }
+  },
+  {
+    "id": "c1782791213812",
+    "electionId": "e1782791128520",
+    "name": "森　大輝",
+    "party": "",
+    "tagline": "",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "4a0o5d590sx61sxtrjmsjh",
+    "sns": {}
   }
 ]
