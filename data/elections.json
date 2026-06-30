@@ -155,8 +155,8 @@
     "city": "田川市",
     "name": "田川市議会議員補欠選挙",
     "type": "市議会議員",
-    "announcementDate": "",
-    "electionDate": "",
+    "announcementDate": "2026-07-07",
+    "electionDate": "0026-07-12",
     "status": "upcoming"
   },
   {
@@ -165,8 +165,8 @@
     "city": "安堵町",
     "name": "安堵町議会議員補欠選挙",
     "type": "町議会議員",
-    "announcementDate": "",
-    "electionDate": "",
+    "announcementDate": "2026-07-07",
+    "electionDate": "2026-07-12",
     "status": "upcoming"
   }
 ]
