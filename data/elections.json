@@ -348,5 +348,15 @@
     "announcementDate": "2026-07-05",
     "electionDate": "2026-07-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782820506453",
+    "prefecture": "鳥取県",
+    "city": "岩美町",
+    "name": "岩美町議会議員選挙",
+    "type": "町議会議院",
+    "announcementDate": "2026-07-07",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
