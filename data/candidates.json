@@ -1424,5 +1424,19 @@
     "policies": [],
     "editToken": "qv1bmnqq6hfdqy5ed2ivma",
     "sns": {}
+  },
+  {
+    "id": "c1782820887729",
+    "electionId": "e1782820813725",
+    "name": "高千穂　有昭",
+    "party": "無所属",
+    "tagline": "",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "wy03zz0wyhs589tufec6o",
+    "sns": {
+      "facebook": "https://www.facebook.com/ariakl.takachiho/?locale=ja_JP"
+    }
   }
 ]
