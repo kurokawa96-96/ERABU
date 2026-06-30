@@ -1178,5 +1178,69 @@
       "facebook": "https://www.facebook.com/t.sakamura",
       "x": "https://x.com/OShNLnsuF6T1Lwh"
     }
+  },
+  {
+    "id": "c1782793061703",
+    "electionId": "e1782792997683",
+    "name": "森　ゆうき",
+    "party": "無所属",
+    "tagline": "49歳　男　新人　前柴田町議会議員",
+    "message": "",
+    "profile": "\n柴田町立槻木小学校\n柴田町立槻木中学校\n宮城県立柴田高等学校（野球部）\n宮城中央理容美容専門学校\n理容店弟子入り\n理容もり3代目店主\nさくら青年会議所副理事長\n柴田町交通指導隊隊長\n柴田町議会議員\n柴田町議会議員辞職\n\n実績\n2017年に柴田町議会議員選挙に立候補し当選。柴田球場のネーミングライツやテレビ回覧板、各種証明書等のコンビニ交付などを一般質問で取り上げ実現。その後柴田町監査委員を務め、2026年、柴田町議会議員を3期務めさせていただき辞職、柴田町長へ立候補を決意。",
+    "policies": [
+      {
+        "icon": "welfare",
+        "label": "やさしい行政",
+        "issue": "誰一人取り残さないまちづくり",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "childcare",
+        "label": "子ども・教育・子育て",
+        "issue": "産み育て、学び、挑戦できる町へ",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "participation",
+        "label": "徹底した現場主義の町政",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "environment",
+        "label": "地域を元気に",
+        "issue": "笑顔で人がつながる町へ",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "environment",
+        "label": "スポーツ都市として進化",
+        "issue": "スポーツで町を元気に",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "participation",
+        "label": "シバタプライド",
+        "issue": "柴田町を愛する気持ち",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      }
+    ],
+    "editToken": "qoh02vyel8xgyla447ca8",
+    "sns": {
+      "facebook": "https://www.facebook.com/yuki.mori.96?mibextid=wwXIfr&rdid=5yl3VTQMUYFWO8vn&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1QQi1KSNYw%2F%3Fmibextid%3DwwXIfr",
+      "other": "https://line.me/ti/p/@988kbily"
+    }
   }
 ]
