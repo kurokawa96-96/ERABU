@@ -228,5 +228,15 @@
     "announcementDate": "2026-07-07",
     "electionDate": "2026-07-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782790549305",
+    "prefecture": "神奈川県",
+    "city": "山北町",
+    "name": "山北町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-07-07",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
