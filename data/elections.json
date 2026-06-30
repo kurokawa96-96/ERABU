@@ -148,5 +148,15 @@
     "announcementDate": "",
     "electionDate": "",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782779653361",
+    "prefecture": "福岡県",
+    "city": "田川市",
+    "name": "田川市議会議員補欠選挙",
+    "type": "市議会議員",
+    "announcementDate": "",
+    "electionDate": "",
+    "status": "upcoming"
   }
 ]
