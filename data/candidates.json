@@ -1271,5 +1271,48 @@
       "instagram": "https://www.instagram.com/kato_mombetsu",
       "youtube": "https://www.youtube.com/channel/UC5kn6zdCqATI5yZ0KpQHj2Q"
     }
+  },
+  {
+    "id": "c1782794410325",
+    "electionId": "e1782794300778",
+    "name": "山谷　ひろこ",
+    "party": "無所属",
+    "tagline": "69歳　女　新人　大鰐町議会議員",
+    "message": "子どもからお年寄りまでひとりひとりが大鰐町に安心して暮らせるよう、幸せづくりの仕掛け人として奮闘しています。\n\n子どもたちに何を継承していくのか…\n私たち大人には明るい未来へと担ぐ責務があります。\n\n町の「大鰐町振興計画」で公開しているアンケート調査では、約8割のみなさんが自然が豊かな大鰐町に愛着を持っています。また定住意向についても、7割以上の方が定住したいと思っています。もっと住みよく、より良い町づくりにはみなさんの声が必要です。\n\n一緒につくっていきましょう。\n",
+    "profile": "国保税軽減のため資産割の廃止を要望\n令和5年度から廃止されました\n\n 在宅介護世帯への家族介護慰労金を拡充してほしいと要望\n令和6年度から要介護3以上から対象となりました。また介護用品支給サービスの支給限度が5万円から6万円に増額になりました\n\n 副食費の無償化を要望\n令和7年4月から、認定保育園・保育所などの大鰐町に住む全ての子どもの副食費が町独自の事業として無償化されました\n\n ０歳〜２歳児までの保育料の無償化を要望\n令和8年4月から、大鰐町に住む０歳児から２歳児までの保育料が無償化され保育料の完全無償化が実現しました\n\n 空き家解体補助金\n一件あたり300,000円であったが、令和8年4月から500,000円に増額されました\n",
+    "policies": [
+      {
+        "icon": "education",
+        "label": "子育て・教育の充実",
+        "issue": "食と健康を預かる\nベースとなるのが家庭\nあたらしい世代が\n健やかに育める地域に",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "economy",
+        "label": "地域活性化の支援",
+        "issue": "農業、産業、観光など\nこれからを見据えた\n仕組みづくりを",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "welfare",
+        "label": "婚活事業の推進",
+        "issue": "大鰐町での新たな出会いや\n夫婦の新生活に向けた\n支援の確率へ",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      }
+    ],
+    "editToken": "6klvwwym66t95dgy4gwdwv",
+    "sns": {
+      "hp": "https://yamaya-hiroko.ivalue.info/#profile",
+      "facebook": "https://www.facebook.com/iibyon.owani",
+      "x": "https://x.com/iibyon_owani8",
+      "instagram": "https://www.instagram.com/iibyon.owani",
+      "youtube": "https://www.youtube.com/@山谷ひろこ"
+    }
   }
 ]
