@@ -328,5 +328,15 @@
     "announcementDate": "2026-07-07",
     "electionDate": "",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782794300778",
+    "prefecture": "青森県",
+    "city": "大鰐町",
+    "name": "大鰐町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-07-07",
+    "electionDate": "2026-07-12",
+    "status": "upcoming"
   }
 ]
