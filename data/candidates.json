@@ -346,7 +346,9 @@
     "message": "",
     "profile": "",
     "policies": [],
-    "editToken": "fe79k9ssbjbt2jrcpzg2v"
+    "editToken": "fe79k9ssbjbt2jrcpzg2v",
+    "sns": {},
+    "result": "won"
   },
   {
     "id": "c1781955778797",
