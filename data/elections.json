@@ -428,5 +428,15 @@
     "announcementDate": "2026-07-26",
     "electionDate": "2026-08-02",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782886888571",
+    "prefecture": "富山県",
+    "city": "朝日町",
+    "name": "朝日町議会議員選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-07-28",
+    "electionDate": "2026-08-02",
+    "status": "upcoming"
   }
 ]
