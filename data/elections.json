@@ -438,5 +438,15 @@
     "announcementDate": "2026-07-28",
     "electionDate": "2026-08-02",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782886996551",
+    "prefecture": "富山県",
+    "city": "小矢部市",
+    "name": "小矢部市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-07-26",
+    "electionDate": "2026-08-02",
+    "status": "upcoming"
   }
 ]
