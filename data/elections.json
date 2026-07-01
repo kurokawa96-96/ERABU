@@ -398,5 +398,15 @@
     "announcementDate": "2026-07-28",
     "electionDate": "2026-08-02",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782886559212",
+    "prefecture": "富山県",
+    "city": "入善町",
+    "name": "入善町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-07-28",
+    "electionDate": "2026-08-02",
+    "status": "upcoming"
   }
 ]
