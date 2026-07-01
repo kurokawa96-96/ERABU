@@ -153,5 +153,144 @@
     "billVotes": [],
     "promises": [],
     "activityReports": []
+  },
+  {
+    "id": "i1782867398978",
+    "name": "岸本　さとこ",
+    "party": "無所属",
+    "prefecture": "",
+    "city": "",
+    "assembly": "",
+    "term": "2026年 - 現在",
+    "tagline": "51歳 (女) 現職 杉並区長",
+    "message": "",
+    "attendanceRate": 0,
+    "speechCount": 0,
+    "questionCount": 0,
+    "billVotes": [],
+    "promises": [
+      {
+        "title": "子ども・教育NEXT！",
+        "status": "未着手",
+        "evidence": ""
+      },
+      {
+        "title": "暮らし・福祉NEXT！",
+        "status": "未着手",
+        "evidence": ""
+      },
+      {
+        "title": "防災NEXT！",
+        "status": "未着手",
+        "evidence": ""
+      },
+      {
+        "title": "環境・まちづくりNEXT！",
+        "status": "未着手",
+        "evidence": ""
+      },
+      {
+        "title": "地域経済・文化NEXT！",
+        "status": "未着手",
+        "evidence": ""
+      },
+      {
+        "title": "対話の区政NEXT！",
+        "status": "未着手",
+        "evidence": ""
+      }
+    ],
+    "activityReports": []
+  },
+  {
+    "id": "i1782867518278",
+    "name": "松原　としお",
+    "party": "無所属",
+    "prefecture": "",
+    "city": "",
+    "assembly": "",
+    "term": "2026年 - 現在",
+    "tagline": "74歳 (男) 現職 狛江市長",
+    "message": "",
+    "attendanceRate": 0,
+    "speechCount": 0,
+    "questionCount": 0,
+    "billVotes": [],
+    "promises": [
+      {
+        "title": "新たな物価高対策で市民生活と地域経済を守ります",
+        "status": "未着手",
+        "evidence": ""
+      },
+      {
+        "title": "「生きがい」を感じられるまちへ。健康・交流・にぎわいを広げます",
+        "status": "未着手",
+        "evidence": ""
+      },
+      {
+        "title": "高齢者・単身世帯にやさしいまちづくり、地域の支え合いを強化",
+        "status": "未着手",
+        "evidence": ""
+      },
+      {
+        "title": "共働き家庭を応援、「小1の壁」対策をさらに推進",
+        "status": "未着手",
+        "evidence": ""
+      },
+      {
+        "title": "多摩川の魅力を生かす、「かわまちづくり」で新たなにぎわい創出",
+        "status": "未着手",
+        "evidence": ""
+      }
+    ],
+    "activityReports": []
+  },
+  {
+    "id": "i1782867594433",
+    "name": "岸本　さとこ",
+    "party": "無所属",
+    "prefecture": "",
+    "city": "",
+    "assembly": "",
+    "term": "2026年 - 現在",
+    "tagline": "51歳 (女) 現職 杉並区長",
+    "message": "",
+    "attendanceRate": 0,
+    "speechCount": 0,
+    "questionCount": 0,
+    "billVotes": [],
+    "promises": [
+      {
+        "title": "子ども・教育NEXT！",
+        "status": "未着手",
+        "evidence": ""
+      },
+      {
+        "title": "暮らし・福祉NEXT！",
+        "status": "未着手",
+        "evidence": ""
+      },
+      {
+        "title": "防災NEXT！",
+        "status": "未着手",
+        "evidence": ""
+      },
+      {
+        "title": "環境・まちづくりNEXT！",
+        "status": "未着手",
+        "evidence": ""
+      },
+      {
+        "title": "地域経済・文化NEXT！",
+        "status": "未着手",
+        "evidence": ""
+      },
+      {
+        "title": "対話の区政NEXT！",
+        "status": "未着手",
+        "evidence": ""
+      }
+    ],
+    "activityReports": []
   }
 ]
