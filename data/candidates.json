@@ -638,7 +638,9 @@
         "budget": ""
       }
     ],
-    "editToken": "auihb2semkmxkbaqnzlk0k"
+    "editToken": "auihb2semkmxkbaqnzlk0k",
+    "sns": {},
+    "result": "close"
   },
   {
     "id": "c1782364566039",
