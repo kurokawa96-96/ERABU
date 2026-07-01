@@ -550,7 +550,9 @@
         "budget": ""
       }
     ],
-    "editToken": "o64eyp9evsmlp09g8gst8"
+    "editToken": "o64eyp9evsmlp09g8gst8",
+    "sns": {},
+    "result": "lost"
   },
   {
     "id": "c1782363453318",
@@ -594,7 +596,9 @@
         "budget": ""
       }
     ],
-    "editToken": "pxpz1nu8dk0tp4z8t9rs6"
+    "editToken": "pxpz1nu8dk0tp4z8t9rs6",
+    "sns": {},
+    "result": "lost"
   },
   {
     "id": "c1782363929907",
