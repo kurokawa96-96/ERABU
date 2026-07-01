@@ -298,7 +298,9 @@
     "message": "",
     "profile": "",
     "policies": [],
-    "editToken": "ci1of01l7kav1pace9xwf"
+    "editToken": "ci1of01l7kav1pace9xwf",
+    "sns": {},
+    "result": "won"
   },
   {
     "id": "c1781955566606",
