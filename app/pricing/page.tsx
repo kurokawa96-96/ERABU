@@ -18,6 +18,7 @@ const PLANS = [
     unit: "円 / 月",
     note: "いつでも解約可能",
     badge: null,
+    url: "https://buy.stripe.com/test_9B6bIT8dW2dhalZ23IcQU01",
   },
   {
     id: "yearly",
@@ -26,6 +27,7 @@ const PLANS = [
     unit: "円 / 年",
     note: "2ヶ月分お得",
     badge: "おすすめ",
+    url: "https://buy.stripe.com/test_9B628jbq8g47alZ4bQcQU00",
   },
 ];
 
@@ -200,9 +202,7 @@ export default function PricingPage() {
                 <li>更新履歴の自動記録</li>
               </ul>
               <button
-                onClick={() => {
-                  alert("準備中です。今しばらくお待ちください。");
-                }}
+                onClick={() => window.location.href = plan.url}
                 style={{
                   width: "100%", marginTop: 16, padding: 13,
                   background: plan.id === "yearly" ? "#1a1a1a" : "#fff",
