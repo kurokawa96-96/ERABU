@@ -468,5 +468,15 @@
     "announcementDate": "2026-08-04",
     "electionDate": "2026-08-09",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782887665071",
+    "prefecture": "北海道",
+    "city": "小樽市",
+    "name": "小樽市長選挙",
+    "type": "市長",
+    "announcementDate": "0026-08-02",
+    "electionDate": "2026-08-09",
+    "status": "upcoming"
   }
 ]
