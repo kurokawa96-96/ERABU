@@ -408,5 +408,15 @@
     "announcementDate": "2026-07-28",
     "electionDate": "2026-08-02",
     "status": "upcoming"
+  },
+  {
+    "id": "e1782886664158",
+    "prefecture": "茨城県",
+    "city": "下妻市",
+    "name": "下妻市長選挙",
+    "type": "市長",
+    "announcementDate": "0006-07-26",
+    "electionDate": "2026-08-02",
+    "status": "upcoming"
   }
 ]
