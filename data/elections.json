@@ -388,5 +388,15 @@
     "announcementDate": "0026-06-14",
     "electionDate": "",
     "status": "past"
+  },
+  {
+    "id": "e1782886377761",
+    "prefecture": "青森県",
+    "city": "鶴田町",
+    "name": "鶴田町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-07-28",
+    "electionDate": "2026-08-02",
+    "status": "upcoming"
   }
 ]
