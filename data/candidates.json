@@ -510,7 +510,9 @@
     "message": "",
     "profile": "",
     "policies": [],
-    "editToken": "sayr5xvc3sa03ljgamtq7xi"
+    "editToken": "sayr5xvc3sa03ljgamtq7xi",
+    "sns": {},
+    "result": "lost"
   },
   {
     "id": "c1782361725579",
