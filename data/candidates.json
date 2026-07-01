@@ -1478,5 +1478,18 @@
     "policies": [],
     "editToken": "ap6yb5irag4xaec08zrn",
     "sns": {}
+  },
+  {
+    "id": "c1782866747765",
+    "electionId": "e001",
+    "name": "三和　ふじよし",
+    "party": "無所属",
+    "tagline": "62歳　男　新人　元五所川原市役所職員　農業",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "ra53q3qytll97q3ikfwsxi",
+    "sns": {},
+    "result": "won"
   }
 ]
