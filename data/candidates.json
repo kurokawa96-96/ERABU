@@ -1547,5 +1547,23 @@
     "policies": [],
     "editToken": "ru8vd98frji27cygq48pks",
     "sns": {}
+  },
+  {
+    "id": "c1782887076907",
+    "electionId": "e1782886996551",
+    "name": "上田　由美子",
+    "party": "無所属",
+    "tagline": "72歳　女　現職　社会保険労務士　行政書士",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "4o85zqdho2n9hlmrijlr3",
+    "sns": {
+      "facebook": "https://www.facebook.com/yumikoueda258",
+      "x": "https://x.com/ymk_ued_jcp",
+      "instagram": "https://www.instagram.com/uedayumiko_official",
+      "youtube": "https://www.youtube.com/@uedayumiko_official",
+      "other": "https://line.me/ti/p/@313ogwbu"
+    }
   }
 ]
