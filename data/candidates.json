@@ -411,7 +411,9 @@
     "message": "",
     "profile": "",
     "policies": [],
-    "editToken": "8l96mtdecicy08g56du8d"
+    "editToken": "8l96mtdecicy08g56du8d",
+    "sns": {},
+    "result": "won"
   },
   {
     "id": "c1782044672423",
@@ -435,7 +437,9 @@
     "message": "",
     "profile": "",
     "policies": [],
-    "editToken": "ext4kco3mrmm88truoovaf"
+    "editToken": "ext4kco3mrmm88truoovaf",
+    "sns": {},
+    "result": "won"
   },
   {
     "id": "c1782046145632",
