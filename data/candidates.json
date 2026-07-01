@@ -311,7 +311,9 @@
     "message": "",
     "profile": "",
     "policies": [],
-    "editToken": "fiz64p5elbd3vhz33bges"
+    "editToken": "fiz64p5elbd3vhz33bges",
+    "sns": {},
+    "result": "won"
   },
   {
     "id": "c1781955626588",
@@ -335,7 +337,9 @@
     "message": "",
     "profile": "",
     "policies": [],
-    "editToken": "e0wl05xvw5kzb8xsp5v83"
+    "editToken": "e0wl05xvw5kzb8xsp5v83",
+    "sns": {},
+    "result": "won"
   },
   {
     "id": "c1781955742054",
