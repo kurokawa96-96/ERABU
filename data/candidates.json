@@ -1621,5 +1621,17 @@
       "hp": "http://www.hazama-toshiya.jp/",
       "facebook": "https://www.facebook.com/otaru.hazama.toshiya/"
     }
+  },
+  {
+    "id": "c1782960475979",
+    "electionId": "e001",
+    "name": "テスト候補",
+    "party": "無所属",
+    "tagline": "",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "2hflmx48mkfk5kleohltbj",
+    "sns": {}
   }
 ]
