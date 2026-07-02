@@ -364,7 +364,9 @@ function CandidateForm({ candidate, elections, onSave, onCancel, onDelete }: {
           <button onClick={() => {
             const newIncumbent = {
               id: `i${Date.now()}`, name: data.name, party: data.party,
-              prefecture: "", city: "", assembly: "",
+              prefecture: elections.find(e => e.id === data.electionId)?.prefecture ?? "",
+city: elections.find(e => e.id === data.electionId)?.city ?? "",
+assembly: elections.find(e => e.id === data.electionId)?.type ?? "",
               term: new Date().getFullYear() + "年 - 現在",
               tagline: data.tagline ?? "", message: data.message ?? "",
               attendanceRate: 0, speechCount: 0, questionCount: 0, billVotes: [],
