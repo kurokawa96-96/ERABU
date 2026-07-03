@@ -27,7 +27,7 @@ const PLANS = [
     unit: "円 / 年",
     note: "2ヶ月分お得",
     badge: "おすすめ",
-    url: "https://buy.stripe.com/test_9B628jbq8g47alZ4bQcQU00",
+    url: "https://buy.stripe.com/9B6bIT8dW2dhalZ23IcQU01",
   },
 ];
 
