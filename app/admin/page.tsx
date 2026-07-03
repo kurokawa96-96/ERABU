@@ -160,8 +160,8 @@ function Toast({ msg, onDone }: { msg: string; onDone: () => void }) {
   );
 }
 
-function GroupBlock({ label, count, children }: { label: string; count: number; children: React.ReactNode }) {
-  const [open, setOpen] = useState(true);
+function GroupBlock({ label, count, children, defaultOpen = true }: { label: string; count: number; children: React.ReactNode; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen);
   return (
     <div style={{ marginBottom: 12 }}>
       <button onClick={() => setOpen(!open)} style={{
@@ -550,7 +550,7 @@ function IncumbentForm({ incumbent, onSave, onCancel, onDelete }: {
           <Field label="所属政党"><input style={inputStyle} value={data.party} onChange={e => up("party", e.target.value)} /></Field>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <Field label="役職"><input style={inputStyle} value={data.assembly} onChange={e => up("assembly", e.target.value)} placeholder="例：中野区長" /></Field>
+          <Field label="役職"><input style={inputStyle} value={data.assembly} onChange={e => up("assembly", e.target.value)} placeholder="例：中野区長 / 衆議院議員" /></Field>
           <Field label="任期"><input style={inputStyle} value={data.term} onChange={e => up("term", e.target.value)} placeholder="例：2018年 - 現在" /></Field>
         </div>
       </div>
@@ -910,7 +910,7 @@ function CandidatesTab({ password, onToast, elections }: {
 
       {sortMode === "area" ? (
   Object.entries(grouped).sort(([a], [b]) => sortByPref(a, b)).map(([pref, elMap]) => (
-    <GroupBlock key={pref} label={pref} count={Object.values(elMap).flat().length}>
+    <GroupBlock key={pref} label={pref} count={Object.values(elMap).flat().length} defaultOpen={false}>
       {Object.entries(elMap).map(([elName, cands]) => (
         <GroupBlock key={elName} label={elName} count={cands.length}>
           {cands.map(c => <CandidateItem key={c.id} c={c} />)}
@@ -925,6 +925,10 @@ function CandidatesTab({ password, onToast, elections }: {
     </div>
   );
 }
+
+// 国政（衆議院・参議院）かどうかを役職名から判定する
+// TODO: assemblyフィールドの入力規則が確定次第、この判定ロジックを見直すこと
+const isNationalAssembly = (assembly: string) => /衆議院|参議院/.test(assembly ?? "");
 
 function IncumbentsTab({ password, onToast }: { password: string; onToast: (m: string) => void }) {
   const [incumbents, setIncumbents] = useState<Incumbent[]>([]);
@@ -1012,7 +1016,19 @@ function IncumbentsTab({ password, onToast }: { password: string; onToast: (m: s
     );
   }
 
-  const byPref = incumbents.reduce<Record<string, Record<string, Incumbent[]>>>((acc, inc) => {
+  // 国政（衆議院・参議院）と地方（都道府県議会以下）に大分類したうえで、
+  // 国政は都道府県、地方は都道府県→市区町村の順にドリルダウンする
+  const nationalIncumbents = incumbents.filter(inc => isNationalAssembly(inc.assembly));
+  const localIncumbents = incumbents.filter(inc => !isNationalAssembly(inc.assembly));
+
+  const nationalByPref = nationalIncumbents.reduce<Record<string, Incumbent[]>>((acc, inc) => {
+    const pref = inc.prefecture || "未設定";
+    if (!acc[pref]) acc[pref] = [];
+    acc[pref].push(inc);
+    return acc;
+  }, {});
+
+  const localByPref = localIncumbents.reduce<Record<string, Record<string, Incumbent[]>>>((acc, inc) => {
     const pref = inc.prefecture || "未設定";
     const city = inc.city || "未設定";
     if (!acc[pref]) acc[pref] = {};
@@ -1046,15 +1062,26 @@ function IncumbentsTab({ password, onToast }: { password: string; onToast: (m: s
       </div>
 
       {sortMode === "area" ? (
-        Object.entries(byPref).sort(([a], [b]) => sortByPref(a, b)).map(([pref, cities]) => (
-          <GroupBlock key={pref} label={pref} count={Object.values(cities).flat().length}>
-            {Object.entries(cities).sort(([a], [b]) => a.localeCompare(b, "ja")).map(([city, incs]) => (
-              <GroupBlock key={city} label={city} count={incs.length}>
+        <>
+          <GroupBlock label="国政" count={nationalIncumbents.length} defaultOpen={false}>
+            {Object.entries(nationalByPref).sort(([a], [b]) => sortByPref(a, b)).map(([pref, incs]) => (
+              <GroupBlock key={pref} label={pref} count={incs.length} defaultOpen={false}>
                 {incs.map(inc => <IncumbentItem key={inc.id} inc={inc} />)}
               </GroupBlock>
             ))}
           </GroupBlock>
-        ))
+          <GroupBlock label="地方" count={localIncumbents.length} defaultOpen={false}>
+            {Object.entries(localByPref).sort(([a], [b]) => sortByPref(a, b)).map(([pref, cities]) => (
+              <GroupBlock key={pref} label={pref} count={Object.values(cities).flat().length} defaultOpen={false}>
+                {Object.entries(cities).sort(([a], [b]) => a.localeCompare(b, "ja")).map(([city, incs]) => (
+                  <GroupBlock key={city} label={city} count={incs.length}>
+                    {incs.map(inc => <IncumbentItem key={inc.id} inc={inc} />)}
+                  </GroupBlock>
+                ))}
+              </GroupBlock>
+            ))}
+          </GroupBlock>
+        </>
       ) : (
         incumbents.map(inc => <IncumbentItem key={inc.id} inc={inc} />)
       )}
