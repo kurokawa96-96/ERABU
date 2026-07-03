@@ -18,7 +18,7 @@ const PLANS = [
     unit: "円 / 月",
     note: "いつでも解約可能",
     badge: null,
-    url: "https://buy.stripe.com/test_9B6bIT8dW2dhalZ23IcQU01",
+    url: "https://buy.stripe.com/9B628jbq8g47alZ4bQcQU00",
   },
   {
     id: "yearly",
