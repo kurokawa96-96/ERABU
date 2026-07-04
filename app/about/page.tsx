@@ -184,29 +184,6 @@ export default function AboutPage() {
           </div>
         </Section>
 
-       {/* お問い合わせ */}
-<Section label="CONTACT">
-  <Card>
-    <div style={{ fontSize: 12, fontFamily: "'Noto Sans JP', sans-serif", color: "#555", lineHeight: 1.8, marginBottom: 14 }}>
-      掲載申請・情報の誤り報告・データ利用のご相談など、お気軽にご連絡くださいませ。
-    </div>
-    <a
-    　href="https://docs.google.com/forms/d/e/1FAIpQLSejDYoL3o8IWFPsREN3f5h1TiNbFaLnjfzO8vJs4Bg8Uis9bQ/viewform" 
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        display: "flex", alignItems: "center", justifyContent: "center", gap: 7,
-        width: "100%", padding: 12, background: "#1a1a1a",
-        color: "#fff", borderRadius: 9, textDecoration: "none",
-        fontSize: 13, fontFamily: "'Noto Sans JP', sans-serif",
-        letterSpacing: "0.05em", boxSizing: "border-box",
-      }}
-    >
-      お問い合わせフォームを開く
-    </a>
-  </Card>
-</Section>
-
       </div>
 
       <div style={{ textAlign: "center", padding: "0 0 32px", fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#d0d0d0", letterSpacing: "0.12em" }}>
