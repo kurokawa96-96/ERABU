@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP, Noto_Serif_JP, Cormorant_Garamond } from "next/font/google";
+import "./globals.css";
 
 const notoSans = Noto_Sans_JP({
   subsets: ["latin"],
@@ -39,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="ja"
       className={`${notoSans.variable} ${notoSerif.variable} ${cormorant.variable}`}
     >
-      <body style={{ margin: 0, padding: 0, background: "#f5f4f0" }}>
+      <body style={{ margin: 0, padding: 0 }}>
         {children}
       </body>
     </html>
