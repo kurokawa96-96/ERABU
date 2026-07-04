@@ -18,6 +18,7 @@ function Icon({ type, size = 18, color = "#1a1a1a" }: { type: string; size?: num
     bookmark: <svg {...p}><path d="M5 2h10v16l-5-4-5 4V2Z" stroke={color} strokeWidth="1.4" strokeLinejoin="round"/></svg>,
     location: <svg {...p}><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5Z" stroke={color} strokeWidth="1.4"/><circle cx="10" cy="7" r="2" stroke={color} strokeWidth="1.3"/></svg>,
     info: <svg {...p}><circle cx="10" cy="10" r="7.5" stroke={color} strokeWidth="1.4"/><path d="M10 9v5M10 6.5v.5" stroke={color} strokeWidth="1.4" strokeLinecap="round"/></svg>,
+    mail: <svg {...p}><rect x="2.5" y="4.5" width="15" height="11" rx="1.5" stroke={color} strokeWidth="1.4"/><path d="M3 5.5l7 5.5 7-5.5" stroke={color} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>,
   };
   return icons[type] ?? null;
 }
@@ -229,6 +230,7 @@ function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => void }) 
     { icon: "calendar", label: "選挙カレンダー", href: "/calendar" },
     { icon: "location", label: "投票所を探す", href: "/polling" },
     { icon: "bookmark", label: "保存した候補者", href: "/saved" },
+    { icon: "mail", label: "お問い合わせ", href: "https://docs.google.com/forms/d/e/1FAIpQLSejDYoL3o8IWFPsREN3f5h1TiNbFaLnjfzO8vJs4Bg8Uis9bQ/viewform", external: true },
     { icon: "info", label: "ERABUについて", href: "/about" },
   ];
 
@@ -252,8 +254,8 @@ function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => void }) 
           </button>
         </div>
         <div style={{ height: 1, background: "#f0f0f0", margin: "0 22px 6px" }} />
-        {items.map(item => (
-          <Link key={item.href} href={item.href} onClick={onClose} style={{ textDecoration: "none" }}>
+        {items.map(item => {
+          const rowContent = (
             <div style={{ display: "flex", alignItems: "center", gap: 13, padding: "15px 22px", cursor: "pointer" }}
               onMouseEnter={e => (e.currentTarget.style.background = "#fafaf8")}
               onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
@@ -261,8 +263,17 @@ function MenuOverlay({ open, onClose }: { open: boolean; onClose: () => void }) 
               <Icon type={item.icon} size={17} color="#999" />
               <span style={{ fontSize: 13.5, fontFamily: "'Noto Sans JP', sans-serif", color: "#2a2a2a" }}>{item.label}</span>
             </div>
-          </Link>
-        ))}
+          );
+          return item.external ? (
+            <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer" onClick={onClose} style={{ textDecoration: "none" }}>
+              {rowContent}
+            </a>
+          ) : (
+            <Link key={item.href} href={item.href} onClick={onClose} style={{ textDecoration: "none" }}>
+              {rowContent}
+            </Link>
+          );
+        })}
         <div style={{ flex: 1 }} />
         <div style={{ padding: "18px 22px", fontSize: 10, fontFamily: "'Noto Sans JP', sans-serif", color: "#ccc", letterSpacing: "0.12em" }}>
           分かるから、選べる
