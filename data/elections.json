@@ -508,5 +508,15 @@
     "announcementDate": "2026-08-04",
     "electionDate": "2026-08-09",
     "status": "upcoming"
+  },
+  {
+    "id": "e1783384726730",
+    "prefecture": "長野県",
+    "city": "長野県",
+    "name": "長野県知事選挙",
+    "type": "県知事",
+    "announcementDate": "2026-07-23",
+    "electionDate": "2026-08-09",
+    "status": "upcoming"
   }
 ]
