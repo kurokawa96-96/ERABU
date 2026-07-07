@@ -548,5 +548,15 @@
     "announcementDate": "2026-08-04",
     "electionDate": "2026-08-09",
     "status": "upcoming"
+  },
+  {
+    "id": "e1783387592865",
+    "prefecture": "長野県",
+    "city": "長野県",
+    "name": "長野県議会議員補欠選挙",
+    "type": "県議会議員",
+    "announcementDate": "2026-07-31",
+    "electionDate": "2026-08-09",
+    "status": "upcoming"
   }
 ]
