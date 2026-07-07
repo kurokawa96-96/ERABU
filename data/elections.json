@@ -498,5 +498,15 @@
     "announcementDate": "2026-08-04",
     "electionDate": "2026-08-09",
     "status": "upcoming"
+  },
+  {
+    "id": "e1783384224502",
+    "prefecture": "長野県",
+    "city": "泰阜村",
+    "name": "泰阜村長選挙",
+    "type": "町長",
+    "announcementDate": "2026-08-04",
+    "electionDate": "2026-08-09",
+    "status": "upcoming"
   }
 ]
