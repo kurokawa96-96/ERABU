@@ -488,5 +488,15 @@
     "announcementDate": "2026-08-02",
     "electionDate": "2026-08-09",
     "status": "upcoming"
+  },
+  {
+    "id": "e1783384033794",
+    "prefecture": "埼玉県",
+    "city": "寄居町",
+    "name": "寄居町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-08-04",
+    "electionDate": "2026-08-09",
+    "status": "upcoming"
   }
 ]
