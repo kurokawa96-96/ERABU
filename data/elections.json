@@ -618,5 +618,15 @@
     "announcementDate": "2026-08-09",
     "electionDate": "2026-08-16",
     "status": "upcoming"
+  },
+  {
+    "id": "e1783569165086",
+    "prefecture": "茨城県",
+    "city": "城里町",
+    "name": "城里町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-08-18",
+    "electionDate": "2026-08-23",
+    "status": "upcoming"
   }
 ]
