@@ -718,5 +718,15 @@
     "announcementDate": "2026-08-13",
     "electionDate": "2026-08-30",
     "status": "upcoming"
+  },
+  {
+    "id": "e1783577529148",
+    "prefecture": "岡山県",
+    "city": "新庄村",
+    "name": "新庄村長選挙",
+    "type": "村長",
+    "announcementDate": "2026-08-25",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
