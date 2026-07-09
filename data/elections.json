@@ -678,5 +678,15 @@
     "announcementDate": "2026-08-28",
     "electionDate": "2026-08-23",
     "status": "upcoming"
+  },
+  {
+    "id": "e1783575189603",
+    "prefecture": "岐阜県",
+    "city": "高山市",
+    "name": "高山市町選挙",
+    "type": "市長",
+    "announcementDate": "2026-08-23",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
