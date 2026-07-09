@@ -638,5 +638,25 @@
     "announcementDate": "2026-08-18",
     "electionDate": "2026-08-23",
     "status": "upcoming"
+  },
+  {
+    "id": "e1783569709402",
+    "prefecture": "北海道",
+    "city": "余市町",
+    "name": "余市町長選挙",
+    "type": "町長",
+    "announcementDate": "0026-08-18",
+    "electionDate": "2026-08-23",
+    "status": "upcoming"
+  },
+  {
+    "id": "e1783574164668",
+    "prefecture": "北海道",
+    "city": "余市町",
+    "name": "余市町議会議員補欠選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-08-18",
+    "electionDate": "2026-08-23",
+    "status": "upcoming"
   }
 ]
