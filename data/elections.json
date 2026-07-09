@@ -708,5 +708,15 @@
     "announcementDate": "2026-08-25",
     "electionDate": "2026-08-30",
     "status": "upcoming"
+  },
+  {
+    "id": "e1783576754567",
+    "prefecture": "香川県",
+    "city": "香川県",
+    "name": "香川県知事選挙",
+    "type": "県知事",
+    "announcementDate": "2026-08-13",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
