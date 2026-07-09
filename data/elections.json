@@ -628,5 +628,15 @@
     "announcementDate": "2026-08-18",
     "electionDate": "2026-08-23",
     "status": "upcoming"
+  },
+  {
+    "id": "e1783569592801",
+    "prefecture": "新潟県",
+    "city": "聖籠町",
+    "name": "聖籠町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-08-18",
+    "electionDate": "2026-08-23",
+    "status": "upcoming"
   }
 ]
