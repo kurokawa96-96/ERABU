@@ -160,7 +160,7 @@ function Toast({ msg, onDone }: { msg: string; onDone: () => void }) {
   );
 }
 
-function GroupBlock({ label, count, children, defaultOpen = true }: { label: string; count: number; children: React.ReactNode; defaultOpen?: boolean }) {
+function GroupBlock({ label, count, children, defaultOpen = false }: { label: string; count: number; children: React.ReactNode; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div style={{ marginBottom: 12 }}>
