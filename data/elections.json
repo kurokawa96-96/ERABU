@@ -688,5 +688,15 @@
     "announcementDate": "2026-08-23",
     "electionDate": "2026-08-30",
     "status": "upcoming"
+  },
+  {
+    "id": "e1783575974462",
+    "prefecture": "新潟県",
+    "city": "粟島浦村",
+    "name": "粟島浦長選挙",
+    "type": "町長",
+    "announcementDate": "2026-08-25",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
