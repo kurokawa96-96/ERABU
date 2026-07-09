@@ -698,5 +698,15 @@
     "announcementDate": "2026-08-25",
     "electionDate": "2026-08-30",
     "status": "upcoming"
+  },
+  {
+    "id": "e1783576659175",
+    "prefecture": "福岡県",
+    "city": "粕谷町",
+    "name": "粕谷町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-08-25",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
