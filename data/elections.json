@@ -728,5 +728,15 @@
     "announcementDate": "2026-08-25",
     "electionDate": "2026-08-30",
     "status": "upcoming"
+  },
+  {
+    "id": "e1783577943996",
+    "prefecture": "福岡県",
+    "city": "鞍手町",
+    "name": "鞍手町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-08-25",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
