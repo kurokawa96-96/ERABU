@@ -798,5 +798,15 @@
     "announcementDate": "2026-08-23",
     "electionDate": "2026-08-30",
     "status": "upcoming"
+  },
+  {
+    "id": "e1784265166252",
+    "prefecture": "香川県",
+    "city": "香川県",
+    "name": "香川県議会議員補欠選挙",
+    "type": "県議会議員",
+    "announcementDate": "2026-08-21",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
