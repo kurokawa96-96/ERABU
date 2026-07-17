@@ -758,5 +758,15 @@
     "announcementDate": "2026-08-25",
     "electionDate": "2026-08-30",
     "status": "upcoming"
+  },
+  {
+    "id": "e1784262950512",
+    "prefecture": "千葉県",
+    "city": "長柄町",
+    "name": "長柄町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-08-25",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
