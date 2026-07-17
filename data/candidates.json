@@ -2691,5 +2691,19 @@
     "policies": [],
     "editToken": "yocl205lyt9ks4nvo6yp2d",
     "sns": {}
+  },
+  {
+    "id": "c1784264620781",
+    "electionId": "e1784263236257",
+    "name": "さかべ　勝彦",
+    "party": "日本共産党",
+    "tagline": "６８歳　男　元職　元高砂市議会議員",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "4zi1c6etsty9owucbzv81g",
+    "sns": {
+      "facebook": "https://www.facebook.com/people/坂辺-勝彦/100007912459034/"
+    }
   }
 ]
