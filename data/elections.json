@@ -768,5 +768,15 @@
     "announcementDate": "2026-08-25",
     "electionDate": "2026-08-30",
     "status": "upcoming"
+  },
+  {
+    "id": "e1784263099120",
+    "prefecture": "岡山県",
+    "city": "新庄村",
+    "name": "新地町議会議員選挙",
+    "type": "村議会議員",
+    "announcementDate": "2026-08-25",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
