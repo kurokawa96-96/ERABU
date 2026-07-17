@@ -778,5 +778,15 @@
     "announcementDate": "2026-08-25",
     "electionDate": "2026-08-30",
     "status": "upcoming"
+  },
+  {
+    "id": "e1784263155852",
+    "prefecture": "千葉県",
+    "city": "長柄町",
+    "name": "長柄町議会議員補欠選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-08-25",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
