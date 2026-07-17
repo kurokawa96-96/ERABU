@@ -2679,5 +2679,17 @@
     "sns": {
       "hp": "https://yokh.jp/"
     }
+  },
+  {
+    "id": "c1784264440831",
+    "electionId": "e1784263236257",
+    "name": "大西　ゆき",
+    "party": "日本共産党",
+    "tagline": "６０歳　女　現職",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "yocl205lyt9ks4nvo6yp2d",
+    "sns": {}
   }
 ]
