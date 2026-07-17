@@ -2553,5 +2553,86 @@
     "policies": [],
     "editToken": "3l8sc356mjei5g7si45gvo",
     "sns": {}
+  },
+  {
+    "id": "c1784263287590",
+    "electionId": "e1784263236257",
+    "name": "森　ひでき",
+    "party": "公明党",
+    "tagline": "６２歳　男　現職　公明党県遊説局次長",
+    "message": "",
+    "profile": "１963年12月1日　長崎県長崎市生まれ\n\n1976年3月　長崎市立西町小学校卒業\n\n１979年3月　長崎市立緑ヶ丘中学校卒業\n\n 1982年3月　長崎県立長崎工業高校　造船科　卒業\n\n1982年4月　不動技研工業(株)　設計製図\n\n1989年1月　 (株)コスモ技研　設計製図\n\n1991年4月　 　登英機設(株)　設計製図\n\n2005年7月　 森設計設立、2010年5月森設計撤退 \n\n2010年9月　 高砂市議初当選\n\n2014年9月　 高砂市議（２期目）当選\n\n2018年9月　 高砂市議（３期目）当選\n\n2021年9月　建設環境経済常任委員会　委員長\n\n2021年9月　広域ごみ処理施設対策特別委員会　副委員長\n\n \nその他　\n\n2020年9月　副議長\n\n2018年9月　広域ごみ処理施設対策特別委員会　委員長\n\n2018年9月　総務常任委員会　委員長\n\n2017年9月　総務常任委員会　委員長\n\n2014年10月　H25年度　決算特別委員会　委員長",
+    "policies": [
+      {
+        "icon": "welfare",
+        "label": "お年寄りの健康と生きがいづくりの施策の充実を図ります",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "environment",
+        "label": "地域コミュニティの活性化で災害に強い支えあうまちづくりに取り組みます",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "childcare",
+        "label": "子育て支援、子育て世代の施策の充実を図ります",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "education",
+        "label": "青少年の健全育成と人間豊かな教育を推進します",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "economy",
+        "label": "若者就職支援をはじめとする雇用対策について取り組みます",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "environment",
+        "label": "球温暖化対策など再生可能エネルギー推進について取り組みます",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "reform",
+        "label": "行政と企業と地域の良好な関係を構築・推進します",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      },
+      {
+        "icon": "transport",
+        "label": "R曽根駅周辺整備を推進します",
+        "issue": "",
+        "solution": "",
+        "deadline": "",
+        "budget": ""
+      }
+    ],
+    "editToken": "bv5tw3vdvyty352zn1si3d",
+    "sns": {
+      "hp": "https://www.komei.or.jp/km/takasago-mori-hideki/?doing_wp_cron=1784263371.5621390342712402343750",
+      "facebook": "https://www.facebook.com/hideki.mori.77",
+      "x": "https://x.com/h_mori1963"
+    }
   }
 ]
