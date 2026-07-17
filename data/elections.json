@@ -838,5 +838,15 @@
     "announcementDate": "2026-08-23",
     "electionDate": "2026-08-30",
     "status": "upcoming"
+  },
+  {
+    "id": "e1784265454982",
+    "prefecture": "京都府",
+    "city": "綾部市",
+    "name": "綾部市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-08-03",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
