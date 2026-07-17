@@ -748,5 +748,15 @@
     "announcementDate": "2026-08-25",
     "electionDate": "2026-08-30",
     "status": "upcoming"
+  },
+  {
+    "id": "e1784262610616",
+    "prefecture": "福島県",
+    "city": "新地町",
+    "name": "新地町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-08-25",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
