@@ -818,5 +818,15 @@
     "announcementDate": "2026-08-25",
     "electionDate": "2026-08-30",
     "status": "upcoming"
+  },
+  {
+    "id": "e1784265302772",
+    "prefecture": "高知県",
+    "city": "安芸市",
+    "name": "安芸市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-08-23",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
