@@ -808,5 +808,15 @@
     "announcementDate": "2026-08-21",
     "electionDate": "2026-08-30",
     "status": "upcoming"
+  },
+  {
+    "id": "e1784265232320",
+    "prefecture": "宮崎県",
+    "city": "三股町",
+    "name": "三股町議会議員選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-08-25",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
