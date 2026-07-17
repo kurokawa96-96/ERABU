@@ -788,5 +788,15 @@
     "announcementDate": "2026-08-25",
     "electionDate": "2026-08-30",
     "status": "upcoming"
+  },
+  {
+    "id": "e1784263236257",
+    "prefecture": "兵庫県",
+    "city": "高砂市",
+    "name": "高砂市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-08-23",
+    "electionDate": "2026-08-30",
+    "status": "upcoming"
   }
 ]
