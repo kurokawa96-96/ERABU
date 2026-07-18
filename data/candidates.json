@@ -2705,5 +2705,34 @@
     "sns": {
       "facebook": "https://www.facebook.com/people/坂辺-勝彦/100007912459034/"
     }
+  },
+  {
+    "id": "c1784375888434",
+    "electionId": "",
+    "name": "",
+    "party": "",
+    "tagline": "",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "wk0v1qlgvw90kugql6ld4",
+    "sns": {}
+  },
+  {
+    "id": "c1784375902905",
+    "electionId": "e1784265302772",
+    "name": "金城　みきひろ",
+    "party": "参政党",
+    "tagline": "44歳　男",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "09tx1b0hh51unthobuywr4p",
+    "sns": {
+      "hp": "https://ameblo.jp/kinjomikihiro/",
+      "facebook": "https://www.facebook.com/people/金城幹泰後援会/pfbid0ytc2s533f7sfkJ24pMt9DgAKFCoW7drWXrwNzYh3vD3rKVZqBgxkBW8qYnHNu1KPl/?locale=ja_JP",
+      "instagram": "https://www.instagram.com/kinjomikihiro",
+      "youtube": "https://www.youtube.com/channel/UCnfgeZFEDSp2OaN8CaZa03g"
+    }
   }
 ]
