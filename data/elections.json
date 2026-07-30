@@ -888,5 +888,15 @@
     "announcementDate": "2026-08-30",
     "electionDate": "2026-09-06",
     "status": "upcoming"
+  },
+  {
+    "id": "e1785377129538",
+    "prefecture": "千葉県",
+    "city": "長生村",
+    "name": "長生村長選挙",
+    "type": "村長",
+    "announcementDate": "2026-09-01",
+    "electionDate": "2026-09-06",
+    "status": "upcoming"
   }
 ]
