@@ -858,5 +858,15 @@
     "announcementDate": "2026-09-01",
     "electionDate": "2026-09-06",
     "status": "upcoming"
+  },
+  {
+    "id": "e1785376504329",
+    "prefecture": "静岡県",
+    "city": "熱海市",
+    "name": "熱海市長選挙",
+    "type": "市長選挙",
+    "announcementDate": "2026-08-30",
+    "electionDate": "2026-09-06",
+    "status": "upcoming"
   }
 ]
