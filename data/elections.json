@@ -878,5 +878,15 @@
     "announcementDate": "2026-08-30",
     "electionDate": "2026-09-06",
     "status": "upcoming"
+  },
+  {
+    "id": "e1785376799531",
+    "prefecture": "大阪府",
+    "city": "交野市",
+    "name": "交野市長選挙",
+    "type": "市長",
+    "announcementDate": "2026-08-30",
+    "electionDate": "2026-09-06",
+    "status": "upcoming"
   }
 ]
