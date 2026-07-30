@@ -898,5 +898,25 @@
     "announcementDate": "2026-09-01",
     "electionDate": "2026-09-06",
     "status": "upcoming"
+  },
+  {
+    "id": "e1785377524907",
+    "prefecture": "埼玉県",
+    "city": "滑川町",
+    "name": "滑川町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-09-01",
+    "electionDate": "2026-09-06",
+    "status": "upcoming"
+  },
+  {
+    "id": "e1785377610741",
+    "prefecture": "福島県",
+    "city": "中島村",
+    "name": "中島村長選挙",
+    "type": "村長",
+    "announcementDate": "2026-09-01",
+    "electionDate": "2026-09-06",
+    "status": "upcoming"
   }
 ]
