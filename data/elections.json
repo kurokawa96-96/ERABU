@@ -868,5 +868,15 @@
     "announcementDate": "2026-08-30",
     "electionDate": "2026-09-06",
     "status": "upcoming"
+  },
+  {
+    "id": "e1785376628764",
+    "prefecture": "岡山県",
+    "city": "井原市",
+    "name": "井原市長選挙",
+    "type": "市長",
+    "announcementDate": "2026-08-30",
+    "electionDate": "2026-09-06",
+    "status": "upcoming"
   }
 ]
