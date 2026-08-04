@@ -928,5 +928,25 @@
     "announcementDate": "2026-09-01",
     "electionDate": "2026-09-06",
     "status": "upcoming"
+  },
+  {
+    "id": "e1785818951259",
+    "prefecture": "長崎県",
+    "city": "川棚町",
+    "name": "川棚町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-09-01",
+    "electionDate": "",
+    "status": "upcoming"
+  },
+  {
+    "id": "e1785819056449",
+    "prefecture": "長崎県",
+    "city": "波佐見町",
+    "name": "波佐見町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-09-01",
+    "electionDate": "2026-09-06",
+    "status": "upcoming"
   }
 ]
