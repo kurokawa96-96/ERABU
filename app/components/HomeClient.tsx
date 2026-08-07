@@ -139,7 +139,19 @@ function RegionAccordion({ groups }: { groups: RegionGroup[] }) {
 }
 function CalendarSection({ elections }: { elections: Election[] }) {
   const [open, setOpen] = useState(false);
-  const sorted = useMemo(() => sortByElectionDate(elections), [elections]);
+
+  const sorted = useMemo(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // 時刻を切り捨て、日付のみで比較
+
+    const upcoming = elections.filter(
+      e => new Date(e.electionDate) >= today
+    );
+
+    return sortByElectionDate(upcoming);
+  }, [elections]);
+
+  // ...以下は変更なし
 
   return (
     <div>
