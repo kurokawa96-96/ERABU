@@ -137,21 +137,15 @@ function RegionAccordion({ groups }: { groups: RegionGroup[] }) {
     </div>
   );
 }
+import { groupElectionsByRegion, sortByElectionDate, getUpcomingElections, formatDate } from "@/lib/regions";
+
 function CalendarSection({ elections }: { elections: Election[] }) {
   const [open, setOpen] = useState(false);
 
   const sorted = useMemo(() => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); // 時刻を切り捨て、日付のみで比較
-
-    const upcoming = elections.filter(
-      e => new Date(e.electionDate) >= today
-    );
-
+    const upcoming = getUpcomingElections(elections); // 必要なら getUpcomingElections(elections, 3) のように猶予日数を指定
     return sortByElectionDate(upcoming);
   }, [elections]);
-
-  // ...以下は変更なし
 
   return (
     <div>
