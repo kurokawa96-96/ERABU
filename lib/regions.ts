@@ -62,3 +62,15 @@ export function formatDate(dateStr: string): string {
   const d = new Date(dateStr);
   return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
 }
+export function getUpcomingElections(
+  elections: Election[],
+  graceDays: number = 0
+): Election[] {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const cutoff = new Date(today);
+  cutoff.setDate(cutoff.getDate() - graceDays);
+
+  return elections.filter(e => new Date(e.electionDate) >= cutoff);
+}
