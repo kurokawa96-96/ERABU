@@ -137,7 +137,6 @@ function RegionAccordion({ groups }: { groups: RegionGroup[] }) {
     </div>
   );
 }
-import { groupElectionsByRegion, sortByElectionDate, getUpcomingElections, formatDate } from "@/lib/regions";
 
 function CalendarSection({ elections }: { elections: Election[] }) {
   const [open, setOpen] = useState(false);
