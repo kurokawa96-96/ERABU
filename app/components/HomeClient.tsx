@@ -3,8 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { Election, RegionGroup } from "@/lib/types";
-import { groupElectionsByRegion, sortByElectionDate, formatDate } from "@/lib/regions";
-
+import { groupElectionsByRegion, sortByElectionDate, getUpcomingElections, formatDate } from "@/lib/regions";
 function Icon({ type, size = 18, color = "#1a1a1a" }: { type: string; size?: number; color?: string }) {
   const p = { width: size, height: size, viewBox: "0 0 20 20", fill: "none" as const };
   const icons: Record<string, JSX.Element> = {
