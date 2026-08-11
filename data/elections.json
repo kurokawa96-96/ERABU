@@ -988,5 +988,15 @@
     "announcementDate": "2026-08-30",
     "electionDate": "2026-09-06",
     "status": "upcoming"
+  },
+  {
+    "id": "e1786435271584",
+    "prefecture": "山形県",
+    "city": "最上町",
+    "name": "最上町議会議員補欠選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-09-01",
+    "electionDate": "2026-09-06",
+    "status": "upcoming"
   }
 ]
