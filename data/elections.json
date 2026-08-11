@@ -1018,5 +1018,15 @@
     "announcementDate": "2026-08-30",
     "electionDate": "2026-09-06",
     "status": "upcoming"
+  },
+  {
+    "id": "e1786435552247",
+    "prefecture": "沖縄県",
+    "city": "竹富町",
+    "name": "竹富町議会議員選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-09-07",
+    "electionDate": "2026-09-12",
+    "status": "upcoming"
   }
 ]
