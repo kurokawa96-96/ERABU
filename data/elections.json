@@ -998,5 +998,15 @@
     "announcementDate": "2026-09-01",
     "electionDate": "2026-09-06",
     "status": "upcoming"
+  },
+  {
+    "id": "e1786435360195",
+    "prefecture": "大阪府",
+    "city": "大阪府",
+    "name": "大阪府議会議員補欠選挙",
+    "type": "府議会議員",
+    "announcementDate": "2026-08-28",
+    "electionDate": "2026-09-06",
+    "status": "upcoming"
   }
 ]
