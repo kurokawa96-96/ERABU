@@ -1028,5 +1028,15 @@
     "announcementDate": "2026-09-07",
     "electionDate": "2026-09-12",
     "status": "upcoming"
+  },
+  {
+    "id": "e1786435828766",
+    "prefecture": "東京都",
+    "city": "神津島村",
+    "name": "神津島村長選挙",
+    "type": "村長",
+    "announcementDate": "2026-09-08",
+    "electionDate": "2026-09-13",
+    "status": "upcoming"
   }
 ]
