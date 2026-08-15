@@ -1038,5 +1038,15 @@
     "announcementDate": "2026-09-08",
     "electionDate": "2026-09-13",
     "status": "upcoming"
+  },
+  {
+    "id": "e1786792057300",
+    "prefecture": "沖縄県",
+    "city": "伊是名村",
+    "name": "伊是名長選挙",
+    "type": "村長",
+    "announcementDate": "2026-09-08",
+    "electionDate": "2026-09-13",
+    "status": "upcoming"
   }
 ]
