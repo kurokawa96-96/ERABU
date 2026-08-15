@@ -1188,5 +1188,15 @@
     "announcementDate": "2026-09-08",
     "electionDate": "2026-09-13",
     "status": "upcoming"
+  },
+  {
+    "id": "e1786793164307",
+    "prefecture": "沖縄県",
+    "city": "伊江村",
+    "name": "伊江村議会議員選挙",
+    "type": "村議会議員",
+    "announcementDate": "2026-09-08",
+    "electionDate": "2026-09-13",
+    "status": "upcoming"
   }
 ]
