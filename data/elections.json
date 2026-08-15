@@ -1098,5 +1098,15 @@
     "announcementDate": "2026-09-06",
     "electionDate": "2026-09-13",
     "status": "upcoming"
+  },
+  {
+    "id": "e1786792431914",
+    "prefecture": "鳥取県",
+    "city": "湯梨浜町",
+    "name": "湯梨浜町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-09-08",
+    "electionDate": "2026-09-13",
+    "status": "upcoming"
   }
 ]
