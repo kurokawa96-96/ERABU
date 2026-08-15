@@ -1128,5 +1128,15 @@
     "announcementDate": "2026-09-06",
     "electionDate": "2026-09-13",
     "status": "upcoming"
+  },
+  {
+    "id": "e1786792751300",
+    "prefecture": "新潟県",
+    "city": "胎内市",
+    "name": "胎内市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-09-06",
+    "electionDate": "2026-09-13",
+    "status": "upcoming"
   }
 ]
