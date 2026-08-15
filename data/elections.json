@@ -1168,5 +1168,15 @@
     "announcementDate": "2026-09-08",
     "electionDate": "2026-09-13",
     "status": "upcoming"
+  },
+  {
+    "id": "e1786793028177",
+    "prefecture": "沖縄県",
+    "city": "石垣市",
+    "name": "石垣市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-09-06",
+    "electionDate": "2026-09-13",
+    "status": "upcoming"
   }
 ]
