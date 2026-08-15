@@ -1138,5 +1138,15 @@
     "announcementDate": "2026-09-06",
     "electionDate": "2026-09-13",
     "status": "upcoming"
+  },
+  {
+    "id": "e1786792833738",
+    "prefecture": "沖縄県",
+    "city": "沖縄市",
+    "name": "沖縄市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-09-06",
+    "electionDate": "2026-09-13",
+    "status": "upcoming"
   }
 ]
