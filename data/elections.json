@@ -1468,5 +1468,15 @@
     "announcementDate": "2026-09-15",
     "electionDate": "2026-09-20",
     "status": "upcoming"
+  },
+  {
+    "id": "e1787397560908",
+    "prefecture": "香川県",
+    "city": "宇多津町",
+    "name": "宇多津町議会議員補欠選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-09-15",
+    "electionDate": "2026-09-20",
+    "status": "upcoming"
   }
 ]
