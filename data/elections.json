@@ -1478,5 +1478,15 @@
     "announcementDate": "2026-09-15",
     "electionDate": "2026-09-20",
     "status": "upcoming"
+  },
+  {
+    "id": "e1787397605120",
+    "prefecture": "群馬県",
+    "city": "館林市",
+    "name": "館林市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-09-13",
+    "electionDate": "2026-09-20",
+    "status": "upcoming"
   }
 ]
