@@ -1448,5 +1448,15 @@
     "announcementDate": "2026-09-15",
     "electionDate": "2026-09-20",
     "status": "upcoming"
+  },
+  {
+    "id": "e1787397446571",
+    "prefecture": "長野県",
+    "city": "塩尻市",
+    "name": "塩尻市長選挙",
+    "type": "市長",
+    "announcementDate": "2026-09-13",
+    "electionDate": "2026-09-20",
+    "status": "upcoming"
   }
 ]
