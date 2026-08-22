@@ -1438,5 +1438,15 @@
     "announcementDate": "2026-09-15",
     "electionDate": "2026-09-20",
     "status": "upcoming"
+  },
+  {
+    "id": "e1787397376723",
+    "prefecture": "福島県",
+    "city": "桑折町",
+    "name": "桑折町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-09-15",
+    "electionDate": "2026-09-20",
+    "status": "upcoming"
   }
 ]
