@@ -1428,5 +1428,15 @@
     "announcementDate": "2026-09-08",
     "electionDate": "2026-09-13",
     "status": "upcoming"
+  },
+  {
+    "id": "e1787397328888",
+    "prefecture": "香川県",
+    "city": "宇多津町",
+    "name": "宇多津町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-09-15",
+    "electionDate": "2026-09-20",
+    "status": "upcoming"
   }
 ]
