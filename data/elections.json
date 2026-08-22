@@ -1418,5 +1418,15 @@
     "announcementDate": "2026-09-08",
     "electionDate": "2026-09-13",
     "status": "upcoming"
+  },
+  {
+    "id": "e1787397276208",
+    "prefecture": "宮城県",
+    "city": "七ヶ宿町",
+    "name": "七ヶ宿町議会議員選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-09-08",
+    "electionDate": "2026-09-13",
+    "status": "upcoming"
   }
 ]
