@@ -1498,5 +1498,15 @@
     "announcementDate": "2026-09-22",
     "electionDate": "2026-09-27",
     "status": "upcoming"
+  },
+  {
+    "id": "e1787397715775",
+    "prefecture": "山梨県",
+    "city": "市川三郷町",
+    "name": "市川三郷町議会議員選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-09-22",
+    "electionDate": "2026-09-27",
+    "status": "upcoming"
   }
 ]
