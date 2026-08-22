@@ -1238,5 +1238,15 @@
     "announcementDate": "2026-09-04",
     "electionDate": "2026-09-13",
     "status": "upcoming"
+  },
+  {
+    "id": "e1787395843784",
+    "prefecture": "岩手県",
+    "city": "二戸市",
+    "name": "二戸市議会議員補欠選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-09-06",
+    "electionDate": "2026-09-13",
+    "status": "upcoming"
   }
 ]
