@@ -1338,5 +1338,15 @@
     "announcementDate": "2026-09-08",
     "electionDate": "2026-09-13",
     "status": "upcoming"
+  },
+  {
+    "id": "e1787396642931",
+    "prefecture": "沖縄県",
+    "city": "座間味村",
+    "name": "座間味村議会議員選挙",
+    "type": "村議会議員",
+    "announcementDate": "2026-09-08",
+    "electionDate": "2026-09-13",
+    "status": "upcoming"
   }
 ]
