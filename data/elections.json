@@ -1358,5 +1358,15 @@
     "announcementDate": "2026-09-08",
     "electionDate": "2026-09-13",
     "status": "upcoming"
+  },
+  {
+    "id": "e1787396838372",
+    "prefecture": "北海道",
+    "city": "利尻町",
+    "name": "利尻町議会議員選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-09-08",
+    "electionDate": "2026-09-13",
+    "status": "upcoming"
   }
 ]
