@@ -1488,5 +1488,15 @@
     "announcementDate": "2026-09-13",
     "electionDate": "2026-09-20",
     "status": "upcoming"
+  },
+  {
+    "id": "e1787397654298",
+    "prefecture": "三重県",
+    "city": "御浜町",
+    "name": "御浜町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-09-22",
+    "electionDate": "2026-09-27",
+    "status": "upcoming"
   }
 ]
