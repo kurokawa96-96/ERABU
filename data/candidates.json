@@ -2776,5 +2776,20 @@
     "policies": [],
     "editToken": "xzga8u4kf7szq86q7mixs",
     "sns": {}
+  },
+  {
+    "id": "c1787631708084",
+    "electionId": "e1785376504329",
+    "name": "徐 浩予 ",
+    "party": "大同党",
+    "tagline": "33歳 　男 　新人",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "bheu492ty1sopa37t5wjjr",
+    "sns": {
+      "hp": "https://jokouyo.mods.jp/index.html",
+      "x": "https://x.com/jo_kouyo"
+    }
   }
 ]
