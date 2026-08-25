@@ -2815,5 +2815,20 @@
     "policies": [],
     "editToken": "1b85l6afl2elawkovjf4hn",
     "sns": {}
+  },
+  {
+    "id": "c1787632042338",
+    "electionId": "e1785376628764",
+    "name": "大舌 いさお",
+    "party": "無所属",
+    "tagline": "67歳 　男　現職",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "hn29bb27mdgfrm20wegm27",
+    "sns": {
+      "hp": "http://oshita.info/",
+      "x": "https://x.com/oshitaisao"
+    }
   }
 ]
