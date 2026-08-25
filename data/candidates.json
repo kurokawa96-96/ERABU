@@ -2830,5 +2830,20 @@
       "hp": "http://oshita.info/",
       "x": "https://x.com/oshitaisao"
     }
+  },
+  {
+    "id": "c1787632167691",
+    "electionId": "e1785376628764",
+    "name": "松本 周平 ",
+    "party": "無所属",
+    "tagline": "32歳 　男　新人　 井原市議会議員",
+    "message": "",
+    "profile": "",
+    "policies": [],
+    "editToken": "2fgtf9rwmae0qihcs1kueic",
+    "sns": {
+      "instagram": "https://www.instagram.com/ibara.matsumoto",
+      "other": "https://line.me/ti/p/@648qmgra"
+    }
   }
 ]
