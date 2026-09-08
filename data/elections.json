@@ -1838,5 +1838,15 @@
     "announcementDate": "2026-10-11",
     "electionDate": "2026-10-18",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788830191672",
+    "prefecture": "京都府",
+    "city": "大山崎町",
+    "name": "大山崎町議会議員選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-10-13",
+    "electionDate": "2026-10-18",
+    "status": "upcoming"
   }
 ]
