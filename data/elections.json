@@ -1768,5 +1768,15 @@
     "announcementDate": "2026-10-13",
     "electionDate": "2026-10-18",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788829637900",
+    "prefecture": "神奈川県",
+    "city": "横浜市",
+    "name": "横浜市長選挙",
+    "type": "市長",
+    "announcementDate": "2026-10-04",
+    "electionDate": "2026-10-18",
+    "status": "upcoming"
   }
 ]
