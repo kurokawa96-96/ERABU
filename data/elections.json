@@ -1628,5 +1628,15 @@
     "announcementDate": "2026-09-29",
     "electionDate": "2026-10-04",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788828341971",
+    "prefecture": "岐阜県",
+    "city": "美濃加茂市",
+    "name": "美濃加茂市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-09-27",
+    "electionDate": "2026-10-04",
+    "status": "upcoming"
   }
 ]
