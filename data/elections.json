@@ -1798,5 +1798,15 @@
     "announcementDate": "2026-10-13",
     "electionDate": "2026-10-18",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788829919582",
+    "prefecture": "福岡県",
+    "city": "みやま市",
+    "name": "みやま市議会議員補欠選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-10-11",
+    "electionDate": "2026-10-18",
+    "status": "upcoming"
   }
 ]
