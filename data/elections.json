@@ -1748,5 +1748,15 @@
     "announcementDate": "2026-10-13",
     "electionDate": "2026-10-18",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788829477111",
+    "prefecture": "福島県",
+    "city": "浅川町",
+    "name": "浅川町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-10-13",
+    "electionDate": "2026-10-18",
+    "status": "upcoming"
   }
 ]
