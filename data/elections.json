@@ -1728,5 +1728,15 @@
     "announcementDate": "2026-10-11",
     "electionDate": "2026-10-18",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788829347420",
+    "prefecture": "福岡県",
+    "city": "みやま市",
+    "name": "みやま市長選挙",
+    "type": "市長",
+    "announcementDate": "2026-10-11",
+    "electionDate": "2026-10-18",
+    "status": "upcoming"
   }
 ]
