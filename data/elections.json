@@ -1528,5 +1528,25 @@
     "announcementDate": "2026-09-26",
     "electionDate": "2026-10-04",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788827331205",
+    "prefecture": "",
+    "city": "",
+    "name": "",
+    "type": "",
+    "announcementDate": "",
+    "electionDate": "",
+    "status": "upcoming"
+  },
+  {
+    "id": "e1788827378728",
+    "prefecture": "福島県",
+    "city": "金山町",
+    "name": "金山町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-09-29",
+    "electionDate": "0006-10-04",
+    "status": "upcoming"
   }
 ]
