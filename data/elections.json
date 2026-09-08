@@ -1788,5 +1788,15 @@
     "announcementDate": "2026-10-11",
     "electionDate": "2026-10-18",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788829819753",
+    "prefecture": "東京都",
+    "city": "八丈町",
+    "name": "八丈町議会議員選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-10-13",
+    "electionDate": "2026-10-18",
+    "status": "upcoming"
   }
 ]
