@@ -1718,5 +1718,15 @@
     "announcementDate": "2026-10-11",
     "electionDate": "2026-10-18",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788829288434",
+    "prefecture": "岐阜県",
+    "city": "可児市",
+    "name": "可児市長選挙",
+    "type": "市長",
+    "announcementDate": "2026-10-11",
+    "electionDate": "2026-10-18",
+    "status": "upcoming"
   }
 ]
