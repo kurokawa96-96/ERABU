@@ -1668,5 +1668,15 @@
     "announcementDate": "2026-09-27",
     "electionDate": "2026-10-04",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788828684626",
+    "prefecture": "沖縄県",
+    "city": "うるま市",
+    "name": "うるま市議会議員選挙 ",
+    "type": "市議会議員",
+    "announcementDate": "2026-09-27",
+    "electionDate": "2026-10-04",
+    "status": "upcoming"
   }
 ]
