@@ -1708,5 +1708,15 @@
     "announcementDate": "2026-10-11",
     "electionDate": "2026-10-18",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788829221587",
+    "prefecture": "兵庫県",
+    "city": "川西市",
+    "name": "川西市長選挙",
+    "type": "市長",
+    "announcementDate": "2026-10-11",
+    "electionDate": "2026-10-18",
+    "status": "upcoming"
   }
 ]
