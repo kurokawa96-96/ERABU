@@ -1568,5 +1568,15 @@
     "announcementDate": "2026-09-29",
     "electionDate": "2026-10-04",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788827849559",
+    "prefecture": "群馬県",
+    "city": "みなかみ町",
+    "name": "みなかみ町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-09-29",
+    "electionDate": "2026-10-04",
+    "status": "upcoming"
   }
 ]
