@@ -1858,5 +1858,15 @@
     "announcementDate": "2026-10-11",
     "electionDate": "2026-10-18",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788830354520",
+    "prefecture": "千葉県",
+    "city": "一宮町",
+    "name": "一宮町議会議員選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-10-13",
+    "electionDate": "2026-10-18",
+    "status": "upcoming"
   }
 ]
