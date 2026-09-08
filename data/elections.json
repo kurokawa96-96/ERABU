@@ -1588,5 +1588,15 @@
     "announcementDate": "2026-09-29",
     "electionDate": "2026-10-04",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788827983633",
+    "prefecture": "静岡県",
+    "city": "河津町",
+    "name": "河津町議会議員選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-09-29",
+    "electionDate": "2026-10-04",
+    "status": "upcoming"
   }
 ]
