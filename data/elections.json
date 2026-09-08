@@ -1878,5 +1878,15 @@
     "announcementDate": "2026-10-18",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788830461257",
+    "prefecture": "山形県",
+    "city": "山辺町",
+    "name": "山辺町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-10-20",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
