@@ -1688,5 +1688,15 @@
     "announcementDate": "2026-10-06",
     "electionDate": "2026-10-11",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788829071223",
+    "prefecture": "香川県",
+    "city": "三木町",
+    "name": "三木町議会議員補欠選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-10-06",
+    "electionDate": "2026-10-11",
+    "status": "upcoming"
   }
 ]
