@@ -1848,5 +1848,15 @@
     "announcementDate": "2026-10-13",
     "electionDate": "2026-10-18",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788830280687",
+    "prefecture": "埼玉県",
+    "city": "草加市",
+    "name": "草加市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-10-11",
+    "electionDate": "2026-10-18",
+    "status": "upcoming"
   }
 ]
