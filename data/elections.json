@@ -1508,5 +1508,15 @@
     "announcementDate": "2026-09-22",
     "electionDate": "2026-09-27",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788827210025",
+    "prefecture": "北海道",
+    "city": "標茶町",
+    "name": "標茶町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-09-29",
+    "electionDate": "2026-10-04",
+    "status": "upcoming"
   }
 ]
