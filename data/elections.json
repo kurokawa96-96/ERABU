@@ -1578,5 +1578,15 @@
     "announcementDate": "2026-09-29",
     "electionDate": "2026-10-04",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788827919589",
+    "prefecture": "北海道",
+    "city": "標茶町",
+    "name": "標茶町議会議員補欠選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-09-29",
+    "electionDate": "2026-10-04",
+    "status": "upcoming"
   }
 ]
