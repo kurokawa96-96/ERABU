@@ -1758,5 +1758,15 @@
     "announcementDate": "2026-10-13",
     "electionDate": "2026-10-18",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788829545818",
+    "prefecture": "富山県",
+    "city": "舟橋村",
+    "name": "舟橋村長選挙",
+    "type": "村長",
+    "announcementDate": "2026-10-13",
+    "electionDate": "2026-10-18",
+    "status": "upcoming"
   }
 ]
