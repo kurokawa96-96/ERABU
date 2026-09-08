@@ -1638,5 +1638,15 @@
     "announcementDate": "2026-09-27",
     "electionDate": "2026-10-04",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788828405026",
+    "prefecture": "静岡県",
+    "city": "裾野市",
+    "name": "裾野市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-09-27",
+    "electionDate": "2026-10-04",
+    "status": "upcoming"
   }
 ]
