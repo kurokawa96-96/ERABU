@@ -1608,5 +1608,15 @@
     "announcementDate": "2026-09-25",
     "electionDate": "2026-10-04",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788828126865",
+    "prefecture": "福島県",
+    "city": "金山町",
+    "name": "金山町議会議員補欠選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-09-26",
+    "electionDate": "2026-10-04",
+    "status": "upcoming"
   }
 ]
