@@ -1548,5 +1548,15 @@
     "announcementDate": "2026-09-29",
     "electionDate": "0006-10-04",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788827435316",
+    "prefecture": "山口県",
+    "city": "上関町",
+    "name": "上関町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-09-29",
+    "electionDate": "2026-10-04",
+    "status": "upcoming"
   }
 ]
