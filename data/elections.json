@@ -1518,5 +1518,15 @@
     "announcementDate": "2026-09-29",
     "electionDate": "2026-10-04",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788827281862",
+    "prefecture": "長野県",
+    "city": "木祖村",
+    "name": "木祖村長選挙",
+    "type": "村長",
+    "announcementDate": "2026-09-26",
+    "electionDate": "2026-10-04",
+    "status": "upcoming"
   }
 ]
