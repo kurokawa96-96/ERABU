@@ -1818,5 +1818,15 @@
     "announcementDate": "2026-10-13",
     "electionDate": "2026-10-18",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788830055992",
+    "prefecture": "富山県",
+    "city": "黒部市",
+    "name": "黒部市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-10-11",
+    "electionDate": "2026-10-18",
+    "status": "upcoming"
   }
 ]
