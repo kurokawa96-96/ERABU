@@ -2158,5 +2158,15 @@
     "announcementDate": "2026-10-18",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788916709492",
+    "prefecture": "福岡県",
+    "city": "桂川町",
+    "name": "桂川町議会議員選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-10-20",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
