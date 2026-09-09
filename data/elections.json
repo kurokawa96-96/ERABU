@@ -2038,5 +2038,15 @@
     "announcementDate": "2026-10-18",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788915886971",
+    "prefecture": "島根県",
+    "city": "美郷町",
+    "name": "美郷町議会議員補欠選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-10-20",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
