@@ -2078,5 +2078,15 @@
     "announcementDate": "2026-10-20",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788916150088",
+    "prefecture": "滋賀県",
+    "city": "栗東市",
+    "name": "栗東市議会議員補欠選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-10-18",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
