@@ -1908,5 +1908,15 @@
     "announcementDate": "2026-10-18",
     "electionDate": "2026-01-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788914857829",
+    "prefecture": "島根県",
+    "city": "美郷町",
+    "name": "美郷町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-10-20",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
