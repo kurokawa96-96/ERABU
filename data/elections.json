@@ -2068,5 +2068,15 @@
     "announcementDate": "2026-10-18",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788916083789",
+    "prefecture": "岩手県",
+    "city": "雫石町",
+    "name": "雫石町議会議員補欠選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-10-20",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
