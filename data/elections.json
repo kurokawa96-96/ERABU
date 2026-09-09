@@ -1928,5 +1928,15 @@
     "announcementDate": "2026-10-20",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788915034485",
+    "prefecture": "北海道",
+    "city": "小平町",
+    "name": "小平町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-10-20",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
