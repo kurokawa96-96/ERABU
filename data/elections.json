@@ -1938,5 +1938,15 @@
     "announcementDate": "2026-10-20",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788915091888",
+    "prefecture": "北海道",
+    "city": "釧路町",
+    "name": "釧路町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-10-20",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
