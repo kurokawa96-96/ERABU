@@ -2018,5 +2018,15 @@
     "announcementDate": "2026-10-20",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788915737581",
+    "prefecture": "福島県",
+    "city": "福島県",
+    "name": "福島県知事選挙",
+    "type": "県知事",
+    "announcementDate": "2026-10-08",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
