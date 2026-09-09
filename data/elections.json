@@ -2148,5 +2148,15 @@
     "announcementDate": "2026-10-18",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788916643011",
+    "prefecture": "長野県",
+    "city": "飯山市",
+    "name": "飯山市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-10-18",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
