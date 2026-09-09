@@ -2128,5 +2128,15 @@
     "announcementDate": "2026-10-28",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788916530630",
+    "prefecture": "富山県",
+    "city": "氷見市",
+    "name": "氷見市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-10-18",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
