@@ -2048,5 +2048,15 @@
     "announcementDate": "2026-10-20",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788915947062",
+    "prefecture": "福島県",
+    "city": "福島県",
+    "name": "福島県議会議員補欠選挙",
+    "type": "県議会議員",
+    "announcementDate": "2026-10-16",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
