@@ -1968,5 +1968,15 @@
     "announcementDate": "2026-10-18",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788915282175",
+    "prefecture": "新潟県",
+    "city": "新潟市",
+    "name": "新潟市長選挙",
+    "type": "市長",
+    "announcementDate": "2026-10-11",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
