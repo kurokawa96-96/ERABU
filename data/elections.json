@@ -2118,5 +2118,15 @@
     "announcementDate": "2026-10-18",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788916472950",
+    "prefecture": "千葉県",
+    "city": "匝瑳市",
+    "name": "匝瑳市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-10-28",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
