@@ -2028,5 +2028,15 @@
     "announcementDate": "2026-10-08",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788915832971",
+    "prefecture": "岩手県",
+    "city": "遠野市",
+    "name": "遠野市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-10-18",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
