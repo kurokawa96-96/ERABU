@@ -1918,5 +1918,15 @@
     "announcementDate": "2026-10-20",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788914916934",
+    "prefecture": "山口県",
+    "city": "田布施町",
+    "name": "田布施町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-10-20",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
