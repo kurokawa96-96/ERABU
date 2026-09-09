@@ -1958,5 +1958,15 @@
     "announcementDate": "2026-10-20",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788915229609",
+    "prefecture": "沖縄県",
+    "city": "豊見城市",
+    "name": "豊見城市長選挙",
+    "type": "市長",
+    "announcementDate": "2026-10-18",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
