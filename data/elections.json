@@ -2138,5 +2138,15 @@
     "announcementDate": "2026-10-18",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788916583371",
+    "prefecture": "三重県",
+    "city": "亀山市",
+    "name": "亀山市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-10-18",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
