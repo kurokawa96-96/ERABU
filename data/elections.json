@@ -1978,5 +1978,15 @@
     "announcementDate": "2026-10-11",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788915412050",
+    "prefecture": "神奈川県",
+    "city": "中井町",
+    "name": "中井町長選挙",
+    "type": "町長",
+    "announcementDate": "2026-10-20",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
