@@ -2108,5 +2108,15 @@
     "announcementDate": "2026-10-18",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788916391433",
+    "prefecture": "山口県",
+    "city": "岩国市",
+    "name": "岩国市議会議員選挙",
+    "type": "市議会議員",
+    "announcementDate": "2026-10-18",
+    "electionDate": "2026-10-25",
+    "status": "upcoming"
   }
 ]
