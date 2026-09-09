@@ -1898,5 +1898,15 @@
     "announcementDate": "2026-10-18",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788914778023",
+    "prefecture": "千葉県",
+    "city": "君津市",
+    "name": "君津市長選挙",
+    "type": "市長",
+    "announcementDate": "2026-10-18",
+    "electionDate": "2026-01-25",
+    "status": "upcoming"
   }
 ]
