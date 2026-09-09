@@ -2088,5 +2088,15 @@
     "announcementDate": "2026-10-18",
     "electionDate": "2026-10-25",
     "status": "upcoming"
+  },
+  {
+    "id": "e1788916203494",
+    "prefecture": "石川県",
+    "city": "能登町",
+    "name": "能登町議会議員選挙",
+    "type": "町議会議員",
+    "announcementDate": "2026-10-20",
+    "electionDate": "2026-10-26",
+    "status": "upcoming"
   }
 ]
